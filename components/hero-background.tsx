@@ -72,14 +72,12 @@ const FallbackBackground = () => (
 );
 
 export const HeroBackground = () => {
-  const [hasWebGLSupport, setHasWebGLSupport] = useState(true);
+  const [hasWebGLSupport, setHasWebGLSupport] = useState<boolean>(true);
 
   useEffect(() => {
     const canvas = document.createElement("canvas");
-    setHasWebGLSupport(
-      !!window.WebGLRenderingContext &&
-        (canvas.getContext("webgl") || canvas.getContext("experimental-webgl"))
-    );
+    const context = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+    setHasWebGLSupport(!!context); // Ensure it's a boolean value (true/false)
   }, []);
 
   if (!hasWebGLSupport) {
