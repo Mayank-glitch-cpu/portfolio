@@ -13,7 +13,7 @@ interface ProjectModalProps {
     achievements: string[];
     period: string;
     githubUrl: string;
-    liveUrl: string;
+    liveUrl?: string;
   };
   isOpen: boolean;
   onClose: () => void;
