@@ -1,66 +1,51 @@
-import { NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
+import { NextResponse } from 'next/server'
+import { put, get, list } from "@vercel/blob";
 
-// Define the path to the visit counter file
-const counterFile = path.join(process.cwd(), 'visit-counter.txt');
+const BLOB_NAME = 'visit-counter.txt';
 
-// Function to ensure the counter file exists
-async function ensureFileExists() {
+async function getVisitCount(): Promise<number> {
   try {
-    await fs.access(counterFile); // Check if the file exists
-  } catch {
-    // If the file does not exist, create it with an initial count of 0
-    await fs.writeFile(counterFile, '0');
-    console.log('Created visit-counter.txt file');
-  }
-}
-
-// GET handler to retrieve the visit count
-export async function GET() {
-  try {
-    await ensureFileExists();
-    const count = await fs.readFile(counterFile, 'utf-8');
-    return NextResponse.json({ count: parseInt(count, 10) });
+    const { blobs } = await list();
+    const counterBlob = blobs.find(blob => blob.pathname === BLOB_NAME);
+    
+    if (counterBlob) {
+      const { blob } = await get(BLOB_NAME);
+      const count = await blob.text();
+      return parseInt(count, 10);
+    }
+    
+    return 0;
   } catch (error) {
     console.error('Error reading visit count:', error);
-
-    // Safely extract error message
-    const errorMessage =
-      error instanceof Error ? error.message : 'Unknown error occurred';
-
-    return NextResponse.json({ count: 0, error: errorMessage });
+    return 0;
   }
 }
 
-// POST handler to increment the visit count
-export async function POST() {
+async function incrementVisitCount(currentCount: number): Promise<number> {
+  const newCount = currentCount + 1;
+  await put(BLOB_NAME, newCount.toString(), { access: 'public' });
+  return newCount;
+}
+
+export async function GET() {
   try {
-    await ensureFileExists();
-    let count = 0;
-
-    // Try to read the current count from the file
-    try {
-      const currentCount = await fs.readFile(counterFile, 'utf-8');
-      count = parseInt(currentCount, 10);
-    } catch (error) {
-      console.error('Error reading visit count, starting from 0:', error);
-    }
-
-    count++; // Increment the count
-    await fs.writeFile(counterFile, count.toString()); // Save the updated count
-    console.log('Updated visit count:', count);
+    const count = await getVisitCount();
     return NextResponse.json({ count });
   } catch (error) {
-    console.error('Failed to increment counter:', error);
-
-    // Safely extract error message
-    const errorMessage =
-      error instanceof Error ? error.message : 'Unknown error occurred';
-
-    return NextResponse.json(
-      { error: 'Failed to increment counter', details: errorMessage },
-      { status: 500 }
-    );
+    console.error('Error reading visit count:', error);
+    return NextResponse.json({ count: 0, error: 'Failed to read counter' });
   }
 }
+
+export async function POST() {
+  try {
+    const currentCount = await getVisitCount();
+    const newCount = await incrementVisitCount(currentCount);
+    console.log('Updated visit count:', newCount);
+    return NextResponse.json({ count: newCount });
+  } catch (error) {
+    console.error('Failed to increment counter:', error);
+    return NextResponse.json({ error: 'Failed to increment counter', details: error.message }, { status: 500 });
+  }
+}
+
