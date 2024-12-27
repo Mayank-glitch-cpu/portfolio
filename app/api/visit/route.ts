@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { put, list } from "@vercel/blob";
+import { put, list, get } from "@vercel/blob";
 
 const BLOB_NAME = 'visit-counter.txt';
 
@@ -9,7 +9,9 @@ async function getVisitCount(): Promise<number> {
     const counterBlob = blobs.find(blob => blob.pathname === BLOB_NAME);
     
     if (counterBlob) {
-      const count = parseInt(counterBlob.data, 10); // Accessing the blob data directly if available
+      // Fetch the blob content using the 'get' method
+      const { blob } = await get(counterBlob.pathname);
+      const count = parseInt(await blob.text(), 10);  // Convert blob content to text and parse it
       return count;
     }
     
