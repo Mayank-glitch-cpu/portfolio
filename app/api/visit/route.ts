@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { put, get, list } from "@vercel/blob";
+import { put, list } from "@vercel/blob";
 
 const BLOB_NAME = 'visit-counter.txt';
 
@@ -9,9 +9,8 @@ async function getVisitCount(): Promise<number> {
     const counterBlob = blobs.find(blob => blob.pathname === BLOB_NAME);
     
     if (counterBlob) {
-      const { blob } = await get(BLOB_NAME);
-      const count = await blob.text();
-      return parseInt(count, 10);
+      const count = parseInt(counterBlob.data, 10); // Accessing the blob data directly if available
+      return count;
     }
     
     return 0;
@@ -48,4 +47,3 @@ export async function POST() {
     return NextResponse.json({ error: 'Failed to increment counter', details: error.message }, { status: 500 });
   }
 }
-
