@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import { Float, PerspectiveCamera } from "@react-three/drei";
+import { Mesh } from "three"; // Import the Mesh type
 
 type FloatingObjectProps = {
   position: [number, number, number];
@@ -11,7 +12,7 @@ type FloatingObjectProps = {
 };
 
 const FloatingObject = ({ position, scale, rotationSpeed = 1 }: FloatingObjectProps) => {
-  const mesh = useRef<THREE.Mesh>(null);
+  const mesh = useRef<Mesh>(null);
 
   useEffect(() => {
     if (!mesh.current) return;
