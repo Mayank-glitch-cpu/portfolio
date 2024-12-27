@@ -34,8 +34,9 @@ const Scene = () => {
   const { gl } = useThree();
 
   useEffect(() => {
-    const handleContextLost = (event: WebGLContextEvent) => {
-      event.preventDefault();
+    const handleContextLost = (event: Event) => {
+      const webglContextEvent = event as WebGLContextEvent; // Type cast the event
+      webglContextEvent.preventDefault();
       console.warn("WebGL context lost. Attempting to restore.");
     };
 
@@ -44,12 +45,12 @@ const Scene = () => {
     };
 
     const canvas = gl.domElement as HTMLCanvasElement; // Type cast here
-    canvas.addEventListener("webglcontextlost", handleContextLost);
-    canvas.addEventListener("webglcontextrestored", handleContextRestored);
+    canvas.addEventListener("webglcontextlost", handleContextLost as EventListener); // Cast listener
+    canvas.addEventListener("webglcontextrestored", handleContextRestored as EventListener); // Cast listener
 
     return () => {
-      canvas.removeEventListener("webglcontextlost", handleContextLost);
-      canvas.removeEventListener("webglcontextrestored", handleContextRestored);
+      canvas.removeEventListener("webglcontextlost", handleContextLost as EventListener);
+      canvas.removeEventListener("webglcontextrestored", handleContextRestored as EventListener);
     };
   }, [gl]);
 
