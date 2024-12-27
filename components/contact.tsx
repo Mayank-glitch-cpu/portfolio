@@ -1,14 +1,20 @@
-"use client"
+"use client";
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Github, Twitter, Linkedin, Mail, MapPin, Phone } from 'lucide-react'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { Button } from '@/components/ui/button'
-import { useToast } from "@/components/ui/use-toast"
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Github, Twitter, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
 
-const ContactItem = ({ icon: Icon, label, href }) => (
+type ContactItemProps = {
+  icon: React.ComponentType<{ className?: string }>;
+  label: string;
+  href: string;
+};
+
+const ContactItem = ({ icon: Icon, label, href }: ContactItemProps) => (
   <a
     href={href}
     target="_blank"
@@ -18,49 +24,49 @@ const ContactItem = ({ icon: Icon, label, href }) => (
     <Icon className="h-5 w-5" />
     <span>{label}</span>
   </a>
-)
+);
 
 const Contact = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const { toast } = useToast()
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
+      const response = await fetch("/api/contact", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
-      })
+      });
 
       if (response.ok) {
         toast({
           title: "Message sent!",
           description: "Thank you for your message. I'll get back to you soon.",
-        })
-        setFormData({ name: '', email: '', message: '' })
+        });
+        setFormData({ name: "", email: "", message: "" });
       } else {
-        throw new Error('Failed to send message')
+        throw new Error("Failed to send message");
       }
     } catch (error) {
       toast({
         title: "Error",
         description: "Failed to send message. Please try again later.",
         variant: "destructive",
-      })
+      });
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   return (
     <section id="contact" className="py-20 bg-muted/30">
@@ -81,7 +87,7 @@ const Contact = () => {
           >
             <h3 className="text-2xl font-semibold mb-4">Contact Information</h3>
             <div className="space-y-4">
-            <ContactItem icon={Mail} label="hrishikeshmagadum09@gmail.com" href="mailto:hrishikeshmagadum09@gmail.com" />
+              <ContactItem icon={Mail} label="hrishikeshmagadum09@gmail.com" href="mailto:hrishikeshmagadum09@gmail.com" />
               <ContactItem icon={Phone} label="+1 (623)-800-2607" href="tel:+16238002607" />
               <ContactItem icon={MapPin} label="Tempe, AZ" href="#" />
               <ContactItem icon={Github} label="GitHub" href="https://github.com/hrishikeshm12" />
@@ -121,15 +127,14 @@ const Contact = () => {
                 rows={4}
               />
               <Button type="submit" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? 'Sending...' : 'Send Message'}
+                {isSubmitting ? "Sending..." : "Send Message"}
               </Button>
             </form>
           </motion.div>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Contact
-
+export default Contact;
