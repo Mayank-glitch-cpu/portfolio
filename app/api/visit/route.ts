@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
-import { put, list, get } from "@vercel/blob";
+import { put, list } from "@vercel/blob";
 
-const BLOB_NAME = 'visit-counter.txt';
+const BLOB_NAME = 'visit_counter/visit-counter.txt';
 
 async function getVisitCount(): Promise<number> {
   try {
@@ -9,13 +9,14 @@ async function getVisitCount(): Promise<number> {
     const counterBlob = blobs.find(blob => blob.pathname === BLOB_NAME);
     
     if (counterBlob) {
-      // Fetch the blob content using the 'get' method
-      const { blob } = await get(counterBlob.pathname);
-      const count = parseInt(await blob.text(), 10);  // Convert blob content to text and parse it
+      // The blob is found; now we need to fetch the content
+      const { blob } = await counterBlob.get();  // Fetch the content of the blob
+      const countText = await blob.text();  // Read the blob as text
+      const count = parseInt(countText, 10);  // Convert to number
       return count;
     }
     
-    return 0;
+    return 0;  // If blob is not found, return 0
   } catch (error) {
     console.error('Error reading visit count:', error);
     return 0;
@@ -24,6 +25,8 @@ async function getVisitCount(): Promise<number> {
 
 async function incrementVisitCount(currentCount: number): Promise<number> {
   const newCount = currentCount + 1;
+  
+  // Store the new count as text in the blob
   await put(BLOB_NAME, newCount.toString(), { access: 'public' });
   return newCount;
 }
