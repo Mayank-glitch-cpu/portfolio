@@ -1,15 +1,6 @@
 import { NextResponse } from 'next/server'
 import sgMail from '@sendgrid/mail'
 
-// Define error type for SendGrid
-interface SendGridError extends Error {
-  response?: {
-    body: {
-      errors: Array<{ message: string; field: string; help?: string }>;
-    };
-  };
-}
-
 // Ensure the API key starts with "SG."
 const apiKey = process.env.SENDGRID_API_KEY
 if (!apiKey || !apiKey.startsWith('SG.')) {
@@ -29,7 +20,7 @@ export async function POST(request: Request) {
   }
 
   const msg = {
-    to: toEmail,
+    to: toEmail, // Use the email from environment variable
     from: process.env.EMAIL_FROM as string,
     subject: `New message from ${name} via Portfolio`,
     text: `
@@ -51,9 +42,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: 'Email sent successfully' })
   } catch (error) {
     console.error('Error sending email:', error)
-    // Type guard to check if error is SendGridError
-    if ((error as SendGridError).response) {
-      console.error((error as SendGridError).response?.body)
+    if (error.response) {
+      console.error(error.response.body)
     }
     return NextResponse.json({ error: 'Failed to send email' }, { status: 500 })
   }
