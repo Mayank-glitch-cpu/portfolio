@@ -29,8 +29,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <VisitCounter />
           {children}
+          <VisitCounter />
           <Toaster />
         </ThemeProvider>
       </body>
