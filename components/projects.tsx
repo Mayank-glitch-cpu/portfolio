@@ -9,7 +9,19 @@ import { ExternalLink, Github } from 'lucide-react'
 import Image from 'next/image'
 import { ProjectModal } from './project-modal'
 
-const projects = [
+
+type Project = {
+  title: string;
+  description: string;
+  image: string;
+  technologies: string[];
+  achievements: string[];
+  period: string;
+  githubUrl: string;
+  liveUrl?: string;
+};
+
+const projects: Project[] = [
   {
     title: 'Pharmacy Revenue Prediction System',
     description: 'A full-stack application leveraging machine learning models to predict pharmacy revenue based on various input attributes.',
@@ -98,7 +110,7 @@ const projects = [
 ]
 
 const Projects = () => {
-  const [selectedProject, setSelectedProject] = useState(null)
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
     <section id="projects" className="py-20">
@@ -119,7 +131,7 @@ const Projects = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <Card 
+              <Card
                 className="cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105"
                 onClick={() => setSelectedProject(project)}
               >
@@ -172,8 +184,7 @@ const Projects = () => {
         />
       )}
     </section>
-  )
-}
+  );
+};
 
-export default Projects
-
+export default Projects;
