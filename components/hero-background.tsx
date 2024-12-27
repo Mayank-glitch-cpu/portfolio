@@ -43,12 +43,13 @@ const Scene = () => {
       console.log("WebGL context restored.");
     };
 
-    gl.domElement.addEventListener("webglcontextlost", handleContextLost);
-    gl.domElement.addEventListener("webglcontextrestored", handleContextRestored);
+    const canvas = gl.domElement as HTMLCanvasElement; // Type cast here
+    canvas.addEventListener("webglcontextlost", handleContextLost);
+    canvas.addEventListener("webglcontextrestored", handleContextRestored);
 
     return () => {
-      gl.domElement.removeEventListener("webglcontextlost", handleContextLost);
-      gl.domElement.removeEventListener("webglcontextrestored", handleContextRestored);
+      canvas.removeEventListener("webglcontextlost", handleContextLost);
+      canvas.removeEventListener("webglcontextrestored", handleContextRestored);
     };
   }, [gl]);
 
