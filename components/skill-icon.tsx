@@ -1,9 +1,11 @@
-"use client"
-
 import { Canvas } from '@react-three/fiber'
 import { Float, Text3D, PerspectiveCamera } from '@react-three/drei'
 
-export const SkillIcon = ({ text }) => {
+interface SkillIconProps {
+  text: string; // Explicitly define the type of the text prop
+}
+
+export const SkillIcon = ({ text }: SkillIconProps) => {
   return (
     <div className="absolute inset-0 pointer-events-none">
       <Canvas>
@@ -25,4 +27,3 @@ export const SkillIcon = ({ text }) => {
     </div>
   )
 }
-
