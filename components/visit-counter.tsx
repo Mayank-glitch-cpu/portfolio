@@ -22,7 +22,12 @@ export default function VisitCounter() {
         setCount(data.count)
       } catch (error) {
         console.error('Error fetching visit count:', error)
-        setError(error.message)
+        // Check if error is an instance of Error before accessing message
+        if (error instanceof Error) {
+          setError(error.message)
+        } else {
+          setError('An unknown error occurred')
+        }
       }
     }
 
@@ -47,4 +52,3 @@ export default function VisitCounter() {
     </div>
   )
 }
-
