@@ -1,6 +1,11 @@
 import { NextResponse } from 'next/server'
 import sgMail from '@sendgrid/mail'
 
+// Add type guard function
+function isSendGridError(error: unknown): error is { response?: { body: any } } {
+  return typeof error === 'object' && error !== null && 'response' in error;
+}
+
 // Define error type for SendGrid
 interface SendGridError extends Error {
   response?: {
@@ -51,9 +56,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: 'Email sent successfully' })
   } catch (error) {
     console.error('Error sending email:', error)
-    // Type guard to check if error is SendGridError
-    if ((error as SendGridError).response) {
-      console.error((error as SendGridError).response?.body)
+    // Use the new type guard
+    if (isSendGridError(error) && error.response) {
+      console.error(error.response.body)
     }
     return NextResponse.json({ error: 'Failed to send email' }, { status: 500 })
   }
