@@ -6,27 +6,27 @@ import { FaLinkedinIn, FaGithub, FaEnvelope, FaFacebookF, FaWhatsapp } from 'rea
 const socialLinks = [
   {
     icon: FaLinkedinIn,
-    href: "https://linkedin.com/in/hrishikeshmagadum",
+    href: "https://www.linkedin.com/in/mayank-vyas-369796213/",
     label: "LinkedIn"
   },
   {
     icon: FaGithub,
-    href: "https://github.com/hrishikeshm12",
+    href: "https://github.com/mayank-glitch-cpu",
     label: "GitHub"
   },
   {
     icon: FaEnvelope,
-    href: "mailto:hrishikeshmagadum09@gmail.com",
+    href: "mailto:mvyas7@asu.edu",
     label: "Email"
   },
-  {
-    icon: FaFacebookF,
-    href: "https://facebook.com/hrishikesh.magadum.3",
-    label: "Facebook"
-  },
+  // {
+  //   icon: FaFacebookF,
+  //   href: "https://facebook.com/hrishikesh.magadum.3",
+  //   label: "Facebook"
+  // },
   {
     icon: FaWhatsapp,
-    href: "https://wa.me/+16238002607",
+    href: "https://wa.me/+16025171664",
     label: "WhatsApp"
   }
 ]
@@ -56,7 +56,7 @@ const Footer = () => {
             ))}
           </div>
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Hrishikesh Magadum. All rights reserved.
+            © {new Date().getFullYear()} Mayank Vyas. All rights reserved.
           </p>
         </motion.div>
       </div>

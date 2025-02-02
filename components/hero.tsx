@@ -39,7 +39,7 @@ const Hero = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               Hello, I'm{' '}
-              <span className="gradient-text">Hrishikesh Magadum</span>
+              <span className="gradient-text">Mayank Vyas</span>
             </motion.h1>
             <motion.p
               className="text-xl text-muted-foreground"
@@ -47,7 +47,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              Data Scientist | Full-Stack Developer | ML Engineer 
+              Ml Engineer | IoT Innovator | Data Analyst | Grad Student | Focused 
             </motion.p>
             <motion.p
               className="text-lg text-muted-foreground"
@@ -55,8 +55,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
             >
-              Driven by a passion for leveraging cutting-edge technologies, I specialize in developing scalable, AI-powered systems and full-stack applications that solve real-world challenges. 
-              Focused on optimizing decision-making, reducing complexity, and enhancing user experiences, I aim to streamline workflows, reduce repetitive tasks, and unlock the potential of big data for meaningful insights and business growth.
+              A data scientist & ML enthusiast passionate about AI, deep learning, and big data. From engineering to AI, my journey has been all about solving real-world problems with cutting-edge technology. Let’s connect and innovate together! 🚀
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -81,7 +80,7 @@ const Hero = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-b from-primary/20 to-background rounded-full overflow-hidden">
               <Image
-                src="/images/headshot/hrishikesh_4_new.jpg"
+                src="/images/headshot/mayank_vyas.jpeg"
                 alt="Hrishikesh Magadum"
                 fill
                 className="object-cover rounded-full p-4"

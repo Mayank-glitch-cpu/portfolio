@@ -3,7 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import { Float, PerspectiveCamera } from "@react-three/drei";
-import { Mesh } from "three"; // Import the Mesh type
+import { Mesh, MeshStandardMaterial } from "three"; // Import the Mesh type and MeshStandardMaterial
 
 type FloatingObjectProps = {
   position: [number, number, number];
@@ -24,7 +24,7 @@ const FloatingObject = ({ position, scale, rotationSpeed = 1 }: FloatingObjectPr
     <Float speed={2 * rotationSpeed} rotationIntensity={0.5} floatIntensity={0.5}>
       <mesh ref={mesh} position={position} scale={scale}>
         <octahedronGeometry />
-        <meshStandardMaterial color="#7C3AED" wireframe />
+        <primitive object={new MeshStandardMaterial({ color: "#7C3AED", wireframe: true })} />
       </mesh>
     </Float>
   );
@@ -84,11 +84,11 @@ export const HeroBackground = () => {
     return <FallbackBackground />;
   }
 
-  return (
-    <div className="absolute inset-0 -z-10">
-      <Canvas>
-        <Scene />
-      </Canvas>
-    </div>
-  );
+  // return (
+  //   // <div className="absolute inset-0 -z-10">
+  //   //   <Canvas>
+  //   //     <Scene />
+  //   //   </Canvas>
+  //   // </div>
+  // )
 };

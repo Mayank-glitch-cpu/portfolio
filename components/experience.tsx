@@ -7,42 +7,71 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 const experiences = [
   {
-    title: "Database Developer",
-    company: "Winsoft Technologies",
-    logo: "/images/logos/winsoft_logo.svg",
-    period: "January 2024 - July 2024",
+    title: "Research Intern - Kalman Filter",
+    company: "Indian Institute of Information Technology Design & Manufacturing Kancheepuram",
+    logo: "/images/logos/IIITDM.jpeg",
+    period: "May 2023 - January 2024",
     description: "Improved database performance and data integrity for banking systems.",
     points: [
-      "Created and revamped 20+ complex SQL stored procedures, improving data integrity by 8%.",
-      "Designed and executed 50+ advanced SQL queries, reducing execution time by 12%.",
-      "Collaborated with QA team to implement automated backup strategies, reducing downtime by 30%.",
-      "Resolved 100% of critical backend issues and troubleshot 15+ stored procedures."
+      "🚀 IoT Infrastructure Development: Engineered a LoRa-based fog computing framework for smart agriculture, reducing sensor energy consumption by 40% and optimizing data transmission using regression models.",
+      "🚀 Data Efficiency: Deployed APAEs (Analytical Prediction Algorithm) across edge-fog-cloud layers, cutting data transmissions by 93.6% while maintaining <10% MAE.",
+      "🚀 System Integration: Streamlined sensor data collection (temperature, humidity, soil moisture) using Arduino and LoRa, achieving 98% irrigation efficiency."
+    ],
+    // add the research publications links with thumbnails
+    publications: [
+      {
+        title: "Optimizing Kalman Filters for Data Integrity",
+        url: "https://ieeexplore.ieee.org/abstract/document/10278208",
+        thumbnail: "/images/logos/IEEE.png"
+      },
+      // {
+        // title: "LoRa-based Fog Computing Framework for Smart Agriculture",
+        // url: "https://example.com/publication2",
+        // thumbnail: "/images/publications/kf_thumbnail2.jpg"
+      // }
     ]
   },
   {
-    title: "Software Developer Intern",
-    company: "Worldline",
-    logo: "/images/logos/worldline_logo.svg",
-    period: "February 2023 - July 2023",
+    title: "Research Intern - Machine Learning Framework",
+    company: "Indian Institute of Information Technology Design & Manufacturing Kancheepuram",
+    logo: "/images/logos/IIITDM.jpeg",
+    period: "April 2023 - January 2023",
     description: "Developed core modules for a Chargeback Automation system.",
     points: [
-      "Constructed modules using MongoDB, Node.js, and RabbitMQ, eliminating manual email-based validation.",
-      "Reduced dispute resolution time by 25%, processing 6,000+ monthly chargeback transactions.",
-      "Engineered callback functions for microservices using Kubernetes, increasing system efficiency by 20%.",
-      "Developed a throttle-level validation plugin with JavaScript, enhancing transaction security."
+      "🚀 Designed a Regressive Prediction Data Forwarding Model (RPDM) using TensorFlow Lite, reducing bandwidth usage by 85% in IoT networks. modules using MongoDB, Node.js, and RabbitMQ, eliminating manual email-based validation.",
+      "🚀 Achieved 99.97% prediction accuracy with Decision Trees, enabling real-time actuation on edge devices during internet outages.uced dispute resolution time by 25%, processing 6,000+ monthly chargeback transactions.",
+      "🚀 Implemented lightweight model compression for deployment on Raspberry Pi/Arduino, reducing power consumption by 82.89%.",
+    
+      // "Developed a throttle-level validation plugin with JavaScript, enhancing transaction security."
+    ],
+    publications: [
+      
+      {
+        title: "LoRa-based Fog Computing Framework for Smart Agriculture",
+        url: "https://ieeexplore.ieee.org/abstract/document/10572197",
+        thumbnail: "/images/logos/IEEE.png"
+      }
     ]
   },
   {
-    title: "Data Analytics Intern",
-    company: "Reliance Jio",
-    logo: "/images/logos/reliance_jio_logo.svg",
+    title: "Research Intern - IoT Innovator",
+    company: "Indian Institute of Information Technology Design & Manufacturing Kancheepuram",
+    logo: "/images/logos/IIITDM.jpeg",
     period: "May 2022 - August 2022",
     description: "Optimized crowd detection models for real-time scenarios.",
     points: [
-      "Improved real-time object detection accuracy by 1.25% through camera angle optimization.",
-      "Deployed PeopleNet v2.6 model, achieving 91.82% precision and 88.60% recall.",
-      "Enhanced performance by 10% using Nvidia DeepStream SDK's GPU for containerized models."
+      "🚀 Designed a Ward’s method clustering algorithm to compress IoT sensor data by 57.39%, deployed on fog nodes to reduce cloud transmission costs by 38%. ",
+      "🚀 Integrated with The Things Network, achieving 1.1s latency for real-time field monitoring, improving response time by 35% over traditional cellular networks.",
+      "🚀Published in IEEE AINA 2023 and tested on a 20-acre testbed, cutting energy consumption by 82.89% at tolerance thresholds (ε=1.0)"
+    ],
+    publications: [
+      {
+        title: "An Efficient Data Aggregation Algorithm for LoRa Enabled Fog Layer in Smart Agriculture",
+        url: "https://link.springer.com/chapter/10.1007/978-3-031-28451-9_4",
+        thumbnail: "/images/logos/springer.jpeg"
+      }
     ]
+
   }
 ]
 
@@ -129,6 +158,43 @@ const Experience = () => {
                               </motion.li>
                             ))}
                           </ul>
+                          {exp.publications && (
+                            <div className="mt-4">
+                              <h4 className="text-lg font-semibold mb-2">Publications:</h4>
+                              {exp.publications.map((pub, i) => (
+                                <a
+                                  key={i}
+                                  href={pub.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="flex items-center space-x-4 mt-2"
+                                >
+                                  <Image
+                                    src={pub.thumbnail}
+                                    alt={pub.title}
+                                    width={50}
+                                    height={50}
+                                    className="rounded-lg"
+                                  />
+                                  <span className="text-sm text-primary">{pub.title}</span>
+                                </a>
+                              ))}
+                            </div>
+                          )}
+                          {/* <div className="mt-4">
+                             {exp.publications && exp.publications.map((pub, i) => (
+                             <a key={i} href={pub.url} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-4 mt-2">
+                             <Image 
+                              src={pub.thumbnail} 
+                              alt={pub.title} 
+                              width={50} 
+                              height={50} 
+                              className="rounded-lg"
+                              />
+                            <span className="text-sm text-primary">{pub.title}</span>
+                            </a>
+                          ))}
+                          </div> */}
                         </CardContent>
                       </Card>
                     </div>

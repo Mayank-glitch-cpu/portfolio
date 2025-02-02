@@ -87,12 +87,12 @@ const Contact = () => {
           >
             <h3 className="text-2xl font-semibold mb-4">Contact Information</h3>
             <div className="space-y-4">
-              <ContactItem icon={Mail} label="hrishikeshmagadum09@gmail.com" href="mailto:hrishikeshmagadum09@gmail.com" />
-              <ContactItem icon={Phone} label="+1 (623)-800-2607" href="tel:+16238002607" />
+              <ContactItem icon={Mail} label="mvyas7@asu.edu" href="mailto:mvyas7@asu.edu" />
+              <ContactItem icon={Phone} label="+1 (602)-517-1664" href="tel:+16025171664" />
               <ContactItem icon={MapPin} label="Tempe, AZ" href="#" />
-              <ContactItem icon={Github} label="GitHub" href="https://github.com/hrishikeshm12" />
-              <ContactItem icon={Linkedin} label="LinkedIn" href="https://linkedin.com/in/hrishikeshmagadum" />
-              <ContactItem icon={Twitter} label="Twitter" href="https://twitter.com/hrishikesh37398" />
+              <ContactItem icon={Github} label="GitHub" href="https://github.com/mayank-glitch-cpu" />
+              <ContactItem icon={Linkedin} label="LinkedIn" href="https://www.linkedin.com/in/mayank-vyas-369796213/" />
+              <ContactItem icon={Twitter} label="Twitter" href="https://x.com/MayankV53812200" />
             </div>
           </motion.div>
           <motion.div

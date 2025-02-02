@@ -11,30 +11,44 @@ import {
   SiCplusplus,
   SiTensorflow,
   SiPytorch,
-  SiScikitlearn,
-  SiPandas,
-  SiOpencv,
   SiKeras,
+  SiScikitlearn,
+  SiReact,
+  SiFlask,
+  SiDjango,
   SiApachespark,
   SiMongodb,
   SiPostgresql,
-  SiFlask,
-  SiDjango,
-  SiReact,
+  SiOpencv,
+  SiPandas,
   SiGithub,
-  SiSelenium,
-  SiStreamlit,
-  SiFastapi,
-  SiPostman,
-} from 'react-icons/si'
+  SiAzuredevops,
+  SiArduino,
+  SiGrafana,
+  SiPowerbi,
+  SiTableau,
+  
+  // siraspberrypi,
+  // SiCnn,
+  // SiApache,
+  // SiNumpy,
+  
+} from "react-icons/si";
 import { DiJava } from 'react-icons/di'
 import { FaWindows } from 'react-icons/fa'
+import { SiRaspberrypi } from 'react-icons/si'
+import { SiCnn } from 'react-icons/si'
+import { SiApache } from 'react-icons/si'
+import { SiNumpy } from 'react-icons/si'
+
+
+
 
 const skills = [
   { icon: SiPython, name: "Python" },
-  { icon: SiR, name: "R" },
+  // { icon: SiR, name: "R" },
   { icon: DiJava, name: "Java" },
-  { icon: SiJavascript, name: "JavaScript" },
+  // { icon: SiJavascript, name: "JavaScript" },
   { icon: SiHtml5, name: "HTML" },
   { icon: SiCplusplus, name: "C++" },
   { icon: SiTensorflow, name: "TensorFlow" },
@@ -46,15 +60,20 @@ const skills = [
   { icon: SiApachespark, name: "PySpark" },
   { icon: SiMongodb, name: "MongoDB" },
   { icon: SiPostgresql, name: "PostgreSQL" },
-  { icon: SiFlask, name: "Flask" },
-  { icon: SiDjango, name: "Django" },
+  // { icon: SiFlask, name: "Flask" },
+  // { icon: SiDjango, name: "Django" },
   { icon: SiReact, name: "React" },
   { icon: SiGithub, name: "GitHub" },
   { icon: FaWindows, name: "Azure" },
-  { icon: SiSelenium, name: "Selenium" },
-  { icon: SiStreamlit, name: "Streamlit" },
-  { icon: SiFastapi, name: "FastAPI" },
-  { icon: SiPostman, name: "Postman" },
+  // { icon: SiAzuredevops, name: "Azure DevOps" },
+  { icon: SiArduino, name: "Arduino" },
+  { icon: SiNumpy, name: "NumPy" },
+  { icon: SiCnn, name: "CNN" },
+  { icon: SiApache, name: "Apache" },
+  { icon: SiRaspberrypi, name: "Raspberry Pi" },
+  { icon: SiGrafana, name: "Grafana" },
+  { icon: SiPowerbi, name: "Power BI" },
+  { icon: SiTableau, name: "Tableau" },
 ]
 
 const About = () => {
@@ -84,20 +103,17 @@ const About = () => {
           transition={{ duration: 0.5 }}
           className="max-w-3xl mx-auto mb-20"
         >
-          <h3 className="text-2xl font-semibold mb-6">My Journey</h3>
+          {/* <h3 className="text-2xl font-semibold mb-6">Ml Enginner | IoT Innovator | Data Analyst | Grad Student | Focused</h3> */}
           <div className="space-y-4 text-lg text-muted-foreground">
           
 <p>  
-I’m Hrishikesh Magadum, a driven technologist with a passion for harnessing data and technology to create impactful solutions. As a Master's student in Data Science and Analytics at Arizona State University, I blend academic rigor with practical expertise to tackle real-world challenges and deliver measurable results.  
-</p>  
+👋 Hi, I'm Mayank Vyas! A data scientist & ML enthusiast, passionate about deep learning, AI, and big data analytics. Pursuing my MS in Data Analytics at ASU, I specialize in LLMs, neural networks, and reinforcement learning.</p>  
 <p>  
-My journey began with a B.Tech in Computer Science from Vellore Institute of Technology, where I graduated with a strong 3.71 CGPA. This foundation has enabled me to excel in machine learning, data analytics, and full-stack development, giving me the versatility to work across domains and technologies.  
-</p>  
+🚀 My path has taken me from optimizing agricultural irrigation with IoT to developing AI-driven solutions for root phenotyping, traffic control, and business analytics. Recently, I contributed to Intel’s self-checkout AI project, enhancing real-time system monitoring with Grafana, MQTT, and Docker.</p>  
 <p>  
-I thrive on developing solutions that improve workflows, enable smarter decision-making, and provide businesses with actionable insights. Whether building data pipelines, crafting intuitive user experiences, or deploying machine learning models, I focus on delivering solutions that drive value and make a difference.  
-</p>  
+💡 Always exploring new frontiers in AI, ML, and data science—let’s build something innovative together!</p>  
 <p>  
-With a passion for innovation and a commitment to continuous learning, I’m eager to contribute to teams that value creativity and technology as tools for growth and transformation.  
+{/* With a passion for innovation and a commitment to continuous learning, I’m eager to contribute to teams that value creativity and technology as tools for growth and transformation.   */}
 </p>  
           </div>
         </motion.div>
@@ -108,7 +124,7 @@ With a passion for innovation and a commitment to continuous learning, I’m eag
           transition={{ duration: 0.5, delay: 0.2 }}
           style={{ opacity }}
         >
-          <h3 className="text-2xl font-semibold mb-8 text-center">Technical Skills</h3>
+          <h3 className="text-2xl font-semibold mb-8 text-center">Technical Stack</h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 max-w-4xl mx-auto">
             {skills.map((skill, index) => (
               <motion.div

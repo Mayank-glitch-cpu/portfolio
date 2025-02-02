@@ -34,7 +34,7 @@ const Header = () => {
 
   if (!mounted) return null
 
-  const navItems = ['Home', 'About', 'Experience', 'Projects', 'Contact']
+  const navItems = ['Home', 'About', 'Experience', 'Projects' ,'Contact']
 
   return (
     <motion.header

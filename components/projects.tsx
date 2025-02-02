@@ -18,81 +18,117 @@ type Project = {
   achievements: string[];
   period: string;
   githubUrl: string;
-  liveUrl?: string;
+  // liveUrl?: string;
 };
 
 const projects: Project[] = [
   {
-    title: 'Pharmacy Revenue Prediction System',
-    description: 'A full-stack application leveraging machine learning models to predict pharmacy revenue based on various input attributes.',
-    image: '/images/projects/pharmacy_project_cover.png',
-    technologies: ['Flask', 'Java (Spring Boot)', 'Docker', 'GitHub Actions', 'Machine Learning'],
+    title: '🛒 Intel Automated Checkout System (Open-Source Contribution)',
+    description: 'Objective: Optimize real-time monitoring of CPU latency and FPS.',
+    image: '/images/projects/intel.jpg',
+    technologies: ['Docker', 'Grafana', 'MQTT', 'oAuth2.0'],
     achievements: [
-      'Developed a Flask web application for handling user requests and data processing',
-      'Created a Java backend for machine learning-based predictions',
-      'Implemented a CI/CD pipeline using GitHub Actions for automated testing and deployment',
-      'Containerized the application using Docker for easy distribution and deployment'
+      'Deployed Dockerized Grafana dashboards for system health tracking. 💻',
+      'Implemented OAuth 2.0 to secure admin access, preventing data breaches. 🔒',
+      'Impact: Reduced system downtime by 25%. ⚡',
+      'Containerized  using Docker for easy distribution and deployment'
     ],
-    period: 'September 2023 - November 2023',
-    githubUrl: 'https://github.com/hrishikeshm12/Pharmacy-Revenue-Prediction',
-    liveUrl: 'https://hub.docker.com/r/hrish06062001/flask-app'
+    period: 'January 2025 - Present',
+    githubUrl: 'https://github.com/intel-retail/automated-self-checkout/pull/652',
+    // liveUrl: 'https://hub.docker.com/r/hrish06062001/flask-app'
   },
   {
-    title: 'Music Mosaic',
-    description: 'Developed a machine learning-powered music recommendation system generating personalized playlists with high accuracy.',
-    image: '/images/projects/music_mosaic_cover.png',
-    technologies: ['Python', 'Flask', 'MongoDB', 'Spotify API', 'Machine Learning'],
+    title: '🌱 MaskRoot: Automated Root Phenotyping',
+    description: 'Deep Learning pipeline for agricultural root segmentation using Mask R-CNN',
+    image: '/images/projects/root.jpg',
+    technologies: ['Python', 'TensorFlow', 'OpenCV', 'Mask R-CNN'],
     achievements: [
-      'Achieved 25% higher accuracy in personalized playlist generation',
-      'Improved precision from 0.10 to 0.65 and recall from 0.13 to 0.80, achieving an F1 score of 0.74',
-      'Reduced matrix size from 6GB to 6.55MB, improving response time'
+      '96.5% segmentation accuracy using transfer learning',
+      '90% reduction in manual annotation time',
+      'Published in Springer Conference'
     ],
-    period: 'December 2022 - May 2023',
-    githubUrl: 'https://github.com/hrishikeshm12/Music-Mosaic',
+    period: 'April 2023 - April 2024',
+    githubUrl: 'https://github.com/Mayank-glitch-cpu/Root_phenotyping',
   },
   {
-    title: 'DeOldiformer',
-    description: 'A research project proposing a hybrid GAN model that combines DeOldify for color restoration and Codeformer for image enhancement.',
-    image: '/images/projects/deoldiformer_project_cover.png',
-    technologies: ['Python', 'PyTorch', 'CUDA', 'Hugging Face', 'Transformers', 'GAN'],
+    title: '📡 LoRa-Based Smart Agriculture (DASA)',
+    description: 'IoT data aggregation system with fog computing',
+    image: '/images/projects/dasa.jpg',
+    technologies: ['Python', 'Apache Spark', 'LoRaWAN', 'Ward Clustering'],
     achievements: [
-      'Achieved 24.4% improvement in image quality over existing methods',
-      'Attained top scores with ARNIQA score of 0.5569, Q-Align score of 3.7754, and NIMA score of 5.5996',
-      'Optimized resource usage by 30% through efficient pipeline execution',
-      'Enabled concurrent model execution on limited hardware'
+      '57.39% data compression at fog layer',
+      '38% reduction in cloud transmission costs',
+      'Published in IEEE AINA 2023'
     ],
-    period: 'January 2024 - December 2024',
-    githubUrl: 'https://github.com/hrishikeshm12/DeOldiformer',
-    liveUrl: 'https://huggingface.co/spaces/hrishikeshm123/DeOldiformer'
+    period: 'May 2022 - August 2022',
+    githubUrl: 'https://github.com/Mayank-glitch-cpu/AINA_Code',
   },
   {
-    title: 'Pixel Fusion',
-    description: 'A web application that generates and transforms images using AI, combining text-to-image generation with artistic style transfer.',
-    image: '/images/projects/pixel_fusion_project_cover.png',
-    technologies: ['Python', 'TensorFlow', 'OpenAI', 'Stable Diffusion', 'Django', 'JavaScript'],
+    title: '🚦 RL Traffic Control with SUMO',
+    description: 'Reinforcement Learning for traffic light optimization',
+    image: '/images/projects/sumo_rl.jpg',
+    technologies: ['Python', 'RLlib', 'SUMO', 'TensorFlow'],
     achievements: [
-      'Implemented concurrent image generation using OpenAI and Stable Diffusion APIs',
-      'Integrated TensorFlow Fast Style Transfer for artistic transformation',
-      'Created a seamless web interface for text-to-image generation and style transfer',
-      'Developed a robust Django backend for handling multiple AI model interactions'
+      '35% reduction in vehicle waiting time',
+      '22% faster average travel time',
+      'DQN agent implementation'
     ],
-    period: 'July 2023',
-    githubUrl: 'https://github.com/hrishikeshm12/Pixel-Fusion',
-    
+    period: 'January 2024 - April 2024',
+    githubUrl: 'https://github.com/Mayank-glitch-cpu/Intersection-Control-using-Reinforcement-learning-and-SUMO',
   },
   
   {
-    title: 'Social Media Analytics',
-    description: 'Developed machine learning models to enhance predictive accuracy of social media usage, revealing insights into demographic and behavioral patterns.',
-    image: '/images/projects/social_media_project_cover.png',
-    technologies: ['Python', 'CatBoost', 'Data Visualization'],
+    title: '🧠 MLP from Scratch',
+    description: 'Neural network implementation from ground up',
+    image: '/images/projects/MLP.jpg',
+    technologies: ['Python', 'NumPy', 'Matplotlib', 'Jupyter'],
     achievements: [
-      'Enhanced predictive accuracy by 7.3% using CatBoost',
-      'Identified that 70% of top 10 cities with highest social media usage are non-metropolitan'
+      '92% accuracy on MNIST dataset',
+      'Manual implementation of backpropagation',
+      'Visualization of weight matrices'
     ],
-    period: 'July 2023 - October 2023',
-    githubUrl: 'https://github.com/hrishikeshm12/Social-Media-Analytics',
+    period: 'August 2024 - November 2024',
+    githubUrl: 'https://github.com/Mayank-glitch-cpu/MLP-from-Scratch',
   },
+  {
+    title: '📶 RPDM: IoT Data Forwarding Model',
+    description: 'Lightweight ML model for edge devices',
+    image: '/images/projects/rpdm.png',
+    technologies: ['TensorFlow Lite', 'Decision Trees', 'FlatBuffers'],
+    achievements: [
+      '99.97% prediction accuracy',
+      '82.89% power consumption reduction',
+      'Raspberry Pi deployment'
+    ],
+    period: 'August 2023 - January 2024',
+    githubUrl: 'https://github.com/Mayank-glitch-cpu/Ml_predictions_framework_for_Smart_Farming',
+  },
+  {
+    title: '🛠️ Data Processing Pipeline',
+    description: 'ETL pipeline for large dataset processing',
+    image: '/images/projects/DP.jpg',
+    technologies: ['PySpark', 'Pandas', 'SQL', 'Cron'],
+    achievements: [
+      '40% runtime reduction through optimization',
+      '10k+ rows processed daily',
+      'Automated report generation'
+    ],
+    period: 'August 2024 - October 2024',
+    githubUrl: 'https://github.com/Mayank-glitch-cpu/Data-Processing',
+  },
+  {
+    title: '📊 Tucson Business Trends Analysis',
+    description: 'Identify growth patterns in Arizona'+'s business landscape.',
+    image: '/images/projects/BA.jpg',
+    technologies: ['PySpark', 'Power Bi', 'Tableau'],
+    achievements: [
+      'Processed 10,000+ business records to analyze customer engagement and operational trends. 📂',
+      'Built interactive dashboards revealing 20% higher weekend operations in postal code 85706. 🏙️',
+      'Impact: Enabled data-driven expansion strategies for local businesses. 💼'
+    ],
+    period: 'August 2024 - December 2024',
+    githubUrl: 'https://github.com/Mayank-glitch-cpu/Reimagined-businesses-in-Tucson',
+  }
  
   // {
   //   title: 'COVID-19 Severity Prediction',
