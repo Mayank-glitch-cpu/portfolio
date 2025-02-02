@@ -8,7 +8,7 @@ import VisitCounter from '@/components/visit-counter'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Hrishikesh Magadum - Portfolio',
+  title: 'Mayank Vyas - Portfolio',
   description: 'Personal portfolio showcasing my projects and skills',
 }
 
