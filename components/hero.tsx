@@ -81,7 +81,7 @@ const Hero = () => {
             <div className="absolute inset-0 bg-gradient-to-b from-primary/20 to-background rounded-full overflow-hidden">
               <Image
                 src="/images/headshot/mayank_vyas.jpeg"
-                alt="Hrishikesh Magadum"
+                alt="Mayank Vyas"
                 fill
                 className="object-cover rounded-full p-4"
                 priority
