@@ -1,21 +1,23 @@
-"use client"
+// src/components/Hero.tsx
+"use client";
 
-import { useRef } from 'react'
-import Image from 'next/image'
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { Button } from '@/components/ui/button'
-import { ArrowRight } from 'lucide-react'
-import { HeroBackground } from './hero-background'
+import { useRef } from 'react';
+import Image from 'next/image';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import CountUp from 'react-countup';
+import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
+import { HeroBackground } from './hero-background';
 
-const Hero = () => {
-  const containerRef = useRef(null)
+const Hero: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end start"]
-  })
+    offset: ['start start', 'end start'],
+  });
 
-  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0])
-  const y = useTransform(scrollYProgress, [0, 1], [0, 100])
+  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, 100]);
 
   return (
     <section 
@@ -47,7 +49,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              Ml Engineer | IoT Innovator | Data Analyst | Grad Student | Focused 
+              ML Engineer | IoT Innovator | Data Analyst | Grad Student | Focused 
             </motion.p>
             <motion.p
               className="text-lg text-muted-foreground"
@@ -55,28 +57,47 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
             >
-              A data scientist & ML enthusiast passionate about AI, deep learning, and big data. From engineering to AI, my journey has been all about solving real-world problems with cutting-edge technology. Let’s connect and innovate together! 🚀
+              A data scientist & ML enthusiast passionate about AI, deep learning, and big data. I transform raw data into actionable insights to drive innovation. Let’s connect and innovate together! 🚀
             </motion.p>
+            {/* Example dynamic counter section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
+              className="flex items-center gap-2"
+            >
+              <span className="text-2xl font-bold">Projects Delivered:</span>
+              <CountUp end={8} duration={6} className="text-2xl font-bold text-indigo-600" />
+              <span className="text-2xl font-bold">Publications:</span>
+              <CountUp end={3} duration={5} className="text-2xl font-bold text-indigo-600" />
+            </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.8 }}
               className="flex gap-4"
             >
-              <Button size="lg" className="rounded-full" onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}>
+              <Button 
+                size="lg" 
+                className="rounded-full" 
+                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+              >
                 View Projects <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-              <Button size="lg" variant="outline" className="rounded-full" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="rounded-full" 
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              >
                 Contact Me
               </Button>
             </motion.div>
           </motion.div>
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            style={{ opacity }}
-            className="relative h-[600px] hidden lg:block"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+                className="relative h-[600px] hidden lg:block"
           >
             <div className="absolute inset-0 bg-gradient-to-b from-primary/20 to-background rounded-full overflow-hidden">
               <Image
@@ -87,12 +108,19 @@ const Hero = () => {
                 priority
               />
             </div>
+            <motion.div 
+              initial={{ opacity: 0 }} 
+              whileHover={{ opacity: 1 }} 
+              className="absolute bottom-4 left-4 bg-black bg-opacity-50 text-white p-2 rounded"
+            >
+            Data Science Enthusiast
+            </motion.div>
           </motion.div>
+
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Hero
-
+export default Hero;
