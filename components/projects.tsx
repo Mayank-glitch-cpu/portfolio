@@ -18,10 +18,25 @@ type Project = {
   achievements: string[];
   period: string;
   githubUrl: string;
-  // liveUrl?: string;
+  liveUrl?: string;
 };
 
 const projects: Project[] = [
+  {
+    title: '📌 Project Title: Sales Performance Dashboard in Power BI ',
+    description: 'I created this interactive Power BI dashboard to analyze sales performance data and uncover key insights. The dashboard helps businesses track revenue trends, identify top-performing products, and compare regional sales efficiently.',
+    image: '/images/projects/dataline_powerBi.png',
+    technologies: ['Docker', 'Grafana', 'MQTT', 'oAuth2.0'],
+    achievements: [
+      '✅ Revenue Trends: Track monthly revenue growth',
+      '✅ Top Products & Categories: Identify best-selling items',
+      '✅ Regional Performance: Compare sales across different locations',
+      '✅ Dynamic Filtering: Users can interact with the visuals for deeper insights'
+    ],
+    period: 'February 2025',
+    githubUrl: 'https://github.com/intel-retail/automated-self-checkout/pull/652',
+    liveUrl: 'https://app.powerbi.com/reportEmbed?reportId=28cfe113-229a-461c-a719-cc7ce42fd44d&autoAuth=true&ctid=41f88ecb-ca63-404d-97dd-ab0a169fd138'
+  },
   {
     title: '🛒 Intel Automated Checkout System (Open-Source Contribution)',
     description: 'Objective: Optimize real-time monitoring of CPU latency and FPS.',
@@ -31,11 +46,11 @@ const projects: Project[] = [
       'Deployed Dockerized Grafana dashboards for system health tracking. 💻',
       'Implemented OAuth 2.0 to secure admin access, preventing data breaches. 🔒',
       'Impact: Reduced system downtime by 25%. ⚡',
-      'Containerized  using Docker for easy distribution and deployment'
+      'Containerized using Docker for easy distribution and deployment'
     ],
     period: 'January 2025 - Present',
     githubUrl: 'https://github.com/intel-retail/automated-self-checkout/pull/652',
-    // liveUrl: 'https://hub.docker.com/r/hrish06062001/flask-app'
+    liveUrl: ''
   },
   {
     title: '🌱 MaskRoot: Automated Root Phenotyping',
@@ -49,6 +64,7 @@ const projects: Project[] = [
     ],
     period: 'April 2023 - April 2024',
     githubUrl: 'https://github.com/Mayank-glitch-cpu/Root_phenotyping',
+    liveUrl: ''
   },
   {
     title: '📡 LoRa-Based Smart Agriculture (DASA)',
@@ -62,6 +78,7 @@ const projects: Project[] = [
     ],
     period: 'May 2022 - August 2022',
     githubUrl: 'https://github.com/Mayank-glitch-cpu/AINA_Code',
+    liveUrl: ''
   },
   {
     title: '🚦 RL Traffic Control with SUMO',
@@ -75,8 +92,8 @@ const projects: Project[] = [
     ],
     period: 'January 2024 - April 2024',
     githubUrl: 'https://github.com/Mayank-glitch-cpu/Intersection-Control-using-Reinforcement-learning-and-SUMO',
+    liveUrl: ''
   },
-  
   {
     title: '🧠 MLP from Scratch',
     description: 'Neural network implementation from ground up',
@@ -89,6 +106,7 @@ const projects: Project[] = [
     ],
     period: 'August 2024 - November 2024',
     githubUrl: 'https://github.com/Mayank-glitch-cpu/MLP-from-Scratch',
+    liveUrl: ''
   },
   {
     title: '📶 RPDM: IoT Data Forwarding Model',
@@ -102,6 +120,7 @@ const projects: Project[] = [
     ],
     period: 'August 2023 - January 2024',
     githubUrl: 'https://github.com/Mayank-glitch-cpu/Ml_predictions_framework_for_Smart_Farming',
+    liveUrl: ''
   },
   {
     title: '🛠️ Data Processing Pipeline',
@@ -115,10 +134,11 @@ const projects: Project[] = [
     ],
     period: 'August 2024 - October 2024',
     githubUrl: 'https://github.com/Mayank-glitch-cpu/Data-Processing',
+    liveUrl: ''
   },
   {
     title: '📊 Tucson Business Trends Analysis',
-    description: 'Identify growth patterns in Arizona'+'s business landscape.',
+    description: 'Identify growth patterns in Arizona\'s business landscape.',
     image: '/images/projects/BA.jpg',
     technologies: ['PySpark', 'Power Bi', 'Tableau'],
     achievements: [
@@ -128,21 +148,8 @@ const projects: Project[] = [
     ],
     period: 'August 2024 - December 2024',
     githubUrl: 'https://github.com/Mayank-glitch-cpu/Reimagined-businesses-in-Tucson',
+    liveUrl: ''
   }
- 
-  // {
-  //   title: 'COVID-19 Severity Prediction',
-  //   description: 'Led a team to develop deep learning models for classifying 3D chest CT images into COVID-19 severity categories.',
-  //   image: '/projects/covid-prediction.jpg',
-  //   technologies: ['Python', 'Deep Learning', 'DenseNet121', 'VGG-16', 'VGG-19'],
-  //   achievements: [
-  //     'Achieved 82.46% accuracy in severity classification',
-  //     'Reduced feature complexity by 90%, improving model training efficiency',
-  //     'Published research paper at the 2nd International Conference on Data Science and Intelligent Applications (ICDSIA-2023)'
-  //   ],
-  //   period: 'January 2022 - October 2022',
-  //   githubUrl: 'https://github.com/yourusername/covid-severity-prediction',
-  // }
 ]
 
 const Projects = () => {

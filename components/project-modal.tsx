@@ -13,7 +13,7 @@ interface ProjectModalProps {
     achievements: string[];
     period: string;
     githubUrl: string;
-    // liveUrl?: string;
+    liveUrl?: string;
   };
   isOpen: boolean;
   onClose: () => void;
@@ -54,9 +54,9 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
         <p className="text-sm text-muted-foreground mt-4">{project.period}</p>
         <div className="flex flex-col sm:flex-row justify-between mt-6 gap-4">
           <Button className="w-full sm:w-auto" asChild>
-            {/* <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
               <ExternalLink className="mr-2 h-4 w-4" /> Live Demo
-            </a> */}
+            </a>
           </Button>
           <Button variant="outline" className="w-full sm:w-auto" asChild>
             <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">

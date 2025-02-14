@@ -67,7 +67,7 @@ const Hero: React.FC = () => {
               className="flex items-center gap-2"
             >
               <span className="text-2xl font-bold">Projects Delivered:</span>
-              <CountUp end={8} duration={6} className="text-2xl font-bold text-indigo-600" />
+              <CountUp end={9} duration={9} className="text-2xl font-bold text-indigo-600" />
               <span className="text-2xl font-bold">Publications:</span>
               <CountUp end={3} duration={5} className="text-2xl font-bold text-indigo-600" />
             </motion.div>
