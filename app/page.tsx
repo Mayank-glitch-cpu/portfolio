@@ -1,26 +1,14 @@
-import { Suspense, lazy } from 'react'
-import Script from 'next/script'
 import Header from '@/components/header'
 import Hero from '@/components/hero'
 import About from '@/components/about'
+import Experience from '@/components/experience'
+import Projects from '@/components/projects'
+import Contact from '@/components/contact'
+import Dashboards from '@/components/dashboards'
+import { Suspense } from 'react'
 
-const Experience = lazy(() => import('@/components/experience'))
-const Projects = lazy(() => import('@/components/projects'))
-const Contact = lazy(() => import('@/components/contact'))
-const Footer = lazy(() => import('@/components/footer'))
-
-export default function Home() {
+const Page = () => {
   return (
-    <>
-      {/* Include external scripts with desired loading strategy */}
-      <Script
-        src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"
-        strategy="afterInteractive"
-      />
-      <Script
-        src="https://files.bpcontent.cloud/2025/01/08/20/20250108201732-E9DTWJ7F.js"
-        strategy="afterInteractive"
-      />
     <main className="flex min-h-screen flex-col">
       <Header />
       <Hero />
@@ -34,15 +22,17 @@ export default function Home() {
         </section>
       </Suspense>
       <Suspense fallback={<div>Loading...</div>}>
+        <section id="dashboards">
+          <Dashboards />
+        </section>
+      </Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
         <section id="contact">
           <Contact />
         </section>
       </Suspense>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Footer />
-      </Suspense>
     </main>
-    </>
   )
 }
 
+export default Page

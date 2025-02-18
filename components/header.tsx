@@ -1,5 +1,4 @@
 "use client"
-
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { MoonIcon, SunIcon, MenuIcon, XIcon } from 'lucide-react'
@@ -15,7 +14,7 @@ const Header = () => {
   useEffect(() => {
     setMounted(true)
     const handleScroll = () => {
-      const sections = ['home', 'about', 'experience', 'projects', 'contact']
+      const sections = ['hero', 'about', 'experience', 'projects', 'dashboards', 'contact']
       const currentSection = sections.find(section => {
         const element = document.getElementById(section)
         if (element) {
@@ -26,6 +25,8 @@ const Header = () => {
       })
       if (currentSection) {
         setActiveSection(currentSection)
+      } else {
+        setActiveSection('home')
       }
     }
     window.addEventListener('scroll', handleScroll)
@@ -34,7 +35,7 @@ const Header = () => {
 
   if (!mounted) return null
 
-  const navItems = ['Home', 'About', 'Experience', 'Projects' ,'Contact']
+  const navItems = ['Home', 'About', 'Experience', 'Projects', 'Dashboards', 'Contact']
 
   return (
     <motion.header
@@ -48,7 +49,7 @@ const Header = () => {
             {navItems.map((item) => (
               <a
                 key={item}
-                href={`#${item.toLowerCase()}`}
+                href={item === 'Home' ? '#' : `#${item.toLowerCase()}`}
                 className={`text-sm font-medium transition-colors hover:text-primary ${
                   activeSection === item.toLowerCase() ? 'text-primary' : 'text-muted-foreground'
                 }`}
@@ -78,33 +79,32 @@ const Header = () => {
             </Button>
           </div>
         </div>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="md:hidden bg-background/95 backdrop-blur-md"
+          >
+            <nav className="flex flex-col items-center py-4">
+              {navItems.map((item) => (
+                <a
+                  key={item}
+                  href={item === 'Home' ? '#' : `#${item.toLowerCase()}`}
+                  className={`text-sm font-medium py-2 transition-colors hover:text-primary ${
+                    activeSection === item.toLowerCase() ? 'text-primary' : 'text-muted-foreground'
+                  }`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item}
+                </a>
+              ))}
+            </nav>
+          </motion.div>
+        )}
       </div>
-      {isMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          className="md:hidden bg-background/95 backdrop-blur-md"
-        >
-          <nav className="flex flex-col items-center py-4">
-            {navItems.map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                className={`text-sm font-medium py-2 transition-colors hover:text-primary ${
-                  activeSection === item.toLowerCase() ? 'text-primary' : 'text-muted-foreground'
-                }`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item}
-              </a>
-            ))}
-          </nav>
-        </motion.div>
-      )}
     </motion.header>
   )
 }
 
 export default Header
-
