@@ -5,6 +5,7 @@ import Experience from '@/components/experience'
 import Projects from '@/components/projects'
 import Contact from '@/components/contact'
 import Dashboards from '@/components/dashboards'
+import Hackathons from '@/components/hackathons'
 import { Suspense } from 'react'
 
 const Page = () => {
@@ -19,6 +20,11 @@ const Page = () => {
       <Suspense fallback={<div>Loading...</div>}>
         <section id="projects">
           <Projects />
+        </section>
+      </Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
+        <section id="hackathons">
+          <Hackathons />
         </section>
       </Suspense>
       <Suspense fallback={<div>Loading...</div>}>
