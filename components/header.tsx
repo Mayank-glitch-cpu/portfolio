@@ -14,7 +14,7 @@ const Header = () => {
   useEffect(() => {
     setMounted(true)
     const handleScroll = () => {
-      const sections = ['hero', 'about', 'experience', 'projects', 'hackathons', 'dashboards', 'contact']
+      const sections = ['hero', 'about', 'education', 'experience', 'projects', 'hackathons', 'dashboards', 'contact']
       const currentSection = sections.find(section => {
         const element = document.getElementById(section)
         if (element) {
@@ -35,7 +35,7 @@ const Header = () => {
 
   if (!mounted) return null
 
-  const navItems = ['Home', 'About', 'Experience', 'Projects', 'Hackathons', 'Dashboards', 'Contact']
+  const navItems = ['Home', 'About', 'Education', 'Experience', 'Projects', 'Hackathons', 'Dashboards', 'Contact']
 
   return (
     <motion.header

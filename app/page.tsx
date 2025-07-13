@@ -1,6 +1,7 @@
 import Header from '@/components/header'
 import Hero from '@/components/hero'
 import About from '@/components/about'
+import Education from '@/components/education'
 import Experience from '@/components/experience'
 import Projects from '@/components/projects'
 import Contact from '@/components/contact'
@@ -14,6 +15,7 @@ const Page = () => {
       <Header />
       <Hero />
       <About />
+      <Education />
       <Suspense fallback={<div>Loading...</div>}>
         <Experience />
       </Suspense>

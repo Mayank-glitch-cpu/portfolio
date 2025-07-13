@@ -106,15 +106,9 @@ const About = () => {
           {/* <h3 className="text-2xl font-semibold mb-6">Ml Enginner | IoT Innovator | Data Analyst | Grad Student | Focused</h3> */}
           <div className="space-y-4 text-lg text-muted-foreground">
           
-<p>  
-👋 Hi, I'm Mayank Vyas! A data scientist & ML enthusiast, passionate about deep learning, AI, and big data analytics. Pursuing my MS in Data Analytics at ASU, I specialize in LLMs, neural networks, and reinforcement learning.</p>  
-<p>  
-🚀 My path has taken me from optimizing agricultural irrigation with IoT to developing AI-driven solutions for root phenotyping, traffic control, and business analytics. Recently, I contributed to Intel’s self-checkout AI project, enhancing real-time system monitoring with Grafana, MQTT, and Docker.</p>  
-<p>  
-💡 Always exploring new frontiers in AI, ML, and data science—let’s build something innovative together!</p>  
-<p>  
-{/* With a passion for innovation and a commitment to continuous learning, I’m eager to contribute to teams that value creativity and technology as tools for growth and transformation.   */}
-</p>  
+<p>
+  As a Data Science master's student at ASU, I specialize in transforming complex problems into impactful <span className="underline decoration-purple-500">AI-driven solutions</span>. My work, from agricultural IoT to contributing to Intel's AI initiatives, showcases a commitment to pushing technological boundaries. I am eager to leverage my expertise in <span className="underline decoration-purple-500">deep learning</span> and <span className="underline decoration-purple-500">big data</span> to build the next generation of intelligent systems.
+</p>
           </div>
         </motion.div>
 
