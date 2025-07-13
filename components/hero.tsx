@@ -49,7 +49,7 @@ const Hero: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              ML Engineer | IoT Innovator | Data Analyst | Grad Student | Focused 
+              Software Developer | NLP Researcher | Data Analyst | Grad Student
             </motion.p>
             <motion.p
               className="text-lg text-muted-foreground"
@@ -57,10 +57,10 @@ const Hero: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
             >
-              A data scientist & ML enthusiast passionate about AI, deep learning, and big data. I transform raw data into actionable insights to drive innovation. Let’s connect and innovate together! 🚀
+              I engineer elegant and efficient code to transform complex problems into seamless, user-centric applications.
             </motion.p>
             {/* Example dynamic counter section */}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.7 }}
@@ -70,7 +70,7 @@ const Hero: React.FC = () => {
               <CountUp end={9} duration={9} className="text-2xl font-bold text-indigo-600" />
               <span className="text-2xl font-bold">Publications:</span>
               <CountUp end={3} duration={5} className="text-2xl font-bold text-indigo-600" />
-            </motion.div>
+            </motion.div> */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -84,6 +84,14 @@ const Hero: React.FC = () => {
               >
                 View Projects <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
+                <Button 
+                size="lg" 
+                variant="default"
+                className="rounded-full" 
+                onClick={() => window.open('https://drive.google.com/file/d/1mBTBy1fNGcjGnc-zUsYKGhKDi9IcPXr7/view?usp=sharing', '_blank')}
+                >
+                View Resume
+                </Button>
               <Button 
                 size="lg" 
                 variant="outline" 
@@ -101,20 +109,14 @@ const Hero: React.FC = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-b from-primary/20 to-background rounded-full overflow-hidden">
               <Image
-                src="/images/projects/mayank.jpeg"
+                src="/images/projects/goldengate-frontface.jpeg"
                 alt="Mayank Vyas"
                 fill
                 className="object-cover rounded-full p-4"
                 priority
               />
             </div>
-            <motion.div 
-              initial={{ opacity: 0 }} 
-              whileHover={{ opacity: 1 }} 
-              className="absolute bottom-4 left-4 bg-black bg-opacity-50 text-white p-2 rounded"
-            >
-            Data Science Enthusiast
-            </motion.div>
+            
           </motion.div>
 
         </div>
