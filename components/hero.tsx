@@ -1,7 +1,7 @@
 // src/components/Hero.tsx
 "use client";
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import CountUp from 'react-countup';
@@ -11,6 +11,8 @@ import { HeroBackground } from './hero-background';
 
 const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isFlipped, setIsFlipped] = useState(false);
+  
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end start'],
@@ -49,7 +51,7 @@ const Hero: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              Software Developer | NLP Researcher | Data Analyst | Grad Student
+               Brewing Software with AI Solutions. ☕️
             </motion.p>
             <motion.p
               className="text-lg text-muted-foreground"
@@ -57,20 +59,21 @@ const Hero: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
             >
-              I engineer elegant and efficient code to transform complex problems into seamless, user-centric applications.
+              As a Machine Learning Researcher, I leverage Natural Language Processing and Large Language Models to build impactful AI solutions.
             </motion.p>
-            {/* Example dynamic counter section */}
-            {/* <motion.div
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.7 }}
-              className="flex items-center gap-2"
             >
-              <span className="text-2xl font-bold">Projects Delivered:</span>
-              <CountUp end={9} duration={9} className="text-2xl font-bold text-indigo-600" />
-              <span className="text-2xl font-bold">Publications:</span>
-              <CountUp end={3} duration={5} className="text-2xl font-bold text-indigo-600" />
-            </motion.div> */}
+              <Button 
+              variant="link" 
+              className="p-0 h-auto text-lg"
+              onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+              Know more about me <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -84,14 +87,14 @@ const Hero: React.FC = () => {
               >
                 View Projects <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-                <Button 
+              <Button 
                 size="lg" 
                 variant="default"
                 className="rounded-full" 
                 onClick={() => window.open('https://drive.google.com/file/d/1mBTBy1fNGcjGnc-zUsYKGhKDi9IcPXr7/view?usp=sharing', '_blank')}
-                >
+              >
                 View Resume
-                </Button>
+              </Button>
               <Button 
                 size="lg" 
                 variant="outline" 
@@ -102,25 +105,119 @@ const Hero: React.FC = () => {
               </Button>
             </motion.div>
           </motion.div>
-          <motion.div
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
-                className="relative h-[600px] hidden lg:block"
-          >
-            <div className="absolute inset-0 bg-gradient-to-b from-primary/20 to-background rounded-full overflow-hidden">
-              <Image
-                src="/images/projects/goldengate-frontface.jpeg"
-                alt="Mayank Vyas"
-                fill
-                className="object-cover rounded-full p-4"
-                priority
-              />
-            </div>
-            
-          </motion.div>
 
+          {/* Blob Image Container - Fixed positioning and single image */}
+          <motion.div
+            whileHover={{ scale: 1 }}
+            transition={{ duration: 2, ease: 'easeInOut' }}
+            className="relative h-[100px] hidden lg:block"
+            onMouseEnter={() => setIsFlipped(true)}
+            onMouseLeave={() => setIsFlipped(false)}
+          >
+            <div className="relative w-full h-full perspective-1000">
+              <motion.div
+                className="relative w-full h-full preserve-3d"
+                animate={{ rotateY: isFlipped ? 180 : 0 }}
+                transition={{
+                  duration: 0.8,
+                  ease: [0.23, 1, 0.32, 1]
+                }}
+              >
+                {/* Front Face */}
+                <div className="absolute inset-0 backface-hidden flex items-center justify-center">
+                  <svg 
+                    width="600" 
+                    height="600" 
+                    viewBox="0 0 200 200" 
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="drop-shadow-2xl"
+                  >
+                    <defs>
+                      <pattern id="front-image" patternUnits="objectBoundingBox" width="1" height="1">
+                        <image
+                          href="/images/projects/goldengate-frontface.jpeg"
+                          x="0"
+                          y="-25"
+                          width="220"
+                          height="200"
+                          preserveAspectRatio="xMidYMid slice"
+                        />
+                      </pattern>
+                      <linearGradient id="front-overlay" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="rgba(139, 69, 19, 0)" />
+                        <stop offset="100%" stopColor="rgba(139, 69, 19, 0.1)" />
+                      </linearGradient>
+                    </defs>
+                    <path 
+                      fill="url(#front-image)" 
+                      d="M42.1,-56.8C54.8,-48.7,65.6,-36.8,71.7,-22.2C77.9,-7.7,79.6,9.3,73.2,22.2C66.8,35,52.4,43.6,38.9,51.6C25.3,59.5,12.7,66.8,-2.5,70.2C-17.7,73.7,-35.3,73.3,-46.4,64.6C-57.6,55.8,-62.2,38.8,-68.8,21.6C-75.5,4.4,-84.2,-12.9,-82.6,-29.7C-81.1,-46.5,-69.3,-62.9,-53.9,-70C-38.4,-77.1,-19.2,-75.1,-2.2,-72C14.7,-68.9,29.4,-64.8,42.1,-56.8Z" 
+                      transform="translate(100 100)" 
+                    />
+                    <path 
+                      fill="url(#front-overlay)" 
+                      d="M42.1,-56.8C54.8,-48.7,65.6,-36.8,71.7,-22.2C77.9,-7.7,79.6,9.3,73.2,22.2C66.8,35,52.4,43.6,38.9,51.6C25.3,59.5,12.7,66.8,-2.5,70.2C-17.7,73.7,-35.3,73.3,-46.4,64.6C-57.6,55.8,-62.2,38.8,-68.8,21.6C-75.5,4.4,-84.2,-12.9,-82.6,-29.7C-81.1,-46.5,-69.3,-62.9,-53.9,-70C-38.4,-77.1,-19.2,-75.1,-2.2,-72C14.7,-68.9,29.4,-64.8,42.1,-56.8Z" 
+                      transform="translate(100 100)" 
+                    />
+                  </svg>
+                </div>
+
+                {/* Back Face */}
+                <div className="absolute inset-0 backface-hidden rotate-y-180 flex items-center justify-center">
+                  <svg 
+                    width="600" 
+                    height="600" 
+                    viewBox="0 0 200 200" 
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="drop-shadow-2xl"
+                  >
+                    <defs>
+                      <pattern id="back-image" patternUnits="objectBoundingBox" width="1" height="1">
+                        <image
+                          href="/images/projects/fishermanWharf.jpeg"
+                          x="-40"
+                          y="0"
+                          width="200"
+                          height="200"
+                          preserveAspectRatio="xMidYMid slice"
+                        />
+                      </pattern>
+                      <linearGradient id="back-overlay" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="rgba(168, 85, 247, 0)" />
+                        <stop offset="100%" stopColor="rgba(168, 85, 247, 0.2)" />
+                      </linearGradient>
+                    </defs>
+                    <path 
+                      fill="url(#back-image)" 
+                      d="M42.1,-56.8C54.8,-48.7,65.6,-36.8,71.7,-22.2C77.9,-7.7,79.6,9.3,73.2,22.2C66.8,35,52.4,43.6,38.9,51.6C25.3,59.5,12.7,66.8,-2.5,70.2C-17.7,73.7,-35.3,73.3,-46.4,64.6C-57.6,55.8,-62.2,38.8,-68.8,21.6C-75.5,4.4,-84.2,-12.9,-82.6,-29.7C-81.1,-46.5,-69.3,-62.9,-53.9,-70C-38.4,-77.1,-19.2,-75.1,-2.2,-72C14.7,-68.9,29.4,-64.8,42.1,-56.8Z" 
+                      transform="translate(100 100)" 
+                    />
+                    <path 
+                      fill="url(#back-overlay)" 
+                      d="M42.1,-56.8C54.8,-48.7,65.6,-36.8,71.7,-22.2C77.9,-7.7,79.6,9.3,73.2,22.2C66.8,35,52.4,43.6,38.9,51.6C25.3,59.5,12.7,66.8,-2.5,70.2C-17.7,73.7,-35.3,73.3,-46.4,64.6C-57.6,55.8,-62.2,38.8,-68.8,21.6C-75.5,4.4,-84.2,-12.9,-82.6,-29.7C-81.1,-46.5,-69.3,-62.9,-53.9,-70C-38.4,-77.1,-19.2,-75.1,-2.2,-72C14.7,-68.9,29.4,-64.8,42.1,-56.8Z" 
+                      transform="translate(100 100)" 
+                    />
+                  </svg>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
       </div>
+
+      <style jsx global>{`
+        .perspective-1000 {
+          perspective: 1000px;
+        }
+        .preserve-3d {
+          transform-style: preserve-3d;
+        }
+        .backface-hidden {
+          backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+          transform: rotateY(180deg);
+        }
+      `}</style>
     </section>
   );
 };
