@@ -1,30 +1,21 @@
 "use client"
 
-import { useRef, useState, useEffect } from 'react'
+import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/card'
 import { HeroBackground } from './hero-background'
 import {
   SiPython,
-  SiR,
   SiJavascript,
   SiHtml5,
   SiCplusplus,
   SiTensorflow,
   SiPytorch,
-  SiKeras,
-  SiScikitlearn,
   SiReact,
-  SiFlask,
   SiDjango,
-  SiApachespark,
   SiMongodb,
   SiPostgresql,
   SiOpencv,
-  SiPandas,
-  SiGithub,
-  SiAzuredevops,
-  SiArduino,
   SiGrafana,
   SiPowerbi,
   SiTableau,
@@ -43,67 +34,49 @@ const skills = [
   { icon: SiCplusplus, name: "C++" },
   { icon: SiTensorflow, name: "TensorFlow" },
   { icon: SiPytorch, name: "PyTorch" },
-  { icon: SiScikitlearn, name: "Scikit-learn" },
-  { icon: SiPandas, name: "Pandas" },
-  { icon: SiOpencv, name: "OpenCV" },
-  { icon: SiKeras, name: "Keras" },
-  { icon: SiApachespark, name: "PySpark" },
+  // { icon: SiScikitlearn, name: "Scikit-learn" },
+  // { icon: SiPandas, name: "Pandas" },
+  // { icon: SiOpencv, name: "OpenCV" },
+  // { icon: SiKeras, name: "Keras" },
+  // { icon: SiApachespark, name: "PySpark" },
   { icon: SiMongodb, name: "MongoDB" },
   { icon: SiPostgresql, name: "PostgreSQL" },
   { icon: SiReact, name: "React" },
-  { icon: SiGithub, name: "GitHub" },
-  { icon: FaWindows, name: "Azure" },
-  { icon: SiArduino, name: "Arduino" },
-  { icon: SiNumpy, name: "NumPy" },
-  { icon: SiCnn, name: "CNN" },
-  { icon: SiApache, name: "Apache" },
-  { icon: SiRaspberrypi, name: "Raspberry Pi" },
-  { icon: SiGrafana, name: "Grafana" },
+  // { icon: SiGithub, name: "GitHub" },
+  // { icon: FaWindows, name: "Azure" },
+  // { icon: SiArduino, name: "Arduino" },
+  // { icon: SiNumpy, name: "NumPy" },
+  // { icon: SiCnn, name: "CNN" },
+  // { icon: SiApache, name: "Apache" },
+  // { icon: SiRaspberrypi, name: "Raspberry Pi" },
+  { icon: SiDjango, name: "Django" },
   { icon: SiPowerbi, name: "Power BI" },
   { icon: SiTableau, name: "Tableau" },
 ]
 
-// Split skills into three columns for carousel
-const col1Skills = skills.slice(0, Math.ceil(skills.length / 3))
-const col2Skills = skills.slice(Math.ceil(skills.length / 3), Math.ceil(skills.length * 2 / 3))
-const col3Skills = skills.slice(Math.ceil(skills.length * 2 / 3))
-
-const VerticalSkillCarousel = ({ skills, direction = 'up' }: { skills: typeof col1Skills, direction?: 'up' | 'down' }) => {
+// SkillGrid component to replace the carousel
+const SkillGrid = ({ skills }: { skills: typeof skills }) => {
   return (
-    <div className="overflow-hidden h-96 w-full">
-      <motion.div
-        className="flex flex-col gap-3"
-        animate={{
-          y: direction === 'up' ? [0, -100 * skills.length] : [-100 * skills.length, 0],
-        }}
-        transition={{
-          y: {
-            repeat: Infinity,
-            repeatType: "loop",
-            duration: 25,
-            ease: "linear",
-          },
-        }}
-        style={{ height: `${skills.length * 200}px` }}
-      >
-        {[...skills, ...skills].map((skill, index) => (
-          <motion.div
-            key={`${skill.name}-${index}`}
-            className="flex-shrink-0 h-20"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.2 }}
-          >
-            <Card className="bg-background/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-colors h-full">
-              <CardContent className="p-3 flex flex-col items-center justify-center h-full">
-                <skill.icon className="w-8 h-8 text-muted-foreground group-hover:text-primary transition-colors" />
-                <span className="mt-1 text-xs text-muted-foreground group-hover:text-primary transition-colors text-center font-medium">
-                  {skill.name}
-                </span>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
-      </motion.div>
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+      {skills.map((skill, index) => (
+        <motion.div
+          key={`${skill.name}-${index}`}
+          className="flex-shrink-0"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: index * 0.05 }}
+          whileHover={{ scale: 1.05 }}
+        >
+          <Card className="bg-background/50 backdrop-blur-sm border-border/50 hover:border-primary/50 hover:shadow-md hover:shadow-primary/10 transition-all h-full">
+            <CardContent className="p-3 flex flex-col items-center justify-center h-full">
+              <skill.icon className="w-8 h-8 text-muted-foreground group-hover:text-primary transition-colors" />
+              <span className="mt-1 text-xs text-muted-foreground group-hover:text-primary transition-colors text-center font-medium">
+                {skill.name}
+              </span>
+            </CardContent>
+          </Card>
+        </motion.div>
+      ))}
     </div>
   )
 }
@@ -151,25 +124,24 @@ const About = () => {
             </div>
           </motion.div>
 
-          {/* Right Column - Technical Stack with Three Column Vertical Carousel */}
+          {/* Right Column - Technical Stack with Grid Layout */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="space-y-6"
           >
-            {/* <h3 className="text-2xl font-semibold text-center gradient-text">Technical Stack</h3> */}
+            <motion.h3
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="text-xl font-semibold text-center gradient-text mb-6"
+            >
+              Technical Stack
+            </motion.h3>
             
-            <div className="grid grid-cols-3 gap-3 h-96">
-              {/* First Column - Moving Up */}
-              <VerticalSkillCarousel skills={col1Skills} direction="up" />
-              
-              {/* Second Column - Moving Down */}
-              <VerticalSkillCarousel skills={col2Skills} direction="down" />
-              
-              {/* Third Column - Moving Up */}
-              <VerticalSkillCarousel skills={col3Skills} direction="up" />
-            </div>
+            {/* Skills Grid */}
+            <SkillGrid skills={skills} />
             
             <div className="text-center mt-6">
               <p className="text-sm text-muted-foreground">

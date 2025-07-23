@@ -14,8 +14,6 @@ const Page = () => {
     <main className="flex min-h-screen flex-col">
       <Header />
       <Hero />
-      <About />
-      <Education />
       <Suspense fallback={<div>Loading...</div>}>
         <Experience />
       </Suspense>
@@ -34,11 +32,9 @@ const Page = () => {
           <Dashboards />
         </section>
       </Suspense>
-      <Suspense fallback={<div>Loading...</div>}>
-        <section id="contact">
-          <Contact />
-        </section>
-      </Suspense>
+      <About />
+      <Education />
+      <Contact />
     </main>
   )
 }
