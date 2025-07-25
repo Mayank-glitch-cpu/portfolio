@@ -27,35 +27,30 @@ import { SiCnn } from 'react-icons/si'
 import { SiApache } from 'react-icons/si'
 import { SiNumpy } from 'react-icons/si'
 
-const skills = [
+// First, define a type for skill items
+type Skill = {
+  icon: React.ElementType;
+  name: string;
+};
+
+// Then use this type for your skills array
+const skills: Skill[] = [
   { icon: SiPython, name: "Python" },
   { icon: DiJava, name: "Java" },
   { icon: SiHtml5, name: "HTML" },
   { icon: SiCplusplus, name: "C++" },
   { icon: SiTensorflow, name: "TensorFlow" },
   { icon: SiPytorch, name: "PyTorch" },
-  // { icon: SiScikitlearn, name: "Scikit-learn" },
-  // { icon: SiPandas, name: "Pandas" },
-  // { icon: SiOpencv, name: "OpenCV" },
-  // { icon: SiKeras, name: "Keras" },
-  // { icon: SiApachespark, name: "PySpark" },
   { icon: SiMongodb, name: "MongoDB" },
   { icon: SiPostgresql, name: "PostgreSQL" },
   { icon: SiReact, name: "React" },
-  // { icon: SiGithub, name: "GitHub" },
-  // { icon: FaWindows, name: "Azure" },
-  // { icon: SiArduino, name: "Arduino" },
-  // { icon: SiNumpy, name: "NumPy" },
-  // { icon: SiCnn, name: "CNN" },
-  // { icon: SiApache, name: "Apache" },
-  // { icon: SiRaspberrypi, name: "Raspberry Pi" },
   { icon: SiDjango, name: "Django" },
   { icon: SiPowerbi, name: "Power BI" },
   { icon: SiTableau, name: "Tableau" },
 ]
 
 // SkillGrid component to replace the carousel
-const SkillGrid = ({ skills }: { skills: typeof skills }) => {
+const SkillGrid = ({ skills }: { skills: Skill[] }) => {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
       {skills.map((skill, index) => (
@@ -78,7 +73,7 @@ const SkillGrid = ({ skills }: { skills: typeof skills }) => {
         </motion.div>
       ))}
     </div>
-  )
+  );
 }
 
 const About = () => {
