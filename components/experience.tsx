@@ -5,8 +5,23 @@ import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { HeroBackground } from './hero-background';
 
 const experiences = [
+	{
+		title: "NLP Researcher",
+		company: "Arizona State University",
+		logo: "/images/logos/Arizona_State_University_seal.svg.png",
+		period: "Jan 2025 - Present",
+		description: "Developing efficient Table retrieval RAG pipeline to reduce user query latency and better inference.",
+		points: [
+			"🚀 Served 500+ users- a RAG prototype on 160K+ NQ tables with 10s query time and 98% retrieval accuracy.",
+			"🚀 Built a ranking algorithm using S-Bert to rank query specific gold tables with 98% Accuracy.",
+			"🚀 Conducting research on improving document question-answering pipelines using sparse and learned embeddings (SPALDE) and Contrastive learning techniques for more accurate retrieval and reduced context noise.",
+			"🚀 Working on hierarchical chunking methods to optimize embeddings and improve information retrieval recall.",
+			"🚀 Designing pruning algorithms to discard irrelevant table segments for better recall and reduced hallucinations"
+		],
+	},
 	{
 		title: "Machine Learning Assistant - Kalman Filter",
 		company: "Indian Institute of Information Technology Design & Manufacturing Kancheepuram",
@@ -74,8 +89,15 @@ const Experience = () => {
 	})
 
 	return (
-		<section id="experience" className="py-20 bg-background" ref={containerRef}>
-			<div className="container mx-auto px-4">
+		<section id="experience" className="py-20 relative overflow-hidden" ref={containerRef}>
+			{/* Custom animated background */}
+			<div className="absolute inset-0">
+				<div className="absolute top-20 left-10 w-72 h-72 rounded-full bg-primary/10 blur-3xl"></div>
+				<div className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-purple-500/10 blur-3xl"></div>
+				<div className="absolute top-1/2 left-1/2 w-60 h-60 rounded-full bg-blue-500/5 blur-3xl"></div>
+			</div>
+			
+			<div className="container mx-auto px-4 relative z-10">
 				<motion.h2
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}
@@ -117,7 +139,9 @@ const Experience = () => {
 											{isEven ? (
 												// Title info on left side for even index (first experience)
 												<Card className="bg-card/50 backdrop-blur-sm border-border/50 hover:shadow-lg transition-all duration-300 w-full">
-													<CardHeader className="flex flex-row items-start gap-4 p-6">
+													<CardHeader className="flex flex-row items-start gap-4 p-6 relative">
+														{/* Circular gradient behind the title */}
+														<div className="absolute left-8 top-1/2 -translate-y-1/2 w-24 h-24 rounded-full bg-gradient-to-br from-purple-500/40 via-primary/30 to-blue-500/30 blur-2xl -z-10" />
 														<div className="w-16 h-16 rounded-full flex-shrink-0 overflow-hidden bg-primary/10 flex items-center justify-center">
 															<Image
 																src={exp.logo}
@@ -128,7 +152,9 @@ const Experience = () => {
 															/>
 														</div>
 														<div>
-															<CardTitle className="text-xl font-bold mb-1 gradient-text">{exp.title}</CardTitle>
+															<CardTitle className="text-xl font-bold mb-1 gradient-text relative z-10">
+																{exp.title}
+															</CardTitle>
 															<p className="font-medium text-base mb-1">{exp.company}</p>
 															<Badge variant="outline" className="text-xs bg-primary/5 border-primary/30">
 																{exp.period}
