@@ -1,11 +1,11 @@
 "use client"
 
-import { useRef } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { HeroBackground } from './hero-background';
+import { HeroBackground } from './hero-background'
 
 const experiences = [
 	{
@@ -90,13 +90,8 @@ const Experience = () => {
 
 	return (
 		<section id="experience" className="py-20 relative overflow-hidden" ref={containerRef}>
-			{/* Custom animated background */}
-			<div className="absolute inset-0">
-				<div className="absolute top-20 left-10 w-72 h-72 rounded-full bg-primary/10 blur-3xl"></div>
-				<div className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-purple-500/10 blur-3xl"></div>
-				<div className="absolute top-1/2 left-1/2 w-60 h-60 rounded-full bg-blue-500/5 blur-3xl"></div>
-			</div>
-			
+			{/* Replace Modern Background with HeroBackground */}
+			<HeroBackground />
 			<div className="container mx-auto px-4 relative z-10">
 				<motion.h2
 					initial={{ opacity: 0, y: 20 }}
@@ -109,8 +104,8 @@ const Experience = () => {
 
 				{/* Timeline container */}
 				<div className="relative">
-					{/* Center timeline */}
-					<div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-primary/20 via-primary to-primary/20"></div>
+					{/* Enhanced center timeline */}
+					<div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-primary/20 via-primary to-primary/20 shadow-lg shadow-primary/20"></div>
 
 					<div className="space-y-24">
 						{experiences.map((exp, index) => {
@@ -128,21 +123,20 @@ const Experience = () => {
 									viewport={{ once: true }}
 									className="relative"
 								>
-									{/* Timeline dot */}
-									<div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-primary z-10 shadow-lg shadow-primary/30"></div>
+									{/* Enhanced timeline dot */}
+									<div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-primary z-10 shadow-lg shadow-primary/50 ring-4 ring-background"></div>
 
-									{/* Content container - flexbox with row layout */}
+									{/* Content container */}
 									<div className="flex flex-col md:flex-row justify-center items-start">
 
 										{/* LEFT SIDE CONTENT */}
 										<div className="w-full md:w-[45%] md:pr-12">
 											{isEven ? (
-												// Title info on left side for even index (first experience)
-												<Card className="bg-card/50 backdrop-blur-sm border-border/50 hover:shadow-lg transition-all duration-300 w-full">
-													<CardHeader className="flex flex-row items-start gap-4 p-6 relative">
-														{/* Circular gradient behind the title */}
-														<div className="absolute left-8 top-1/2 -translate-y-1/2 w-24 h-24 rounded-full bg-gradient-to-br from-purple-500/40 via-primary/30 to-blue-500/30 blur-2xl -z-10" />
-														<div className="w-16 h-16 rounded-full flex-shrink-0 overflow-hidden bg-primary/10 flex items-center justify-center">
+												<Card className="bg-card/70 backdrop-blur-md border-border/50 hover:shadow-xl hover:shadow-primary/10 transition-all duration-500 w-full group">
+													<CardHeader className="flex flex-row items-start gap-4 p-6 relative overflow-hidden">
+														{/* Enhanced gradient behind title */}
+														<div className="absolute left-8 top-1/2 -translate-y-1/2 w-24 h-24 rounded-full bg-gradient-to-br from-purple-500/20 via-primary/15 to-blue-500/20 blur-2xl group-hover:scale-110 transition-transform duration-500" />
+														<div className="w-16 h-16 rounded-full flex-shrink-0 overflow-hidden bg-gradient-to-br from-primary/10 to-blue-500/10 flex items-center justify-center ring-2 ring-primary/20">
 															<Image
 																src={exp.logo}
 																alt={`${exp.company} logo`}
@@ -156,17 +150,16 @@ const Experience = () => {
 																{exp.title}
 															</CardTitle>
 															<p className="font-medium text-base mb-1">{exp.company}</p>
-															<Badge variant="outline" className="text-xs bg-primary/5 border-primary/30">
+															<Badge variant="outline" className="text-xs bg-primary/10 border-primary/30 hover:bg-primary/20 transition-colors">
 																{exp.period}
 															</Badge>
 														</div>
 													</CardHeader>
 												</Card>
 											) : (
-												// Roles on left side for odd index (second experience)
-												<Card className="bg-card/50 backdrop-blur-sm border-border/50 hover:shadow-lg transition-all duration-300 w-full">
+												<Card className="bg-card/70 backdrop-blur-md border-border/50 hover:shadow-xl hover:shadow-primary/10 transition-all duration-500 w-full">
 													<CardContent className="p-6">
-														<p className="mb-4 text-base">{exp.description}</p>
+														<p className="mb-4 text-base text-muted-foreground">{exp.description}</p>
 														<ul className="list-disc pl-5 space-y-3">
 															{exp.points.map((point, i) => (
 																<motion.li
@@ -183,14 +176,16 @@ const Experience = () => {
 
 														{exp.publications && (
 															<div className="mt-6 space-y-3">
-																<h4 className="text-lg font-semibold">Publications:</h4>
+																<h4 className="text-lg font-semibold gradient-text">Publications:</h4>
 																{exp.publications.map((pub, i) => (
-																	<a
+																	<motion.a
 																		key={i}
 																		href={pub.url}
 																		target="_blank"
 																		rel="noopener noreferrer"
-																		className="flex items-center space-x-3 p-3 rounded-lg bg-primary/5 hover:bg-primary/10 transition-colors"
+																		className="flex items-center space-x-3 p-3 rounded-lg bg-primary/5 hover:bg-primary/15 transition-all duration-300 border border-primary/10 hover:border-primary/20"
+																		whileHover={{ scale: 1.02 }}
+																		whileTap={{ scale: 0.98 }}
 																	>
 																		<Image
 																			src={pub.thumbnail}
@@ -199,8 +194,8 @@ const Experience = () => {
 																			height={40}
 																			className="rounded-md"
 																		/>
-																		<span className="text-sm text-primary">{pub.title}</span>
-																	</a>
+																		<span className="text-sm text-primary font-medium">{pub.title}</span>
+																	</motion.a>
 																))}
 															</div>
 														)}
@@ -215,10 +210,11 @@ const Experience = () => {
 										{/* RIGHT SIDE CONTENT */}
 										<div className="w-full md:w-[45%] md:pl-12 mt-8 md:mt-0">
 											{!isEven ? (
-												// Title info on right side for odd index (second experience)
-												<Card className="bg-card/50 backdrop-blur-sm border-border/50 hover:shadow-lg transition-all duration-300 w-full">
-													<CardHeader className="flex flex-row items-start gap-4 p-6">
-														<div className="w-16 h-16 rounded-full flex-shrink-0 overflow-hidden bg-primary/10 flex items-center justify-center">
+												<Card className="bg-card/70 backdrop-blur-md border-border/50 hover:shadow-xl hover:shadow-primary/10 transition-all duration-500 w-full group">
+													<CardHeader className="flex flex-row items-start gap-4 p-6 relative overflow-hidden">
+														{/* Enhanced gradient behind title */}
+														<div className="absolute left-8 top-1/2 -translate-y-1/2 w-24 h-24 rounded-full bg-gradient-to-br from-blue-500/20 via-primary/15 to-purple-500/20 blur-2xl group-hover:scale-110 transition-transform duration-500" />
+														<div className="w-16 h-16 rounded-full flex-shrink-0 overflow-hidden bg-gradient-to-br from-blue-500/10 to-primary/10 flex items-center justify-center ring-2 ring-primary/20">
 															<Image
 																src={exp.logo}
 																alt={`${exp.company} logo`}
@@ -228,19 +224,18 @@ const Experience = () => {
 															/>
 														</div>
 														<div>
-															<CardTitle className="text-xl font-bold mb-1 gradient-text">{exp.title}</CardTitle>
+															<CardTitle className="text-xl font-bold mb-1 gradient-text relative z-10">{exp.title}</CardTitle>
 															<p className="font-medium text-base mb-1">{exp.company}</p>
-															<Badge variant="outline" className="text-xs bg-primary/5 border-primary/30">
+															<Badge variant="outline" className="text-xs bg-primary/10 border-primary/30 hover:bg-primary/20 transition-colors">
 																{exp.period}
 															</Badge>
 														</div>
 													</CardHeader>
 												</Card>
 											) : (
-												// Roles on right side for even index (first experience)
-												<Card className="bg-card/50 backdrop-blur-sm border-border/50 hover:shadow-lg transition-all duration-300 w-full">
+												<Card className="bg-card/70 backdrop-blur-md border-border/50 hover:shadow-xl hover:shadow-primary/10 transition-all duration-500 w-full">
 													<CardContent className="p-6">
-														<p className="mb-4 text-base">{exp.description}</p>
+														<p className="mb-4 text-base text-muted-foreground">{exp.description}</p>
 														<ul className="list-disc pl-5 space-y-3">
 															{exp.points.map((point, i) => (
 																<motion.li
@@ -257,14 +252,16 @@ const Experience = () => {
 
 														{exp.publications && (
 															<div className="mt-6 space-y-3">
-																<h4 className="text-lg font-semibold">Publications:</h4>
+																<h4 className="text-lg font-semibold gradient-text">Publications:</h4>
 																{exp.publications.map((pub, i) => (
-																	<a
+																	<motion.a
 																		key={i}
 																		href={pub.url}
 																		target="_blank"
 																		rel="noopener noreferrer"
-																		className="flex items-center space-x-3 p-3 rounded-lg bg-primary/5 hover:bg-primary/10 transition-colors"
+																		className="flex items-center space-x-3 p-3 rounded-lg bg-primary/5 hover:bg-primary/15 transition-all duration-300 border border-primary/10 hover:border-primary/20"
+																		whileHover={{ scale: 1.02 }}
+																		whileTap={{ scale: 0.98 }}
 																	>
 																		<Image
 																			src={pub.thumbnail}
@@ -273,8 +270,8 @@ const Experience = () => {
 																			height={40}
 																			className="rounded-md"
 																		/>
-																		<span className="text-sm text-primary">{pub.title}</span>
-																	</a>
+																		<span className="text-sm text-primary font-medium">{pub.title}</span>
+																	</motion.a>
 																))}
 															</div>
 														)}

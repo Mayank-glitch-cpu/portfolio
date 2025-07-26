@@ -1,9 +1,13 @@
 "use client"
 
-import { motion } from 'framer-motion'
+import { useRef, useEffect, useState } from 'react'
+import { motion, useScroll } from 'framer-motion'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import Image from 'next/image'
+import { ExternalLink, Code2, Award } from 'lucide-react'
+
+import { HeroBackground } from './hero-background'
 
 type HackathonProject = {
   title: string;
@@ -29,7 +33,7 @@ const hackathons: HackathonProject[] = [
       'Developed a holistic applicant evaluation portal (React frontend + FastAPI backend) where candidates showcase GitHub activity (stars, forks, PRs) alongside resumes. Integrated a Popularity Index algorithm to auto-rank talent, cutting recruiter screening time by 60% while boosting candidate visibility for niche roles.'
     ],
     technologies: ['React', 'FastAPI', 'BERT', 'FAISS', 'Docker', 'AWS', 'GitHub API', 'BeautifulSoup', 'Pandas', 'SQL'],
-    image: '/images/hackathons/original.png', // Placeholder - replace with actual image
+    image: '/images/hackathons/original.png',
   },
   {
     title: 'Gamify: Interactive Learning through Automated Quiz Generation',
@@ -44,7 +48,7 @@ const hackathons: HackathonProject[] = [
       'Created a backend infrastructure with Supabase for user authentication, quiz storage, and performance analytics.'
     ],
     technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Zoom API', 'RTMS', 'Gemini AI', 'Supabase'],
-    image: '/images/hackathons/zoom.jpeg', // Placeholder - replace with actual image
+    image: '/images/hackathons/zoom.jpeg',
   },
   {
     title: 'TwinGenius: AI-Powered Digital Twin Generator',
@@ -59,19 +63,20 @@ const hackathons: HackathonProject[] = [
       'Reduced digital twin setup time from hours to seconds through complete end-to-end automation.'
     ],
     technologies: ['Gemini AI', 'AWS IoT TwinMaker', 'AWS SiteWise', 'Boto3', 'Python', 'LLM', 'IoT'],
-    image: '/images/hackathons/honeywell-2.png', // Placeholder - replace with actual image
+    image: '/images/hackathons/honeywell-2.png',
   }
 ];
 
 const Hackathons = () => {
+  const containerRef = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  })
+
   return (
-    <section id="hackathons" className="py-20 relative overflow-hidden">
-      {/* Background gradients */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-72 h-72 rounded-full bg-primary/10 blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-purple-500/10 blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 w-60 h-60 rounded-full bg-blue-500/5 blur-3xl"></div>
-      </div>
+    <section id="hackathons" className="py-20 relative overflow-hidden" ref={containerRef}>
+      <HeroBackground />
       <div className="container mx-auto px-4 relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -81,11 +86,16 @@ const Hackathons = () => {
         >
           Hackathon Adventures
         </motion.h2>
+
+        {/* Timeline container */}
         <div className="relative">
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-primary/20 via-primary to-primary/20"></div>
+          {/* Enhanced center timeline matching experience */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-primary/20 via-primary to-primary/20 shadow-lg shadow-primary/20"></div>
+
           <div className="space-y-24">
             {hackathons.map((hackathon, index) => {
               const isEven = index % 2 === 0;
+
               return (
                 <motion.div
                   key={index}
@@ -98,18 +108,22 @@ const Hackathons = () => {
                   viewport={{ once: true }}
                   className="relative"
                 >
-                  {/* Timeline dot */}
-                  <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-primary z-10 shadow-lg shadow-primary/30"></div>
+                  {/* Enhanced timeline dot matching experience */}
+                  <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-6 h-6 rounded-full bg-primary z-10 shadow-lg shadow-primary/50 ring-4 ring-background"></div>
+
+                  {/* Content container */}
                   <div className="flex flex-col md:flex-row justify-center items-start">
+
                     {/* LEFT SIDE CONTENT */}
                     <div className="w-full md:w-[45%] md:pr-12">
                       {isEven ? (
-                        <Card className="bg-card/50 backdrop-blur-sm border-border/50 hover:shadow-lg transition-all duration-300 w-full">
-                          <CardHeader className="flex flex-row items-start gap-4 p-6 relative">
-                            {/* Circular gradient behind the title */}
-                            <div className="absolute left-8 top-1/2 -translate-y-1/2 w-24 h-24 rounded-full bg-gradient-to-br from-purple-500/40 via-primary/30 to-blue-500/30 blur-2xl -z-10" />
+                        <Card className="bg-card/70 backdrop-blur-md border-border/50 hover:shadow-xl hover:shadow-primary/10 transition-all duration-500 w-full group">
+                          <CardHeader className="flex flex-row items-start gap-4 p-6 relative overflow-hidden">
+                            {/* Enhanced gradient behind title */}
+                            <div className="absolute left-8 top-1/2 -translate-y-1/2 w-24 h-24 rounded-full bg-gradient-to-br from-purple-500/20 via-primary/15 to-blue-500/20 blur-2xl group-hover:scale-110 transition-transform duration-500" />
+                            
                             {hackathon.image && (
-                              <div className="w-16 h-16 rounded-full flex-shrink-0 overflow-hidden bg-primary/10 flex items-center justify-center">
+                              <div className="w-16 h-16 rounded-full flex-shrink-0 overflow-hidden bg-gradient-to-br from-primary/10 to-blue-500/10 flex items-center justify-center ring-2 ring-primary/20">
                                 <Image
                                   src={hackathon.image}
                                   alt={hackathon.title}
@@ -119,17 +133,19 @@ const Hackathons = () => {
                                 />
                               </div>
                             )}
+                            
                             <div>
                               <CardTitle className="text-xl font-bold mb-1 gradient-text relative z-10">
                                 {hackathon.title}
                               </CardTitle>
                               <p className="font-medium text-base mb-1">{hackathon.event}</p>
-                              <p className="text-sm text-muted-foreground mb-1">{hackathon.organizer}</p>
-                              <Badge variant="outline" className="text-xs bg-primary/5 border-primary/30">
+                              <p className="text-sm text-muted-foreground mb-2">{hackathon.organizer}</p>
+                              <Badge variant="outline" className="text-xs bg-primary/10 border-primary/30 hover:bg-primary/20 transition-colors">
                                 {hackathon.period}
                               </Badge>
                               {hackathon.award && (
-                                <Badge variant="secondary" className="mt-2 bg-primary/80">
+                                <Badge className="mt-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-semibold">
+                                  <Award className="w-3 h-3 mr-1" />
                                   {hackathon.award}
                                 </Badge>
                               )}
@@ -137,52 +153,77 @@ const Hackathons = () => {
                           </CardHeader>
                         </Card>
                       ) : (
-                        <Card className="bg-card/50 backdrop-blur-sm border-border/50 hover:shadow-lg transition-all duration-300 w-full">
+                        <Card className="bg-card/70 backdrop-blur-md border-border/50 hover:shadow-xl hover:shadow-primary/10 transition-all duration-500 w-full">
                           <CardContent className="p-6">
                             <div className="space-y-3 mb-4">
                               {hackathon.description.map((para, i) => (
-                                <p key={i} className="text-muted-foreground">
+                                <motion.p 
+                                  key={i}
+                                  initial={{ opacity: 0, x: -10 }}
+                                  whileInView={{ opacity: 1, x: 0 }}
+                                  transition={{ duration: 0.3, delay: i * 0.1 }}
+                                  className="text-sm sm:text-base text-muted-foreground"
+                                >
                                   {para}
-                                </p>
+                                </motion.p>
                               ))}
                             </div>
-                            <div className="flex flex-wrap gap-2 mt-4">
-                              {hackathon.technologies.map((tech, i) => (
-                                <Badge key={i} variant="outline" className="bg-muted/50">
-                                  {tech}
-                                </Badge>
-                              ))}
+
+                            {/* Tech Stack */}
+                            <div className="mt-6 space-y-3">
+                              <div className="flex items-center gap-2">
+                                <Code2 className="w-4 h-4 text-primary" />
+                                <h4 className="text-lg font-semibold gradient-text">Technologies:</h4>
+                              </div>
+                              <div className="flex flex-wrap gap-2">
+                                {hackathon.technologies.map((tech, i) => (
+                                  <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, scale: 0 }}
+                                    whileInView={{ opacity: 1, scale: 1 }}
+                                    transition={{ delay: i * 0.05 }}
+                                  >
+                                    <Badge variant="outline" className="bg-muted/50 hover:bg-primary/10 transition-colors">
+                                      {tech}
+                                    </Badge>
+                                  </motion.div>
+                                ))}
+                              </div>
                             </div>
+
                             {hackathon.projectLink && (
-                              <div className="mt-4">
-                                <a
+                              <div className="mt-6">
+                                <motion.a
                                   href={hackathon.projectLink}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="text-primary hover:underline text-sm inline-flex items-center"
+                                  className="flex items-center space-x-2 p-3 rounded-lg bg-primary/5 hover:bg-primary/15 transition-all duration-300 border border-primary/10 hover:border-primary/20 w-fit"
+                                  whileHover={{ scale: 1.02 }}
+                                  whileTap={{ scale: 0.98 }}
                                 >
-                                  View Project
-                                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                  </svg>
-                                </a>
+                                  <ExternalLink className="w-4 h-4 text-primary" />
+                                  <span className="text-sm text-primary font-medium">View Project</span>
+                                </motion.a>
                               </div>
                             )}
                           </CardContent>
                         </Card>
                       )}
                     </div>
+
                     {/* SPACER FOR TIMELINE */}
                     <div className="w-0 md:w-[10%]"></div>
+
                     {/* RIGHT SIDE CONTENT */}
                     <div className="w-full md:w-[45%] md:pl-12 mt-8 md:mt-0">
                       {!isEven ? (
-                        <Card className="bg-card/50 backdrop-blur-sm border-border/50 hover:shadow-lg transition-all duration-300 w-full">
-                          <CardHeader className="flex flex-row items-start gap-4 p-6 relative">
-                            {/* Circular gradient behind the title */}
-                            <div className="absolute right-8 top-1/2 -translate-y-1/2 w-24 h-24 rounded-full bg-gradient-to-bl from-purple-500/40 via-primary/30 to-blue-500/30 blur-2xl -z-10" />
+                        <Card className="bg-card/70 backdrop-blur-md border-border/50 hover:shadow-xl hover:shadow-primary/10 transition-all duration-500 w-full group">
+                          <CardHeader className="flex flex-row items-start gap-4 p-6 relative overflow-hidden">
+                            {/* Enhanced gradient behind title */}
+                            <div className="absolute left-8 top-1/2 -translate-y-1/2 w-24 h-24 rounded-full bg-gradient-to-br from-blue-500/20 via-primary/15 to-purple-500/20 blur-2xl group-hover:scale-110 transition-transform duration-500" />
+                            
                             {hackathon.image && (
-                              <div className="w-16 h-16 rounded-full flex-shrink-0 overflow-hidden bg-primary/10 flex items-center justify-center">
+                              <div className="w-16 h-16 rounded-full flex-shrink-0 overflow-hidden bg-gradient-to-br from-blue-500/10 to-primary/10 flex items-center justify-center ring-2 ring-primary/20">
                                 <Image
                                   src={hackathon.image}
                                   alt={hackathon.title}
@@ -192,17 +233,19 @@ const Hackathons = () => {
                                 />
                               </div>
                             )}
+                            
                             <div>
                               <CardTitle className="text-xl font-bold mb-1 gradient-text relative z-10">
                                 {hackathon.title}
                               </CardTitle>
                               <p className="font-medium text-base mb-1">{hackathon.event}</p>
-                              <p className="text-sm text-muted-foreground mb-1">{hackathon.organizer}</p>
-                              <Badge variant="outline" className="text-xs bg-primary/5 border-primary/30">
+                              <p className="text-sm text-muted-foreground mb-2">{hackathon.organizer}</p>
+                              <Badge variant="outline" className="text-xs bg-primary/10 border-primary/30 hover:bg-primary/20 transition-colors">
                                 {hackathon.period}
                               </Badge>
                               {hackathon.award && (
-                                <Badge variant="secondary" className="mt-2 bg-primary/80">
+                                <Badge className="mt-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-semibold">
+                                  <Award className="w-3 h-3 mr-1" />
                                   {hackathon.award}
                                 </Badge>
                               )}
@@ -210,35 +253,57 @@ const Hackathons = () => {
                           </CardHeader>
                         </Card>
                       ) : (
-                        <Card className="bg-card/50 backdrop-blur-sm border-border/50 hover:shadow-lg transition-all duration-300 w-full">
+                        <Card className="bg-card/70 backdrop-blur-md border-border/50 hover:shadow-xl hover:shadow-primary/10 transition-all duration-500 w-full">
                           <CardContent className="p-6">
                             <div className="space-y-3 mb-4">
                               {hackathon.description.map((para, i) => (
-                                <p key={i} className="text-muted-foreground">
+                                <motion.p 
+                                  key={i}
+                                  initial={{ opacity: 0, x: 10 }}
+                                  whileInView={{ opacity: 1, x: 0 }}
+                                  transition={{ duration: 0.3, delay: i * 0.1 }}
+                                  className="text-sm sm:text-base text-muted-foreground"
+                                >
                                   {para}
-                                </p>
+                                </motion.p>
                               ))}
                             </div>
-                            <div className="flex flex-wrap gap-2 mt-4">
-                              {hackathon.technologies.map((tech, i) => (
-                                <Badge key={i} variant="outline" className="bg-muted/50">
-                                  {tech}
-                                </Badge>
-                              ))}
+
+                            {/* Tech Stack */}
+                            <div className="mt-6 space-y-3">
+                              <div className="flex items-center gap-2">
+                                <Code2 className="w-4 h-4 text-primary" />
+                                <h4 className="text-lg font-semibold gradient-text">Technologies:</h4>
+                              </div>
+                              <div className="flex flex-wrap gap-2">
+                                {hackathon.technologies.map((tech, i) => (
+                                  <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, scale: 0 }}
+                                    whileInView={{ opacity: 1, scale: 1 }}
+                                    transition={{ delay: i * 0.05 }}
+                                  >
+                                    <Badge variant="outline" className="bg-muted/50 hover:bg-primary/10 transition-colors">
+                                      {tech}
+                                    </Badge>
+                                  </motion.div>
+                                ))}
+                              </div>
                             </div>
+
                             {hackathon.projectLink && (
-                              <div className="mt-4">
-                                <a
+                              <div className="mt-6">
+                                <motion.a
                                   href={hackathon.projectLink}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="text-primary hover:underline text-sm inline-flex items-center"
+                                  className="flex items-center space-x-2 p-3 rounded-lg bg-primary/5 hover:bg-primary/15 transition-all duration-300 border border-primary/10 hover:border-primary/20 w-fit"
+                                  whileHover={{ scale: 1.02 }}
+                                  whileTap={{ scale: 0.98 }}
                                 >
-                                  View Project
-                                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                  </svg>
-                                </a>
+                                  <ExternalLink className="w-4 h-4 text-primary" />
+                                  <span className="text-sm text-primary font-medium">View Project</span>
+                                </motion.a>
                               </div>
                             )}
                           </CardContent>

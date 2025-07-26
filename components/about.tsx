@@ -1,9 +1,11 @@
 "use client"
 
-import { useRef } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { Card, CardContent } from '@/components/ui/card'
-import { HeroBackground } from './hero-background'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { ExternalLink, GraduationCap, Calendar, Trophy, BarChart3, TrendingUp, Database } from 'lucide-react'
+import Image from 'next/image'
 import {
   SiPython,
   SiJavascript,
@@ -15,79 +17,42 @@ import {
   SiDjango,
   SiMongodb,
   SiPostgresql,
-  SiOpencv,
-  SiGrafana,
   SiPowerbi,
   SiTableau,
 } from "react-icons/si";
 import { DiJava } from 'react-icons/di'
-import { FaWindows } from 'react-icons/fa'
-import { SiRaspberrypi } from 'react-icons/si'
-import { SiCnn } from 'react-icons/si'
-import { SiApache } from 'react-icons/si'
-import { SiNumpy } from 'react-icons/si'
+import { HeroBackground } from './hero-background';
 
-// First, define a type for skill items
+// Skills data
 type Skill = {
   icon: React.ElementType;
   name: string;
+  category: string;
 };
 
-// Then use this type for your skills array
 const skills: Skill[] = [
-  { icon: SiPython, name: "Python" },
-  { icon: DiJava, name: "Java" },
-  { icon: SiHtml5, name: "HTML" },
-  { icon: SiCplusplus, name: "C++" },
-  { icon: SiTensorflow, name: "TensorFlow" },
-  { icon: SiPytorch, name: "PyTorch" },
-  { icon: SiMongodb, name: "MongoDB" },
-  { icon: SiPostgresql, name: "PostgreSQL" },
-  { icon: SiReact, name: "React" },
-  { icon: SiDjango, name: "Django" },
-  { icon: SiPowerbi, name: "Power BI" },
-  { icon: SiTableau, name: "Tableau" },
-]
+  { icon: SiPython, name: "Python", category: "Programming" },
+  { icon: DiJava, name: "Java", category: "Programming" },
+  { icon: SiHtml5, name: "HTML", category: "Web" },
+  { icon: SiCplusplus, name: "C++", category: "Programming" },
+  { icon: SiTensorflow, name: "TensorFlow", category: "AI/ML" },
+  { icon: SiPytorch, name: "PyTorch", category: "AI/ML" },
+  { icon: SiMongodb, name: "MongoDB", category: "Database" },
+  { icon: SiPostgresql, name: "PostgreSQL", category: "Database" },
+  { icon: SiReact, name: "React", category: "Web" },
+  { icon: SiDjango, name: "Django", category: "Framework" },
+  { icon: SiPowerbi, name: "Power BI", category: "Analytics" },
+  { icon: SiTableau, name: "Tableau", category: "Analytics" },
+];
 
-// SkillGrid component to replace the carousel
-const SkillGrid = ({ skills }: { skills: Skill[] }) => {
-  return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-      {skills.map((skill, index) => (
-        <motion.div
-          key={`${skill.name}-${index}`}
-          className="flex-shrink-0"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: index * 0.05 }}
-          whileHover={{ scale: 1.05 }}
-        >
-          <Card className="bg-background/50 backdrop-blur-sm border-border/50 hover:border-primary/50 hover:shadow-md hover:shadow-primary/10 transition-all h-full">
-            <CardContent className="p-3 flex flex-col items-center justify-center h-full">
-              <skill.icon className="w-8 h-8 text-muted-foreground group-hover:text-primary transition-colors" />
-              <span className="mt-1 text-xs text-muted-foreground group-hover:text-primary transition-colors text-center font-medium">
-                {skill.name}
-              </span>
-            </CardContent>
-          </Card>
-        </motion.div>
-      ))}
-    </div>
-  );
-}
-
+// About Section
 const About = () => {
-  const containerRef = useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  })
-
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.9, 1], [0, 1, 1, 0])
+  const containerRef = useRef(null);
 
   return (
-    <section id="about" className="py-20 bg-muted/50 relative overflow-hidden" ref={containerRef}>
+    <section id="about" className="py-20 relative overflow-hidden" ref={containerRef}>
       <HeroBackground />
+      
       <div className="container mx-auto px-4 relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -98,57 +63,92 @@ const About = () => {
           About Me
         </motion.h2>
         
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="grid lg:grid-cols-2 gap-12 items-start max-w-7xl mx-auto">
           {/* Left Column - About Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6 }}
             className="space-y-6"
           >
-            <div className="space-y-4 text-lg text-muted-foreground">
-                <p>
-                  As a Data Science master's student at ASU, I architect intelligent systems by specializing in <span className="text-purple-500">RAG (Retrieval-Augmented Generation)</span> pipelines for LLMs and developing sophisticated <span className="text-purple-500">AI Agents</span>. My core expertise lies in <span className="text-purple-500">Natural Language Processing</span>, where I design high-performance <span className="text-purple-500">retrieval algorithms</span> to power next-generation AI applications.
-                </p>
-                <p>
-                  I translate complex theory into real-world impact. My project experience includes analyzing <span className="text-purple-500">Time Series data</span> to build robust <span className="text-purple-500">IoT Pipelines</span> for smart agriculture and engineering a production-ready, dockerized pipeline for <a href="https://github.com/Mayank-glitch-cpu/automated-self-checkout" target="_blank" rel="noopener noreferrer" className="text-primary underline decoration-purple-500 hover:text-purple-400 transition-colors">Intel's automated self-checkout system</a> to visualize critical data on Grafana.
-                </p>
-                <p>
-                  I also engineered a <span className="text-purple-500">Masked R-CNN</span> pipeline to intelligently detect the <span className="text-purple-500">primary root length</span> of plant species like wheat, brassica napus, and arabidopsis thaliana, enabling biologists to study the <span className="text-purple-500">root phenome</span> more effectively.
-                </p>
-            </div>
+            <Card className="bg-card/70 backdrop-blur-md border-border/50 hover:shadow-xl hover:shadow-primary/10 transition-all duration-500">
+              <CardContent className="p-8">
+                <div className="space-y-6 text-base leading-relaxed text-muted-foreground">
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                  >
+                    As a Data Science master's student at ASU, I architect intelligent systems by specializing in <span className="text-primary font-semibold">RAG (Retrieval-Augmented Generation)</span> pipelines for LLMs and developing sophisticated <span className="text-primary font-semibold">AI Agents</span>. My core expertise lies in <span className="text-primary font-semibold">Natural Language Processing</span>, where I design high-performance <span className="text-primary font-semibold">retrieval algorithms</span> to power next-generation AI applications.
+                  </motion.p>
+                  
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                  >
+                    I translate complex theory into real-world impact. My project experience includes analyzing <span className="text-primary font-semibold">Time Series data</span> to build robust <span className="text-primary font-semibold">IoT Pipelines</span> for smart agriculture and engineering a production-ready, dockerized pipeline for <a href="https://github.com/Mayank-glitch-cpu/automated-self-checkout" target="_blank" rel="noopener noreferrer" className="text-primary underline hover:text-primary/80 transition-colors">Intel's automated self-checkout system</a> to visualize critical data on Grafana.
+                  </motion.p>
+                  
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                  >
+                    I also engineered a <span className="text-primary font-semibold">Masked R-CNN</span> pipeline to intelligently detect the <span className="text-primary font-semibold">primary root length</span> of plant species like wheat, brassica napus, and arabidopsis thaliana, enabling biologists to study the <span className="text-primary font-semibold">root phenome</span> more effectively.
+                  </motion.p>
+                </div>
+              </CardContent>
+            </Card>
           </motion.div>
 
-          {/* Right Column - Technical Stack with Grid Layout */}
+          {/* Right Column - Technical Stack */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-6"
           >
-            <motion.h3
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="text-xl font-semibold text-center gradient-text mb-6"
-            >
-              Technical Stack
-            </motion.h3>
-            
-            {/* Skills Grid */}
-            <SkillGrid skills={skills} />
-            
-            <div className="text-center mt-6">
-              <p className="text-sm text-muted-foreground">
-                {skills.length}+ Technologies & Growing
-              </p>
-            </div>
+            <Card className="bg-card/70 backdrop-blur-md border-border/50 hover:shadow-xl hover:shadow-primary/10 transition-all duration-500">
+              <CardHeader className="pb-4">
+                <CardTitle className="text-xl font-semibold text-center gradient-text">
+                  Technical Stack
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                  {skills.map((skill, index) => (
+                    <motion.div
+                      key={`${skill.name}-${index}`}
+                      initial={{ opacity: 0, scale: 0 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3, delay: index * 0.05 }}
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      className="group"
+                    >
+                      <Card className="bg-background/30 backdrop-blur-sm border-border/30 hover:border-primary/50 hover:bg-primary/5 transition-all duration-300 h-full">
+                        <CardContent className="p-4 flex flex-col items-center justify-center text-center space-y-2">
+                          <skill.icon className="w-8 h-8 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
+                          <span className="text-xs font-medium text-muted-foreground group-hover:text-primary transition-colors duration-300">
+                            {skill.name}
+                          </span>
+                        </CardContent>
+                      </Card>
+                    </motion.div>
+                  ))}
+                </div>
+                
+                <div className="text-center mt-6">
+                  <Badge variant="outline" className="bg-primary/10 border-primary/30 text-primary">
+                    {skills.length}+ Technologies & Growing
+                  </Badge>
+                </div>
+              </CardContent>
+            </Card>
           </motion.div>
         </div>
       </div>
     </section>
-  )
-}
-
-export default About
-
+  );
+};
+export default About;
