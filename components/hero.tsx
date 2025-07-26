@@ -1,18 +1,72 @@
 // src/components/Hero.tsx
 "use client";
 
-import { useRef, useState } from 'react';
-import Image from 'next/image';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import CountUp from 'react-countup';
+import { useRef, useState, useEffect } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Mail, Linkedin, Github, Twitter } from 'lucide-react';
 import { HeroBackground } from './hero-background';
+
+const socialLinks = [
+  {
+    icon: Mail,
+    label: "Mail",
+    href: "https://mail.google.com/mail/?view=cm&fs=1&to=vyasmayank963@gmail.com",
+    color: "hover:bg-red-500 hover:border-red-500",
+  },
+  {
+    icon: Linkedin,
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/mayankv10",
+    color: "hover:bg-blue-600 hover:border-blue-600",
+  },
+  {
+    icon: Github,
+    label: "GitHub",
+    href: "https://github.com/mayank-glitch-cpu",
+    color: "hover:bg-gray-800 hover:border-gray-800",
+  },
+  {
+    icon: Twitter,
+    label: "Twitter",
+    href: "https://x.com/MayankV53812200",
+    color: "hover:bg-blue-400 hover:border-blue-400",
+  },
+];
+
+// Function to generate random positions in a circle
+const generateRandomPositions = () => {
+  const positions: { x: number; y: number }[] = [];
+  const radius = 80;
+  const angles = [0, 90, 180, 270]; // Base angles
+  
+  // Shuffle the angles for randomness
+  const shuffledAngles = [...angles].sort(() => Math.random() - 0.5);
+  
+  shuffledAngles.forEach((baseAngle, index) => {
+    // Add some randomness to the angle (±20 degrees)
+    const randomOffset = (Math.random() - 0.5) * 40;
+    const angle = (baseAngle + randomOffset) * (Math.PI / 180);
+    
+    // Add some randomness to the radius (±15px)
+    const randomRadius = radius + (Math.random() - 0.5) * 30;
+    
+    positions.push({
+      x: Math.cos(angle) * randomRadius,
+      y: Math.sin(angle) * randomRadius,
+    });
+  });
+  
+  return positions;
+};
 
 const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [showIcons, setShowIcons] = useState(false);
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const [isFlipped, setIsFlipped] = useState(false);
-  
+  const [iconPositions, setIconPositions] = useState(generateRandomPositions());
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end start'],
@@ -20,6 +74,20 @@ const Hero: React.FC = () => {
 
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
   const y = useTransform(scrollYProgress, [0, 1], [0, 100]);
+
+  // Only regenerate positions when initially showing icons, not while hovering over them
+  useEffect(() => {
+    if (showIcons && hoveredIdx === null) {
+      setIconPositions(generateRandomPositions());
+    }
+  }, [showIcons]);
+
+  const handleConnectHover = (isHovering: boolean) => {
+    setShowIcons(isHovering);
+    if (!isHovering) {
+      setHoveredIdx(null);
+    }
+  };
 
   return (
     <section 
@@ -95,14 +163,130 @@ const Hero: React.FC = () => {
               >
                 View Resume
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="rounded-full" 
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              
+              {/* Enhanced Connect Button */}
+              <div
+                className="relative"
+                onMouseEnter={() => handleConnectHover(true)}
+                onMouseLeave={() => handleConnectHover(false)}
               >
-                Contact Me
-              </Button>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                >
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="rounded-full flex items-center justify-center transition-all duration-300 hover:bg-primary hover:text-primary-foreground hover:shadow-lg"
+                    style={{ minWidth: 140 }}
+                  >
+                    <motion.span
+                      animate={showIcons ? { opacity: 0.7 } : { opacity: 1 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      Connect
+                    </motion.span>
+                  </Button>
+                </motion.div>
+
+                {/* Animated Social Icons */}
+                <AnimatePresence>
+                  {showIcons && (
+                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                      {socialLinks.map((item, idx) => (
+                        <motion.a
+                          key={`${item.label}-${idx}`}
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          initial={{ 
+                            x: 0, 
+                            y: 0, 
+                            opacity: 0, 
+                            scale: 0,
+                            rotate: 0
+                          }}
+                          animate={{ 
+                            x: iconPositions[idx]?.x || 0, 
+                            y: iconPositions[idx]?.y || 0, 
+                            opacity: 1, 
+                            scale: hoveredIdx === idx ? 1.4 : 1,
+                            rotate: hoveredIdx === idx ? 360 : 0
+                          }}
+                          exit={{ 
+                            x: 0, 
+                            y: 0, 
+                            opacity: 0, 
+                            scale: 0,
+                            rotate: 180
+                          }}
+                          transition={{ 
+                            type: "spring", 
+                            stiffness: 300, 
+                            damping: 25, 
+                            delay: idx * 0.1,
+                            rotate: { duration: 0.6, ease: "easeInOut" }
+                          }}
+                          className={`
+                            absolute bg-white dark:bg-background border border-border rounded-full 
+                            shadow-lg hover:shadow-xl p-3 cursor-pointer transition-all duration-300 
+                            ${item.color} hover:text-white z-30 backdrop-blur-sm
+                          `}
+                          style={{ 
+                            transform: `translate(-50%, -50%)`,
+                          }}
+                          onMouseEnter={() => setHoveredIdx(idx)}
+                          onMouseLeave={() => setHoveredIdx(null)}
+                          whileHover={{ 
+                            scale: 1.4,
+                            rotate: 10,
+                            transition: { duration: 0.2 }
+                          }}
+                          whileTap={{ 
+                            scale: 1.2,
+                            transition: { duration: 0.1 }
+                          }}
+                        >
+                          <motion.div
+                            animate={hoveredIdx === idx ? { rotate: [0, -10, 10, 0] } : {}}
+                            transition={{ duration: 0.4, repeat: hoveredIdx === idx ? Infinity : 0 }}
+                          >
+                            <item.icon className="h-5 w-5" />
+                          </motion.div>
+                          
+                          {/* Tooltip */}
+                          <motion.div
+                            initial={{ opacity: 0, y: 10, scale: 0.8 }}
+                            animate={hoveredIdx === idx ? 
+                              { opacity: 1, y: -35, scale: 1 } : 
+                              { opacity: 0, y: 10, scale: 0.8 }
+                            }
+                            transition={{ duration: 0.2 }}
+                            className="absolute left-1/2 -translate-x-1/2 bg-black dark:bg-white text-white dark:text-black px-2 py-1 rounded text-xs font-medium whitespace-nowrap pointer-events-none"
+                          >
+                            {item.label}
+                            <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-black dark:border-t-white"></div>
+                          </motion.div>
+                        </motion.a>
+                      ))}
+                    </div>
+                  )}
+                </AnimatePresence>
+
+                {/* Subtle background glow when icons are visible */}
+                <AnimatePresence>
+                  {showIcons && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 0.1, scale: 1.5 }}
+                      exit={{ opacity: 0, scale: 0.8 }}
+                      transition={{ duration: 0.3 }}
+                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-primary rounded-full blur-3xl pointer-events-none z-10"
+                    />
+                  )}
+                </AnimatePresence>
+              </div>
             </motion.div>
           </motion.div>
 

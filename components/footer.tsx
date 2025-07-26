@@ -16,7 +16,7 @@ const socialLinks = [
   },
   {
     icon: FaEnvelope,
-    href: "mailto:mvyas7@asu.edu",
+    href: "https://mail.google.com/mail/?view=cm&fs=1&to=vyasmayank963@gmail.com",
     label: "Email"
   },
   // {
