@@ -7,6 +7,7 @@ import Projects from '@/components/projects'
 import Contact from '@/components/contact'
 import Dashboards from '@/components/dashboards'
 import Hackathons from '@/components/hackathons'
+import YouTubeVideos from '@/components/youtube-videos'
 import { Suspense } from 'react'
 
 const Page = () => {
@@ -30,6 +31,11 @@ const Page = () => {
       <Suspense fallback={<div>Loading...</div>}>
         <section id="dashboards">
           <Dashboards />
+        </section>
+      </Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
+        <section id="videos">
+          <YouTubeVideos />
         </section>
       </Suspense>
       <About />
