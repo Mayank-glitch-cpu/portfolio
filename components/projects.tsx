@@ -24,6 +24,22 @@ type Project = {
 
 const projects: Project[] = [
   {
+    title: '🎯 Job Tracker: AI-Powered Career Automation Platform',
+    description: 'Architected an end-to-end AI automation pipeline using Elasticsearch for high-speed semantic search and a knowledge graph to map complex relationships between job requirements and user skills. Developed an LLM-based agentic workflow that autonomously parses job descriptions and aligns them with candidate resumes.',
+    image: '/images/projects/AI Job Tracker Overview.png',
+    technologies: ['Elasticsearch', 'LLM Agents', 'Knowledge Graphs', 'Chrome Extension', 'Google Analytics', 'Semantic Search'],
+    achievements: [
+      '✅ Improved job match relevance by 92% and reduced manual search time by 98% through AI automation',
+      '✅ Launched production Chrome extension acquiring 12 active users and 9 new users across 2 countries (US, India)',
+      '✅ Implemented LLM-based agentic workflow for autonomous job description parsing and resume alignment',
+      '✅ Leveraged Google Analytics for comprehensive user engagement monitoring and growth tracking'
+    ],
+    period: 'Present',
+    githubUrl: 'https://github.com/Mayank-glitch-cpu/Job-Tracker',
+    liveUrl: 'https://chromewebstore.google.com/detail/job-tracker/jglalknjiibgaggndnicpaiigbgjfgha',
+    category: 'AI & LLM'
+  },
+  {
     title: '📌 Enterprise Sales Analytics Dashboard',
     description: 'Developed an enterprise-grade Power BI dashboard implementing DAX measures and advanced data modeling techniques to transform raw sales data into actionable business intelligence. The solution features multi-dimensional analysis capabilities with drill-through functionality for granular insights.',
     image: '/images/projects/dataline_powerBi.png',
@@ -159,22 +175,6 @@ const projects: Project[] = [
     githubUrl: 'https://github.com/Mayank-glitch-cpu/Reimagined-businesses-in-Tucson',
     liveUrl: '',
     category: 'Data Analytics'
-  },
-  {
-    title: '🎯 Job Tracker: AI-Powered Career Automation Platform',
-    description: 'Architected an end-to-end AI automation pipeline using Elasticsearch for high-speed semantic search and a knowledge graph to map complex relationships between job requirements and user skills. Developed an LLM-based agentic workflow that autonomously parses job descriptions and aligns them with candidate resumes.',
-    image: '/images/projects/deoldiformer_project_cover.png',
-    technologies: ['Elasticsearch', 'LLM Agents', 'Knowledge Graphs', 'Chrome Extension', 'Google Analytics', 'Semantic Search'],
-    achievements: [
-      '✅ Improved job match relevance by 92% and reduced manual search time by 98% through AI automation',
-      '✅ Launched production Chrome extension acquiring 12 active users and 9 new users across 2 countries (US, India)',
-      '✅ Implemented LLM-based agentic workflow for autonomous job description parsing and resume alignment',
-      '✅ Leveraged Google Analytics for comprehensive user engagement monitoring and growth tracking'
-    ],
-    period: 'Present',
-    githubUrl: 'https://github.com/Mayank-glitch-cpu/Job-Tracker',
-    liveUrl: 'https://chromewebstore.google.com/detail/job-tracker/jglalknjiibgaggndnicpaiigbgjfgha',
-    category: 'AI & LLM'
   }
 ]
 
@@ -183,7 +183,7 @@ const Projects = () => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const [filter, setFilter] = useState<string>('All');
 
-  const categories = ['All', 'Machine Learning', 'Data Analytics', 'Data Engineering', 'IoT Systems', 'DevOps & Cloud', 'AI & LLM'];
+  const categories = ['All', 'AI & LLM', 'Machine Learning', 'Data Analytics', 'Data Engineering', 'IoT Systems', 'DevOps & Cloud'];
 
   const filteredProjects = projects.filter(project => {
     if (filter === 'All') return true;
