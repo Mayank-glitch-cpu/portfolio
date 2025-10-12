@@ -9,17 +9,14 @@ import { HeroBackground } from './hero-background'
 
 const experiences = [
 	{
-		title: "NLP Researcher",
+		title: "Software Engineer, NLP",
 		company: "Arizona State University",
 		logo: "/images/logos/Arizona_State_University_seal.svg.png",
 		period: "Jan 2025 - Present",
 		description: "Developing efficient Table retrieval RAG pipeline to reduce user query latency and better inference.",
 		points: [
-			"🚀 Served 500+ users- a RAG prototype on 160K+ NQ tables with 10s query time and 98% retrieval accuracy.",
-			"🚀 Built a ranking algorithm using S-Bert to rank query specific gold tables with 98% Accuracy.",
-			"🚀 Conducting research on improving document question-answering pipelines using sparse and learned embeddings (SPALDE) and Contrastive learning techniques for more accurate retrieval and reduced context noise.",
-			"🚀 Working on hierarchical chunking methods to optimize embeddings and improve information retrieval recall.",
-			"🚀 Designing pruning algorithms to discard irrelevant table segments for better recall and reduced hallucinations"
+			"🚀 Engineered Information retrieval RAG pipeline using row level chunking with BM25 and pruning algorithms followed by contrastive learning model on 160K NQ tables to get 93% recall at top 10.",
+			"🚀 Developed a Universal prompting methodology SEAR for temporal reasoning tasks on 8 varied datasets to get an average of 92.5% HCS score, beating the SoTa methods like CoT,ToT, etc.."
 		],
 	},
 	{
