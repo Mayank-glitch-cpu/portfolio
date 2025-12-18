@@ -1,6 +1,7 @@
 import Header from '@/components/header'
 import Hero from '@/components/hero'
 import About from '@/components/about'
+import GitHubContributions from '@/components/github-contributions'
 import Education from '@/components/education'
 import Experience from '@/components/experience'
 import Projects from '@/components/projects'
@@ -39,6 +40,7 @@ const Page = () => {
         </section>
       </Suspense>
       <About />
+      <GitHubContributions />
       <Education />
       <Contact />
     </main>

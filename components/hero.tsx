@@ -1,12 +1,139 @@
-// src/components/Hero.tsx
+	// src/components/Hero.tsx
 "use client";
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useMemo } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+
+// Code typing animation component
+const CodeTypingAnimation: React.FC = () => {
+	const [displayedCode, setDisplayedCode] = useState('');
+	const [currentLine, setCurrentLine] = useState(0);
+	const [showCursor, setShowCursor] = useState(true);
+
+	const codeLines = useMemo(() => [
+		{ text: 'const ', type: 'keyword' },
+		{ text: 'developer', type: 'variable' },
+		{ text: ' = ', type: 'operator' },
+		{ text: '{', type: 'bracket' },
+		{ text: '\n  passion', type: 'property' },
+		{ text: ': ', type: 'operator' },
+		{ text: '"AI & ML"', type: 'string' },
+		{ text: ',', type: 'punctuation' },
+		{ text: '\n  skills', type: 'property' },
+		{ text: ': ', type: 'operator' },
+		{ text: '[', type: 'bracket' },
+		{ text: '"NLP"', type: 'string' },
+		{ text: ', ', type: 'punctuation' },
+		{ text: '"LLMs"', type: 'string' },
+		{ text: ', ', type: 'punctuation' },
+		{ text: '"Systems"', type: 'string' },
+		{ text: ']', type: 'bracket' },
+		{ text: ',', type: 'punctuation' },
+		{ text: '\n  focus', type: 'property' },
+		{ text: ': ', type: 'operator' },
+		{ text: '"solving real-world problems"', type: 'string' },
+		{ text: '\n', type: 'text' },
+		{ text: '};', type: 'bracket' },
+	], []);
+
+	// Cursor blink effect
+	useEffect(() => {
+		const cursorInterval = setInterval(() => {
+			setShowCursor(prev => !prev);
+		}, 530);
+		return () => clearInterval(cursorInterval);
+	}, []);
+
+	// Typing effect
+	useEffect(() => {
+		if (currentLine >= codeLines.length) {
+			// Restart animation after a pause
+			const restartTimeout = setTimeout(() => {
+				setDisplayedCode('');
+				setCurrentLine(0);
+			}, 4000);
+			return () => clearTimeout(restartTimeout);
+		}
+
+		const currentToken = codeLines[currentLine];
+		const chars = currentToken.text.split('');
+		let charIndex = 0;
+
+		const typeInterval = setInterval(() => {
+			if (charIndex < chars.length) {
+				setDisplayedCode(prev => prev + chars[charIndex]);
+				charIndex++;
+			} else {
+				clearInterval(typeInterval);
+				setCurrentLine(prev => prev + 1);
+			}
+		}, 50 + Math.random() * 30); // Variable typing speed for realism
+
+		return () => clearInterval(typeInterval);
+	}, [currentLine, codeLines]);
+
+	// Render the code with syntax highlighting
+	const renderCode = () => {
+		let result: JSX.Element[] = [];
+		let charCount = 0;
+
+		for (let i = 0; i < codeLines.length; i++) {
+			const token = codeLines[i];
+			const tokenLength = token.text.length;
+
+			if (charCount >= displayedCode.length) break;
+
+			const remainingChars = displayedCode.length - charCount;
+			const displayChars = Math.min(tokenLength, remainingChars);
+			const displayText = token.text.substring(0, displayChars);
+
+			const colorClass = {
+				keyword: 'text-purple-400',
+				variable: 'text-blue-300',
+				operator: 'text-gray-400',
+				bracket: 'text-yellow-300',
+				property: 'text-cyan-300',
+				string: 'text-green-400',
+				punctuation: 'text-gray-400',
+				text: 'text-gray-300',
+			}[token.type] || 'text-gray-300';
+
+			result.push(
+				<span key={i} className={colorClass}>
+					{displayText}
+				</span>
+			);
+
+			charCount += tokenLength;
+		}
+
+		return result;
+	};
+
+	return (
+		<div className="font-mono text-sm md:text-base bg-gray-900/80 backdrop-blur-sm rounded-lg p-4 border border-gray-700/50 shadow-xl">
+			<div className="flex items-center gap-2 mb-3 pb-2 border-b border-gray-700/50">
+				<div className="w-3 h-3 rounded-full bg-red-500" />
+				<div className="w-3 h-3 rounded-full bg-yellow-500" />
+				<div className="w-3 h-3 rounded-full bg-green-500" />
+				<span className="ml-2 text-gray-500 text-xs">developer.ts</span>
+			</div>
+			<pre className="whitespace-pre-wrap leading-relaxed">
+				<code>
+					{renderCode()}
+					<span
+						className={`inline-block w-2 h-4 bg-blue-400 ml-0.5 align-middle transition-opacity duration-100 ${
+							showCursor ? 'opacity-100' : 'opacity-0'
+						}`}
+					/>
+				</code>
+			</pre>
+		</div>
+	);
+};
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Mail, Linkedin, Github, Twitter, X } from 'lucide-react';
+import { ArrowRight, Mail, Linkedin, Github, Twitter } from 'lucide-react';
 import { HeroBackground } from './hero-background';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 const socialLinks = [
 	{
@@ -67,7 +194,6 @@ const Hero: React.FC = () => {
 	const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 	const [isFlipped, setIsFlipped] = useState(false);
 	const [iconPositions, setIconPositions] = useState(generateRandomPositions());
-	const [bookingModalOpen, setBookingModalOpen] = useState(false);
 
 	const { scrollYProgress } = useScroll({
 		target: containerRef,
@@ -123,14 +249,13 @@ const Hero: React.FC = () => {
 						>
 							Brewing Software with AI Solutions. ☕️
 						</motion.p>
-						<motion.p
-							className="text-lg text-muted-foreground"
+						<motion.div
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.5, delay: 0.6 }}
 						>
-							As a Machine Learning Researcher, I leverage Natural Language Processing and Large Language Models to build impactful AI solutions.
-						</motion.p>
+							<CodeTypingAnimation />
+						</motion.div>
 						<motion.div
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
@@ -162,7 +287,7 @@ const Hero: React.FC = () => {
 								size="lg"
 								variant="default"
 								className="rounded-full"
-								onClick={() => window.open('https://drive.google.com/file/d/1mBTBy1fNGcjGnc-zUsYKGhKDi9IcPXr7/view?usp=sharing', '_blank')}
+								onClick={() => window.open('https://drive.google.com/file/d/1jBfOtoAucMhpZfWb1JTshj0lGN-xuEP9/view?usp=sharing', '_blank')}
 							>
 								View Resume
 							</Button>
@@ -285,23 +410,6 @@ const Hero: React.FC = () => {
 								</AnimatePresence>
 							</div>
 						</motion.div>
-
-						{/* New "Book an appointment" button - placed below the existing buttons */}
-						<motion.div
-							initial={{ opacity: 0, y: 20 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.5, delay: 1.0 }} // Slight delay to animate after the buttons above
-							className="flex justify-start" // Align to the left, matching your layout
-						>
-							<Button
-								size="lg"
-								variant="outline"
-								className="rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 border-none"
-								onClick={() => setBookingModalOpen(true)} // Open the modal
-							>
-								Book an appointment
-							</Button>
-						</motion.div>
 					</motion.div>
 
 					{/* Blob Image Container - Fixed positioning and single image */}
@@ -401,34 +509,6 @@ const Hero: React.FC = () => {
 					</motion.div>
 				</div>
 			</div>
-
-			{/* Immersed Modal for Booking */}
-			<Dialog open={bookingModalOpen} onOpenChange={setBookingModalOpen}>
-				<DialogContent className="sm:max-w-[800px] sm:max-h-[80vh] h-[600px] bg-card/90 backdrop-blur-md border-border/50">
-					<DialogHeader>
-						<DialogTitle className="flex justify-between items-center text-lg font-semibold gradient-text">
-							<span>Schedule an appointment</span>
-							<Button
-								variant="ghost"
-								size="icon"
-								className="h-8 w-8 rounded-full hover:bg-muted"
-								onClick={() => setBookingModalOpen(false)}
-							>
-								<X className="h-4 w-4" />
-							</Button>
-						</DialogTitle>
-					</DialogHeader>
-					<div className="w-full h-full min-h-[500px] rounded-lg overflow-hidden">
-						<iframe
-							src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ29Um0RH9Lo5sc2zmSIyTW8BFIQUWiBEezZwBpUJdeobRbRnmkrY5FRQxV00hAsPn7g_nfjQWyy?gv=true"
-							frameBorder="0"
-							style={{ width: '100%', height: '100%', minHeight: '500px' }}
-							scrolling="yes"
-							className="rounded-lg"
-						></iframe>
-					</div>
-				</DialogContent>
-			</Dialog>
 
 			<style jsx global>{`
         .perspective-1000 {

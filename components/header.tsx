@@ -10,10 +10,14 @@ const Header = () => {
   const { theme, setTheme } = useTheme()
   const [activeSection, setActiveSection] = useState('home')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
     setMounted(true)
     const handleScroll = () => {
+      // Check if page is scrolled
+      setIsScrolled(window.scrollY > 50)
+
       const sections = ['hero', 'about', 'education', 'experience', 'projects', 'hackathons', 'dashboards', 'videos', 'contact']
       const currentSection = sections.find(section => {
         const element = document.getElementById(section)
@@ -35,13 +39,17 @@ const Header = () => {
 
   if (!mounted) return null
 
-  const navItems = ['Home', 'About', 'Education', 'Experience', 'Projects', 'Hackathons', 'Dashboards', 'Videos']
+  const navItems = ['Home', 'About', 'Education', 'Experience', 'Projects', 'Hackathons']
 
   return (
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md shadow-sm"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? 'bg-background/60 backdrop-blur-md shadow-sm'
+          : 'bg-transparent'
+      }`}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-4">
