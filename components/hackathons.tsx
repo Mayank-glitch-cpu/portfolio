@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Github, ExternalLink, ChevronDown, Award } from 'lucide-react'
 import Image from 'next/image'
+import { SectionBackground } from './section-background'
 
 type HackathonProject = {
   title: string;
@@ -75,8 +76,9 @@ const Hackathons = () => {
   const [expandedHackathon, setExpandedHackathon] = useState<number | null>(null)
 
   return (
-    <section id="hackathons" className="py-24 bg-background">
-      <div className="container mx-auto px-4 max-w-5xl">
+    <section id="hackathons" className="py-24 relative overflow-hidden">
+      <SectionBackground variant="hackathons" />
+      <div className="container mx-auto px-4 max-w-5xl relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

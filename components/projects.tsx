@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Github, ExternalLink, ChevronDown } from 'lucide-react'
 import Image from 'next/image'
+import { SectionBackground } from './section-background'
 
 type Project = {
   title: string;
@@ -205,8 +206,9 @@ const Projects = () => {
   })
 
   return (
-    <section id="projects" className="py-24 bg-background">
-      <div className="container mx-auto px-4 max-w-4xl">
+    <section id="projects" className="py-24 relative overflow-hidden">
+      <SectionBackground variant="projects" />
+      <div className="container mx-auto px-4 max-w-4xl relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

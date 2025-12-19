@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight, FileText, Github, Play, X, Presentation } from 'lucide-react'
 import Image from 'next/image'
+import { SectionBackground } from './section-background'
 
 const experiences = [
 	{
@@ -91,7 +92,8 @@ const Experience = () => {
 	};
 
 	return (
-		<section id="experience" className="py-24 bg-background">
+		<section id="experience" className="py-24 relative overflow-hidden">
+			<SectionBackground variant="experience" />
 			{/* PPT Modal */}
 			<AnimatePresence>
 				{pptModal.isOpen && (
@@ -153,7 +155,7 @@ const Experience = () => {
 				)}
 			</AnimatePresence>
 
-			<div className="container mx-auto px-4 max-w-4xl">
+			<div className="container mx-auto px-4 max-w-4xl relative z-10">
 				<motion.h2
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}
