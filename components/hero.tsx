@@ -295,7 +295,7 @@ const Hero: React.FC = () => {
 								size="lg"
 								variant="default"
 								className="rounded-full"
-								onClick={() => window.open('https://drive.google.com/file/d/1jBfOtoAucMhpZfWb1JTshj0lGN-xuEP9/view?usp=sharing', '_blank')}
+								onClick={() => window.open('https://mayank-glitch-cpu.github.io/mayank-resume/', '_blank')}
 							>
 								View Resume
 							</Button>
