@@ -1,13 +1,11 @@
 "use client"
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { MoonIcon, SunIcon, MenuIcon, XIcon } from 'lucide-react'
-import { useTheme } from 'next-themes'
+import { MenuIcon, XIcon, Mail } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 const Header = () => {
   const [mounted, setMounted] = useState(false)
-  const { theme, setTheme } = useTheme()
   const [activeSection, setActiveSection] = useState('home')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
@@ -18,7 +16,7 @@ const Header = () => {
       // Check if page is scrolled
       setIsScrolled(window.scrollY > 50)
 
-      const sections = ['hero', 'about', 'education', 'experience', 'projects', 'hackathons', 'dashboards', 'videos', 'contact']
+      const sections = ['hero', 'about', 'education', 'experience', 'projects', 'dashboards', 'videos', 'contact']
       const currentSection = sections.find(section => {
         const element = document.getElementById(section)
         if (element) {
@@ -39,7 +37,7 @@ const Header = () => {
 
   if (!mounted) return null
 
-  const navItems = ['Home', 'About', 'Education', 'Experience', 'Projects', 'Hackathons']
+  const navItems = ['Home', 'About', 'Education', 'Experience', 'Projects']
 
   return (
     <motion.header
@@ -53,7 +51,13 @@ const Header = () => {
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-4">
-          <nav className="hidden md:flex items-center space-x-4">
+          {/* Left: Name */}
+          <a href="#" className="text-lg font-bold text-foreground hover:text-primary transition-colors">
+            Mayank Vyas
+          </a>
+
+          {/* Center: Navigation */}
+          <nav className="hidden md:flex items-center space-x-6 absolute left-1/2 -translate-x-1/2">
             {navItems.map((item) => (
               <a
                 key={item}
@@ -66,16 +70,16 @@ const Header = () => {
               </a>
             ))}
           </nav>
+
+          {/* Right: Contact Me button + Mobile menu */}
           <div className="flex items-center space-x-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="rounded-full"
+            <a
+              href="mailto:vyasmayank963@gmail.com"
+              className="hidden md:flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full border border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
             >
-              {theme === 'dark' ? <SunIcon className="h-5 w-5" /> : <MoonIcon className="h-5 w-5" />}
-              <span className="sr-only">Toggle theme</span>
-            </Button>
+              <Mail className="h-4 w-4" />
+              Contact Me
+            </a>
             <Button
               variant="ghost"
               size="icon"
@@ -107,6 +111,14 @@ const Header = () => {
                   {item}
                 </a>
               ))}
+              <a
+                href="mailto:vyasmayank963@gmail.com"
+                className="mt-4 flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full border border-primary/50 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Mail className="h-4 w-4" />
+                Contact Me
+              </a>
             </nav>
           </motion.div>
         )}

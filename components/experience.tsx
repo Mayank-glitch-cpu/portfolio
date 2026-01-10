@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowUpRight, FileText, Github, Play, X, Presentation } from 'lucide-react'
+import { ArrowUpRight, FileText, Github, Play, X, Presentation, Star } from 'lucide-react'
 import Image from 'next/image'
 import { SectionBackground } from './section-background'
 
@@ -251,11 +251,10 @@ const Experience = () => {
 											href={exp.github}
 											target="_blank"
 											rel="noopener noreferrer"
-											className="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-lg bg-muted/50 border border-border/50 hover:bg-muted hover:border-border transition-all group/gh"
+											className="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-lg bg-yellow-500/10 border border-yellow-500/30 hover:bg-yellow-500/20 hover:border-yellow-500/50 transition-all group/star"
 										>
-											<Github className="w-4 h-4 text-foreground" />
-											<span className="text-sm font-medium text-foreground group-hover/gh:text-primary transition-colors">View on GitHub</span>
-											<ArrowUpRight className="w-3 h-3 text-muted-foreground group-hover/gh:text-primary group-hover/gh:-translate-y-0.5 group-hover/gh:translate-x-0.5 transition-all" />
+											<Star className="w-4 h-4 text-yellow-500" />
+											<span className="text-sm font-medium text-foreground group-hover/star:text-yellow-500 transition-colors">Star on GitHub</span>
 										</a>
 									)}
 
