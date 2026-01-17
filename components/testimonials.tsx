@@ -9,7 +9,7 @@ interface Testimonial {
   name: string
   title: string
   company: string
-  image: string
+  image?: string
   quote: string
   linkedin?: string
 }
@@ -23,7 +23,32 @@ const testimonials: Testimonial[] = [
     linkedin: "https://www.linkedin.com/in/sahilpawar17/",
     quote: "I had the pleasure of working with Mayank Vyas during the Intel Open Source Hackathon, and I couldn't have asked for a better teammate. We were tackling an issue that involved visualizing real-time machine configuration data using MQTT and Grafana Docker, and Mayank jumped right in with his problem-solving mindset and enthusiasm. What really stood out to me was his curiosity and dedication—even after the hackathon ended, he kept working on the issue, not because he had to, but because he genuinely wanted to learn more. That kind of passion is rare and speaks volumes about his approach to technology and innovation. Beyond his technical skills, Mayank is a fantastic collaborator—always open to ideas, eager to experiment, and ready to help. I'd highly recommend him to anyone looking for a proactive, skilled, and passionate team player!"
   },
+  {
+    name: "Vignesh Mohan",
+    title: "Project Partner",
+    company: "Ex SDE @ Standard Chartered GBS",
+    image: "/images/testimonials/vignesh.jpg",
+    linkedin: "https://www.linkedin.com/in/vignesh-mohan-3701311a1/",
+    quote: "Mayank was a standout teammate during our hackathon, bringing together strong AI insight and solid software engineering skills. What impressed me most was his refusal to give up. He consistently went the extra mile to ensure the project worked end to end."
+  },
+  {
+    name: "Vansh Mathur",
+    title: "Associate Software Engineer",
+    company: "Telstra",
+    image: "/images/testimonials/vansh.jpg",
+    linkedin: "https://www.linkedin.com/in/vanshmathur7/",
+    quote: "Working with you has been a great experience. You are professional, dependable, and communicate with clarity and ease. You’re always approachable and open to feedback, which makes collaboration smooth and effective. Your reliability and positive attitude truly stand out."
+  },
 ]
+
+const getInitials = (name: string) => {
+  return name
+    .split(' ')
+    .map(word => word[0])
+    .join('')
+    .toUpperCase()
+    .slice(0, 2)
+}
 
 const TestimonialCard = ({ testimonial, index }: { testimonial: Testimonial; index: number }) => (
   <motion.div
@@ -35,12 +60,18 @@ const TestimonialCard = ({ testimonial, index }: { testimonial: Testimonial; ind
       <CardContent className="p-6">
         <div className="flex items-start gap-4 mb-4">
           <div className="relative w-14 h-14 rounded-full overflow-hidden flex-shrink-0 border-2 border-primary/30">
-            <Image
-              src={testimonial.image}
-              alt={testimonial.name}
-              fill
-              className="object-cover"
-            />
+            {testimonial.image ? (
+              <Image
+                src={testimonial.image}
+                alt={testimonial.name}
+                fill
+                className="object-cover"
+              />
+            ) : (
+              <div className="w-full h-full bg-primary/20 flex items-center justify-center text-primary font-semibold text-lg">
+                {getInitials(testimonial.name)}
+              </div>
+            )}
           </div>
           <div className="flex-1 min-w-0">
             {testimonial.linkedin ? (
