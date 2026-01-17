@@ -16,12 +16,28 @@ interface Testimonial {
 
 const testimonials: Testimonial[] = [
   {
+    name: "Akshay Purohit",
+    title: "Senior Software Engineer",
+    company: "Google",
+    image: "/images/testimonials/chunnu_bhyaa.jpg",
+    linkedin: "https://www.linkedin.com/in/akshayapurohit/",
+    quote: "Mayank is an outstanding software engineer with strong hands-on experience in Python, distributed systems, and applied AI/ML. I’ve closely mentored him over the past year and consistently seen his ability to translate theory into real-world systems. His recent publication at AACL, “No Universal Prompting,” highlights his depth in prompt engineering and his practical understanding of modern AI workflows. Beyond research, Mayank excels at rapid execution, most notably winning HackASU, where he built a full-fledged education platform leveraging prompt engineering and software engineering skills in a single night, securing first place.He is highly adaptable, receptive to feedback, and consistently adds value to any team he works with. I strongly believe Mayank has the technical ability and mindset to thrive in fast-paced, high-impact engineering environments."
+  },
+  {
     name: "Sahil Pawar",
     title: "Software Engineer Intern",
     company: "Lumen",
     image: "/images/testimonials/sahil.jpg",
     linkedin: "https://www.linkedin.com/in/sahilpawar17/",
     quote: "I had the pleasure of working with Mayank Vyas during the Intel Open Source Hackathon, and I couldn't have asked for a better teammate. We were tackling an issue that involved visualizing real-time machine configuration data using MQTT and Grafana Docker, and Mayank jumped right in with his problem-solving mindset and enthusiasm. What really stood out to me was his curiosity and dedication—even after the hackathon ended, he kept working on the issue, not because he had to, but because he genuinely wanted to learn more. That kind of passion is rare and speaks volumes about his approach to technology and innovation. Beyond his technical skills, Mayank is a fantastic collaborator—always open to ideas, eager to experiment, and ready to help. I'd highly recommend him to anyone looking for a proactive, skilled, and passionate team player!"
+  },
+  {
+    name: "Aditya Pokharna",
+    title: "Data Analyst Intern",
+    company: "Tesla",
+    image: "/images/testimonials/Adi.jpg",
+    linkedin: "https://www.linkedin.com/in/adipokharna/",
+    quote: "I’ve worked with Mayank on several projects during my master’s program and on current work, and it’s been a great experience. He’s strong with data tools, handles analysis and communication confidently, and is especially skilled in machine learning. What stands out is his ability to understand models deeply and apply them thoughtfully to real problems. He’s reliable, collaborative, and easy to work with, making him a valuable addition to any data or ML-focused team."
   },
   {
     name: "Vignesh Mohan",
@@ -38,14 +54,6 @@ const testimonials: Testimonial[] = [
     image: "/images/testimonials/vansh.jpg",
     linkedin: "https://www.linkedin.com/in/vanshmathur7/",
     quote: "Working with you has been a great experience. You are professional, dependable, and communicate with clarity and ease. You’re always approachable and open to feedback, which makes collaboration smooth and effective. Your reliability and positive attitude truly stand out."
-  },
-  {
-    name: "Aditya Pokharna",
-    title: "Data Analyst Intern",
-    company: "Tesla",
-    image: "/images/testimonials/Adi.jpg",
-    linkedin: "https://www.linkedin.com/in/adipokharna/",
-    quote: "I’ve worked with Mayank on several projects during my master’s program and on current work, and it’s been a great experience. He’s strong with data tools, handles analysis and communication confidently, and is especially skilled in machine learning. What stands out is his ability to understand models deeply and apply them thoughtfully to real problems. He’s reliable, collaborative, and easy to work with, making him a valuable addition to any data or ML-focused team."
   }
 ] 
 
