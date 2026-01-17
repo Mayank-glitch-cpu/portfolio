@@ -16,7 +16,7 @@ const Header = () => {
       // Check if page is scrolled
       setIsScrolled(window.scrollY > 50)
 
-      const sections = ['hero', 'about', 'education', 'experience', 'projects', 'dashboards', 'videos', 'contact']
+      const sections = ['hero', 'about', 'education', 'experience', 'projects', 'testimonials', 'dashboards', 'videos', 'contact']
       const currentSection = sections.find(section => {
         const element = document.getElementById(section)
         if (element) {
@@ -37,7 +37,7 @@ const Header = () => {
 
   if (!mounted) return null
 
-  const navItems = ['Home', 'About', 'Education', 'Experience', 'Projects']
+  const navItems = ['Home', 'About', 'Education', 'Experience', 'Projects', 'Testimonials']
 
   return (
     <motion.header

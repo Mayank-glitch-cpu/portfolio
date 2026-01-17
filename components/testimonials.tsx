@@ -39,6 +39,14 @@ const testimonials: Testimonial[] = [
     linkedin: "https://www.linkedin.com/in/vanshmathur7/",
     quote: "Working with you has been a great experience. You are professional, dependable, and communicate with clarity and ease. You’re always approachable and open to feedback, which makes collaboration smooth and effective. Your reliability and positive attitude truly stand out."
   },
+  {
+    name: "Aditya Pokharna",
+    title: "Data Analyst Intern",
+    company: "Tesla",
+    image: "/images/testimonials/adi.jpg",
+    linkedin: "https://www.linkedin.com/in/adipokharna/",
+    quote: "I’ve worked with Mayank on several projects during my master’s program and on current work, and it’s been a great experience. He’s strong with data tools, handles analysis and communication confidently, and is especially skilled in machine learning. What stands out is his ability to understand models deeply and apply them thoughtfully to real problems. He’s reliable, collaborative, and easy to work with, making him a valuable addition to any data or ML-focused team."
+  }
 ]
 
 const getInitials = (name: string) => {
