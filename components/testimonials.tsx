@@ -54,6 +54,14 @@ const testimonials: Testimonial[] = [
     image: "/images/testimonials/vansh.jpg",
     linkedin: "https://www.linkedin.com/in/vanshmathur7/",
     quote: "Working with you has been a great experience. You are professional, dependable, and communicate with clarity and ease. You’re always approachable and open to feedback, which makes collaboration smooth and effective. Your reliability and positive attitude truly stand out."
+  },
+  {
+    name: "Abraham Lozano",
+    title: "Master's Student",
+    company: "ASU",
+    image: "/images/testimonials/abhrahm.jpg",
+    linkedin: "https://www.linkedin.com/in/abrahamlozanoserna",
+    quote: "I had the pleasure to work on a research project with Mayank. He was always thinking outside the box and going the extra mile to create tangible solutions. He is also a great leader and easy to get along with."
   }
 ] 
 
