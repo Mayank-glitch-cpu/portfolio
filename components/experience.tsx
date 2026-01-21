@@ -23,7 +23,7 @@ const experiences = [
 		publications: [
 			{
 				title: "No Universal Prompt: Unifying Reasoning through Adaptive Prompting for Temporal Table Reasoning",
-				url: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=ZiszgsIAAAAJ&citation_for_view=ZiszgsIAAAAJ:9yKSN-GCB0IC"
+				url: "https://aclanthology.org/2025.ijcnlp-long.150/"
 			}
 		]
 	},
