@@ -56,6 +56,14 @@ const testimonials: Testimonial[] = [
     quote: "Working with you has been a great experience. You are professional, dependable, and communicate with clarity and ease. You’re always approachable and open to feedback, which makes collaboration smooth and effective. Your reliability and positive attitude truly stand out."
   },
   {
+    name: "Ishita Sharma",
+    title: "Senior Associate",
+    company: "Amazon",
+    image: "/images/testimonials/Ishita.jpg",
+    linkedin: "https://www.linkedin.com/in/ishitasharma03/",
+    quote: "Mayank is genuinely one of the most helpful people I’ve worked with. He’s dependable, collaborative, and always ready to step in whether it’s brainstorming, debugging, or guiding the team through challenges. Working with him has been a smooth and positive experience, and I’d happily collaborate with him again."
+  },
+  {
     name: "Abraham Lozano",
     title: "Master's Student",
     company: "ASU",
