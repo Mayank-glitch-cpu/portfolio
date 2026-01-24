@@ -23,7 +23,8 @@ const experiences = [
 		publications: [
 			{
 				title: "No Universal Prompt: Unifying Reasoning through Adaptive Prompting for Temporal Table Reasoning",
-				url: "https://aclanthology.org/2025.ijcnlp-long.150/"
+				url: "https://aclanthology.org/2025.ijcnlp-long.150/",
+				venue: "AACL 2025"
 			}
 		]
 	},
@@ -62,15 +63,18 @@ const experiences = [
 		publications: [
 			{
 				title: "Optimizing Kalman Filters for Data Integrity",
-				url: "https://ieeexplore.ieee.org/abstract/document/10278208"
+				url: "https://ieeexplore.ieee.org/abstract/document/10278208",
+				venue: "IEEE"
 			},
 			{
 				title: "LoRa-based Fog Computing Framework",
-				url: "https://ieeexplore.ieee.org/abstract/document/10572197"
+				url: "https://ieeexplore.ieee.org/abstract/document/10572197",
+				venue: "Springer"
 			},
 			{
 				title: "Data Aggregation for LoRa in Smart Agriculture",
-				url: "https://link.springer.com/chapter/10.1007/978-3-031-28451-9_4"
+				url: "https://link.springer.com/chapter/10.1007/978-3-031-28451-9_4",
+				venue: "IEEE"
 			}
 		]
 	}
@@ -235,9 +239,14 @@ const Experience = () => {
 														<div className="w-8 h-8 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0">
 															<FileText className="w-4 h-4 text-primary" />
 														</div>
-														<p className="flex-1 text-sm font-medium text-foreground group-hover/pub:text-primary transition-colors truncate">
+														<div className="flex-1 min-w-0">
+														<p className="text-sm font-medium text-foreground group-hover/pub:text-primary transition-colors truncate">
 															{pub.title}
 														</p>
+														{pub.venue && (
+															<p className="text-xs text-muted-foreground mt-0.5">{pub.venue}</p>
+														)}
+													</div>
 														<ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover/pub:text-primary group-hover/pub:-translate-y-0.5 group-hover/pub:translate-x-0.5 transition-all flex-shrink-0" />
 													</a>
 												))}
