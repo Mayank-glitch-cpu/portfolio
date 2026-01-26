@@ -37,7 +37,15 @@ const testimonials: Testimonial[] = [
     company: "Tesla",
     image: "/images/testimonials/Adi.jpg",
     linkedin: "https://www.linkedin.com/in/adipokharna/",
-    quote: "I’ve worked with Mayank on several projects during my master’s program and on current work, and it’s been a great experience. He’s strong with data tools, handles analysis and communication confidently, and is especially skilled in machine learning. What stands out is his ability to understand models deeply and apply them thoughtfully to real problems. He’s reliable, collaborative, and easy to work with, making him a valuable addition to any data or ML-focused team."
+    quote: "I've worked with Mayank on several projects during my master's program and on current work, and it's been a great experience. He's strong with data tools, handles analysis and communication confidently, and is especially skilled in machine learning. What stands out is his ability to understand models deeply and apply them thoughtfully to real problems. He's reliable, collaborative, and easy to work with, making him a valuable addition to any data or ML-focused team."
+  },
+  {
+    name: "Abhishek Rajgaria",
+    title: "Software Engineer",
+    company: "Amazon",
+    image: "/images/testimonials/abhishek.jpg",
+    linkedin: "https://www.linkedin.com/in/abhrajga/",
+    quote: "It was a good experience working with him. He was easy to talk to, responded quickly, and delivered things on time. I was impressed by how fast he was able to experiment with five prompting techniques across eight datasets and three models in a very short span of time. One piece of feedback I would share, based on our single project together, is that it might help to slow down slightly at times and not rush through the work."
   },
   {
     name: "Vignesh Mohan",
