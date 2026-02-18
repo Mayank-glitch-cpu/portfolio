@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowUpRight, FileText, Github, Play, X, Presentation, Star } from 'lucide-react'
+import { ArrowUpRight, FileText, X, Presentation } from 'lucide-react'
 import Image from 'next/image'
 import { SectionBackground } from './section-background'
 
@@ -30,22 +30,17 @@ const experiences = [
 	},
 	{
 		title: "Founding Software Engineer",
-		company: "Job-Hunt AI",
+		company: "JobMatch-AI",
 		logo: "/images/logos/Arizona_State_University_seal.svg.png",
 		location: "Tempe, Arizona (Self-Employed)",
 		startYear: "2025",
 		endYear: "Present",
-		url: "https://github.com/Mayank-glitch-cpu/job-hunt-ai-Demo",
+		url: "https://job-hunt-frontend-etejhvrjsq-ue.a.run.app/",
 		highlights: [
 			"Architected an end-to-end AI automation pipeline using Elasticsearch for high-speed semantic search and a knowledge graph to map complex relationships between job requirements and user skills",
 			"Developed an LLM-based agentic workflow that autonomously parses job descriptions and aligns them with candidate resumes, improving job match relevance by 92% and reducing manual search time by 98%"
 		],
-		github: "https://github.com/Mayank-glitch-cpu/job-hunt-ai-Demo",
-		video: "https://www.canva.com/design/DAG6WCshhY4/bdcbmyay8II-UPhweNhdSA/watch?utm_content=DAG6WCshhY4&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h6ae7bce759",
-		// ppt: {
-		// 	embedUrl: "https://docs.google.com/presentation/d/1GuMrcXYcnR7wgoUvQkqKRn4U64qnBqVr/embed?start=false&loop=false&delayms=3000",
-		// 	title: "Job Hunt AI Powered Career Navigation Revolutionizing Job Recommendations.pptx"
-		// }
+		website: "https://job-hunt-frontend-etejhvrjsq-ue.a.run.app/"
 	},
 	{
 		title: "Software Engineer, Machine Learning Architecture",
@@ -254,30 +249,16 @@ const Experience = () => {
 										</div>
 									)}
 
-									{/* GitHub Link */}
-									{exp.github && (
+									{/* Website Link */}
+									{'website' in exp && exp.website && (
 										<a
-											href={exp.github}
+											href={exp.website}
 											target="_blank"
 											rel="noopener noreferrer"
-											className="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-lg bg-yellow-500/10 border border-yellow-500/30 hover:bg-yellow-500/20 hover:border-yellow-500/50 transition-all group/star"
+											className="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-lg bg-primary/10 border border-primary/20 hover:bg-primary/20 hover:border-primary/30 transition-all group/web"
 										>
-											<Star className="w-4 h-4 text-yellow-500" />
-											<span className="text-sm font-medium text-foreground group-hover/star:text-yellow-500 transition-colors">Star on GitHub</span>
-										</a>
-									)}
-
-									{/* Video Link */}
-									{exp.video && (
-										<a
-											href={exp.video}
-											target="_blank"
-											rel="noopener noreferrer"
-											className="inline-flex items-center gap-2 mt-4 ml-2 px-4 py-2 rounded-lg bg-primary/10 border border-primary/20 hover:bg-primary/20 hover:border-primary/30 transition-all group/vid"
-										>
-											<Play className="w-4 h-4 text-primary" />
-											<span className="text-sm font-medium text-foreground group-hover/vid:text-primary transition-colors">Watch Demo</span>
-											<ArrowUpRight className="w-3 h-3 text-muted-foreground group-hover/vid:text-primary group-hover/vid:-translate-y-0.5 group-hover/vid:translate-x-0.5 transition-all" />
+											<ArrowUpRight className="w-4 h-4 text-primary" />
+											<span className="text-sm font-medium text-foreground group-hover/web:text-primary transition-colors">JobMatch-AI</span>
 										</a>
 									)}
 

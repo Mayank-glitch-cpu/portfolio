@@ -1,7 +1,7 @@
 // src/components/Hero.tsx
 "use client";
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Mail, Linkedin, Github, Twitter, Calendar, FileText } from 'lucide-react';
@@ -155,8 +155,6 @@ const socialLinks = [
 
 const Hero: React.FC = () => {
 	const containerRef = useRef<HTMLDivElement>(null);
-	const [isFlipped, setIsFlipped] = useState(false);
-
 	const { scrollYProgress } = useScroll({
 		target: containerRef,
 		offset: ['start start', 'end start'],
@@ -264,178 +262,80 @@ const Hero: React.FC = () => {
 						</motion.div>
 					</motion.div>
 
-					{/* Blob Image Container - Fixed positioning and single image */}
+					{/* Blob Image Container */}
 					<motion.div
 						whileHover={{ scale: 1.02 }}
 						transition={{ duration: 0.4, ease: 'easeOut' }}
 						className="relative h-[500px] hidden lg:flex items-center justify-center"
-						onMouseEnter={() => setIsFlipped(true)}
-						onMouseLeave={() => setIsFlipped(false)}
 					>
-						<div className="relative w-full h-full perspective-1000">
-							<motion.div
-								className="relative w-full h-full preserve-3d"
-								animate={{ rotateY: isFlipped ? 180 : 0 }}
-								transition={{
-									duration: 0.8,
-									ease: [0.23, 1, 0.32, 1]
-								}}
-							>
-								{/* Front Face */}
-								<div className="absolute inset-0 backface-hidden flex items-center justify-center">
-									{/* Outer glow for immersion effect */}
-									<div className="absolute w-[500px] h-[500px] rounded-full bg-gradient-to-br from-purple-500/20 via-blue-500/10 to-transparent blur-3xl" />
-									<svg
-										width="600"
-										height="600"
-										viewBox="0 0 200 200"
-										xmlns="http://www.w3.org/2000/svg"
-										className="relative z-10"
-										style={{
-											filter: 'drop-shadow(0 25px 50px rgba(139, 92, 246, 0.3)) drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2))'
-										}}
-									>
-										<defs>
-											{/* Clip path for the blob shape */}
-											<clipPath id="front-blob-clip">
-												<path
-													d="M42.1,-56.8C54.8,-48.7,65.6,-36.8,71.7,-22.2C77.9,-7.7,79.6,9.3,73.2,22.2C66.8,35,52.4,43.6,38.9,51.6C25.3,59.5,12.7,66.8,-2.5,70.2C-17.7,73.7,-35.3,73.3,-46.4,64.6C-57.6,55.8,-62.2,38.8,-68.8,21.6C-75.5,4.4,-84.2,-12.9,-82.6,-29.7C-81.1,-46.5,-69.3,-62.9,-53.9,-70C-38.4,-77.1,-19.2,-75.1,-2.2,-72C14.7,-68.9,29.4,-64.8,42.1,-56.8Z"
-													transform="translate(100 100)"
-												/>
-											</clipPath>
-											{/* Gradient overlay for depth */}
-											<linearGradient id="front-depth-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-												<stop offset="0%" stopColor="rgba(255,255,255,0.15)" />
-												<stop offset="50%" stopColor="rgba(255,255,255,0)" />
-												<stop offset="100%" stopColor="rgba(0,0,0,0.2)" />
-											</linearGradient>
-											{/* Radial gradient for vignette effect */}
-											<radialGradient id="front-vignette" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-												<stop offset="60%" stopColor="rgba(0,0,0,0)" />
-												<stop offset="100%" stopColor="rgba(0,0,0,0.3)" />
-											</radialGradient>
-										</defs>
-										{/* Main image with blob clip */}
-										<g clipPath="url(#front-blob-clip)">
-											<image
-												href="/images/me/meatSF.jpeg"
-												x="16"
-												y="25"
-												width="165"
-												height="149"
-												preserveAspectRatio="xMidYMid slice"
-											/>
-											{/* Vignette overlay */}
-											<path
-												fill="url(#front-vignette)"
-												d="M42.1,-56.8C54.8,-48.7,65.6,-36.8,71.7,-22.2C77.9,-7.7,79.6,9.3,73.2,22.2C66.8,35,52.4,43.6,38.9,51.6C25.3,59.5,12.7,66.8,-2.5,70.2C-17.7,73.7,-35.3,73.3,-46.4,64.6C-57.6,55.8,-62.2,38.8,-68.8,21.6C-75.5,4.4,-84.2,-12.9,-82.6,-29.7C-81.1,-46.5,-69.3,-62.9,-53.9,-70C-38.4,-77.1,-19.2,-75.1,-2.2,-72C14.7,-68.9,29.4,-64.8,42.1,-56.8Z"
-												transform="translate(100 100)"
-											/>
-											{/* Depth gradient overlay */}
-											<path
-												fill="url(#front-depth-gradient)"
-												d="M42.1,-56.8C54.8,-48.7,65.6,-36.8,71.7,-22.2C77.9,-7.7,79.6,9.3,73.2,22.2C66.8,35,52.4,43.6,38.9,51.6C25.3,59.5,12.7,66.8,-2.5,70.2C-17.7,73.7,-35.3,73.3,-46.4,64.6C-57.6,55.8,-62.2,38.8,-68.8,21.6C-75.5,4.4,-84.2,-12.9,-82.6,-29.7C-81.1,-46.5,-69.3,-62.9,-53.9,-70C-38.4,-77.1,-19.2,-75.1,-2.2,-72C14.7,-68.9,29.4,-64.8,42.1,-56.8Z"
-												transform="translate(100 100)"
-											/>
-										</g>
-										{/* Subtle border/edge highlight */}
-										<path
-											fill="none"
-											stroke="url(#front-depth-gradient)"
-											strokeWidth="1.5"
-											d="M42.1,-56.8C54.8,-48.7,65.6,-36.8,71.7,-22.2C77.9,-7.7,79.6,9.3,73.2,22.2C66.8,35,52.4,43.6,38.9,51.6C25.3,59.5,12.7,66.8,-2.5,70.2C-17.7,73.7,-35.3,73.3,-46.4,64.6C-57.6,55.8,-62.2,38.8,-68.8,21.6C-75.5,4.4,-84.2,-12.9,-82.6,-29.7C-81.1,-46.5,-69.3,-62.9,-53.9,-70C-38.4,-77.1,-19.2,-75.1,-2.2,-72C14.7,-68.9,29.4,-64.8,42.1,-56.8Z"
-											transform="translate(100 100)"
-										/>
-									</svg>
-								</div>
-
-								{/* Back Face */}
-								<div className="absolute inset-0 backface-hidden rotate-y-180 flex items-center justify-center">
-									{/* Outer glow for immersion effect */}
-									<div className="absolute w-[500px] h-[500px] rounded-full bg-gradient-to-br from-blue-500/20 via-purple-500/10 to-transparent blur-3xl" />
-									<svg
-										width="600"
-										height="600"
-										viewBox="0 0 200 200"
-										xmlns="http://www.w3.org/2000/svg"
-										className="relative z-10"
-										style={{
-											filter: 'drop-shadow(0 25px 50px rgba(59, 130, 246, 0.3)) drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2))'
-										}}
-									>
-										<defs>
-											{/* Clip path for the blob shape */}
-											<clipPath id="back-blob-clip">
-												<path
-													d="M42.1,-56.8C54.8,-48.7,65.6,-36.8,71.7,-22.2C77.9,-7.7,79.6,9.3,73.2,22.2C66.8,35,52.4,43.6,38.9,51.6C25.3,59.5,12.7,66.8,-2.5,70.2C-17.7,73.7,-35.3,73.3,-46.4,64.6C-57.6,55.8,-62.2,38.8,-68.8,21.6C-75.5,4.4,-84.2,-12.9,-82.6,-29.7C-81.1,-46.5,-69.3,-62.9,-53.9,-70C-38.4,-77.1,-19.2,-75.1,-2.2,-72C14.7,-68.9,29.4,-64.8,42.1,-56.8Z"
-													transform="translate(100 100)"
-												/>
-											</clipPath>
-											{/* Gradient overlay for depth */}
-											<linearGradient id="back-depth-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-												<stop offset="0%" stopColor="rgba(255,255,255,0.15)" />
-												<stop offset="50%" stopColor="rgba(255,255,255,0)" />
-												<stop offset="100%" stopColor="rgba(0,0,0,0.2)" />
-											</linearGradient>
-											{/* Radial gradient for vignette effect */}
-											<radialGradient id="back-vignette" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-												<stop offset="60%" stopColor="rgba(0,0,0,0)" />
-												<stop offset="100%" stopColor="rgba(0,0,0,0.3)" />
-											</radialGradient>
-										</defs>
-										{/* Main image with blob clip */}
-										<g clipPath="url(#back-blob-clip)">
-											<image
-												href="/images/me/coding.jpeg"
-												x="10"
-												y="20"
-												width="200"
-												height="200"
-												preserveAspectRatio="xMidYMid slice"
-											/>
-											{/* Vignette overlay */}
-											<path
-												fill="url(#back-vignette)"
-												d="M42.1,-56.8C54.8,-48.7,65.6,-36.8,71.7,-22.2C77.9,-7.7,79.6,9.3,73.2,22.2C66.8,35,52.4,43.6,38.9,51.6C25.3,59.5,12.7,66.8,-2.5,70.2C-17.7,73.7,-35.3,73.3,-46.4,64.6C-57.6,55.8,-62.2,38.8,-68.8,21.6C-75.5,4.4,-84.2,-12.9,-82.6,-29.7C-81.1,-46.5,-69.3,-62.9,-53.9,-70C-38.4,-77.1,-19.2,-75.1,-2.2,-72C14.7,-68.9,29.4,-64.8,42.1,-56.8Z"
-												transform="translate(100 100)"
-											/>
-											{/* Depth gradient overlay */}
-											<path
-												fill="url(#back-depth-gradient)"
-												d="M42.1,-56.8C54.8,-48.7,65.6,-36.8,71.7,-22.2C77.9,-7.7,79.6,9.3,73.2,22.2C66.8,35,52.4,43.6,38.9,51.6C25.3,59.5,12.7,66.8,-2.5,70.2C-17.7,73.7,-35.3,73.3,-46.4,64.6C-57.6,55.8,-62.2,38.8,-68.8,21.6C-75.5,4.4,-84.2,-12.9,-82.6,-29.7C-81.1,-46.5,-69.3,-62.9,-53.9,-70C-38.4,-77.1,-19.2,-75.1,-2.2,-72C14.7,-68.9,29.4,-64.8,42.1,-56.8Z"
-												transform="translate(100 100)"
-											/>
-										</g>
-										{/* Subtle border/edge highlight */}
-										<path
-											fill="none"
-											stroke="url(#back-depth-gradient)"
-											strokeWidth="1.5"
-											d="M42.1,-56.8C54.8,-48.7,65.6,-36.8,71.7,-22.2C77.9,-7.7,79.6,9.3,73.2,22.2C66.8,35,52.4,43.6,38.9,51.6C25.3,59.5,12.7,66.8,-2.5,70.2C-17.7,73.7,-35.3,73.3,-46.4,64.6C-57.6,55.8,-62.2,38.8,-68.8,21.6C-75.5,4.4,-84.2,-12.9,-82.6,-29.7C-81.1,-46.5,-69.3,-62.9,-53.9,-70C-38.4,-77.1,-19.2,-75.1,-2.2,-72C14.7,-68.9,29.4,-64.8,42.1,-56.8Z"
-											transform="translate(100 100)"
-										/>
-									</svg>
-								</div>
-							</motion.div>
-						</div>
+						{/* Outer glow for immersion effect */}
+						<div className="absolute w-[500px] h-[500px] rounded-full bg-gradient-to-br from-purple-500/20 via-blue-500/10 to-transparent blur-3xl" />
+						<svg
+							width="600"
+							height="600"
+							viewBox="0 0 200 200"
+							xmlns="http://www.w3.org/2000/svg"
+							className="relative z-10"
+							style={{
+								filter: 'drop-shadow(0 25px 50px rgba(139, 92, 246, 0.3)) drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2))'
+							}}
+						>
+							<defs>
+								{/* Clip path for the blob shape */}
+								<clipPath id="front-blob-clip">
+									<path
+										d="M42.1,-56.8C54.8,-48.7,65.6,-36.8,71.7,-22.2C77.9,-7.7,79.6,9.3,73.2,22.2C66.8,35,52.4,43.6,38.9,51.6C25.3,59.5,12.7,66.8,-2.5,70.2C-17.7,73.7,-35.3,73.3,-46.4,64.6C-57.6,55.8,-62.2,38.8,-68.8,21.6C-75.5,4.4,-84.2,-12.9,-82.6,-29.7C-81.1,-46.5,-69.3,-62.9,-53.9,-70C-38.4,-77.1,-19.2,-75.1,-2.2,-72C14.7,-68.9,29.4,-64.8,42.1,-56.8Z"
+										transform="translate(100 100)"
+									/>
+								</clipPath>
+								{/* Gradient overlay for depth */}
+								<linearGradient id="front-depth-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+									<stop offset="0%" stopColor="rgba(255,255,255,0.15)" />
+									<stop offset="50%" stopColor="rgba(255,255,255,0)" />
+									<stop offset="100%" stopColor="rgba(0,0,0,0.2)" />
+								</linearGradient>
+								{/* Radial gradient for vignette effect */}
+								<radialGradient id="front-vignette" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+									<stop offset="60%" stopColor="rgba(0,0,0,0)" />
+									<stop offset="100%" stopColor="rgba(0,0,0,0.3)" />
+								</radialGradient>
+							</defs>
+							{/* Main image with blob clip */}
+							<g clipPath="url(#front-blob-clip)">
+								<image
+									href="/images/me/meatSF.jpeg"
+									x="16"
+									y="25"
+									width="165"
+									height="149"
+									preserveAspectRatio="xMidYMid slice"
+								/>
+								{/* Vignette overlay */}
+								<path
+									fill="url(#front-vignette)"
+									d="M42.1,-56.8C54.8,-48.7,65.6,-36.8,71.7,-22.2C77.9,-7.7,79.6,9.3,73.2,22.2C66.8,35,52.4,43.6,38.9,51.6C25.3,59.5,12.7,66.8,-2.5,70.2C-17.7,73.7,-35.3,73.3,-46.4,64.6C-57.6,55.8,-62.2,38.8,-68.8,21.6C-75.5,4.4,-84.2,-12.9,-82.6,-29.7C-81.1,-46.5,-69.3,-62.9,-53.9,-70C-38.4,-77.1,-19.2,-75.1,-2.2,-72C14.7,-68.9,29.4,-64.8,42.1,-56.8Z"
+									transform="translate(100 100)"
+								/>
+								{/* Depth gradient overlay */}
+								<path
+									fill="url(#front-depth-gradient)"
+									d="M42.1,-56.8C54.8,-48.7,65.6,-36.8,71.7,-22.2C77.9,-7.7,79.6,9.3,73.2,22.2C66.8,35,52.4,43.6,38.9,51.6C25.3,59.5,12.7,66.8,-2.5,70.2C-17.7,73.7,-35.3,73.3,-46.4,64.6C-57.6,55.8,-62.2,38.8,-68.8,21.6C-75.5,4.4,-84.2,-12.9,-82.6,-29.7C-81.1,-46.5,-69.3,-62.9,-53.9,-70C-38.4,-77.1,-19.2,-75.1,-2.2,-72C14.7,-68.9,29.4,-64.8,42.1,-56.8Z"
+									transform="translate(100 100)"
+								/>
+							</g>
+							{/* Subtle border/edge highlight */}
+							<path
+								fill="none"
+								stroke="url(#front-depth-gradient)"
+								strokeWidth="1.5"
+								d="M42.1,-56.8C54.8,-48.7,65.6,-36.8,71.7,-22.2C77.9,-7.7,79.6,9.3,73.2,22.2C66.8,35,52.4,43.6,38.9,51.6C25.3,59.5,12.7,66.8,-2.5,70.2C-17.7,73.7,-35.3,73.3,-46.4,64.6C-57.6,55.8,-62.2,38.8,-68.8,21.6C-75.5,4.4,-84.2,-12.9,-82.6,-29.7C-81.1,-46.5,-69.3,-62.9,-53.9,-70C-38.4,-77.1,-19.2,-75.1,-2.2,-72C14.7,-68.9,29.4,-64.8,42.1,-56.8Z"
+								transform="translate(100 100)"
+							/>
+						</svg>
 					</motion.div>
 				</div>
 			</div>
 
-			<style jsx global>{`
-        .perspective-1000 {
-          perspective: 1000px;
-        }
-        .preserve-3d {
-          transform-style: preserve-3d;
-        }
-        .backface-hidden {
-          backface-visibility: hidden;
-        }
-        .rotate-y-180 {
-          transform: rotateY(180deg);
-        }
-      `}</style>
 		</section>
 	);
 };
