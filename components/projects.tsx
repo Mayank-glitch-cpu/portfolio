@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Github, ExternalLink, ChevronDown } from 'lucide-react'
+import { Github, ExternalLink } from 'lucide-react'
 import Image from 'next/image'
 import { SectionBackground } from './section-background'
 
@@ -19,6 +19,20 @@ type Project = {
 };
 
 const projects: Project[] = [
+  {
+    title: 'AXIS — Agentic eXpert Interview System',
+    description: 'A 4-agent orchestration pipeline using LangChain + LangGraph that autonomously prepares candidates for interviews — parsing resumes, researching companies, generating tailored questions, and building personalized study plans.',
+    image: '/images/projects/Axis.png',
+    technologies: ['LangChain', 'LangGraph', 'FastAPI', 'Docker'],
+    achievements: [
+      'Architected planner/executor agent loops with shared memory and tool routing across 4 specialized agents',
+      'Agents autonomously scrape company data, parse resumes, generate role-specific questions, and build study plans',
+      'Configurable fallbacks and kill-switches for reliable multi-source knowledge routing'
+    ],
+    period: 'Jan 2026',
+    githubUrl: 'https://github.com/Mayank-glitch-cpu/Interview-Prep-AI',
+    category: 'AI & LLM'
+  },
   {
     title: 'AI-Powered Gamified Learning Platform',
     description: 'Transform educational questions into interactive, story-based visualizations using AI. Features a 4-layer pipeline that intelligently routes content from documents (PDF/DOCX) to 18 distinct game templates with intelligent caching and real-time progress tracking.',
@@ -198,7 +212,6 @@ const categories = ['All', 'AI & LLM', 'ML', 'Data', 'Data Analytics', 'IoT', 'D
 
 const Projects = () => {
   const [filter, setFilter] = useState<string>('All')
-  const [expandedProject, setExpandedProject] = useState<number | null>(null)
 
   const filteredProjects = projects.filter(project => {
     if (filter === 'All') return true
@@ -318,45 +331,17 @@ const Projects = () => {
                       ))}
                     </div>
 
-                    {/* Expandable Achievements */}
-                    <div className="mt-3">
-                      <button
-                        onClick={() => setExpandedProject(expandedProject === index ? null : index)}
-                        className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
-                      >
-                        <motion.div
-                          animate={{ rotate: expandedProject === index ? 180 : 0 }}
-                          transition={{ duration: 0.2 }}
+                    {/* Achievements */}
+                    <ul className="mt-3 space-y-1">
+                      {project.achievements.map((achievement, i) => (
+                        <li
+                          key={i}
+                          className="text-xs text-muted-foreground/70 leading-relaxed pl-3 relative before:content-['·'] before:absolute before:left-0 before:text-muted-foreground/50"
                         >
-                          <ChevronDown className="w-3 h-3" />
-                        </motion.div>
-                        {expandedProject === index ? 'Hide' : 'Show'} achievements
-                      </button>
-
-                      <AnimatePresence>
-                        {expandedProject === index && (
-                          <motion.ul
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="mt-2 space-y-1 overflow-hidden"
-                          >
-                            {project.achievements.map((achievement, i) => (
-                              <motion.li
-                                key={i}
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: i * 0.05 }}
-                                className="text-xs text-muted-foreground/70 leading-relaxed pl-3 relative before:content-['·'] before:absolute before:left-0 before:text-muted-foreground/50"
-                              >
-                                {achievement}
-                              </motion.li>
-                            ))}
-                          </motion.ul>
-                        )}
-                      </AnimatePresence>
-                    </div>
+                          {achievement}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
 

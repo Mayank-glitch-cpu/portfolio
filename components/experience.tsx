@@ -16,9 +16,8 @@ const experiences = [
 		endYear: "Present",
 		url: "https://coral-lab-asu.github.io/",
 		highlights: [
-			"Engineered a scalable and fault-tolerant data ingestion pipeline on AWS using Apache Spark, processing 1.2 TB of data (NQ tables) while reducing system latency by 3x",
-			"Optimized system performance by designing pruning algorithms to discard irrelevant data segments, improving information retrieval recall and reducing resource consumption",
-			"Developed and tested a distributed, 3-stage meta-reasoning engine, achieving an 11% performance improvement over existing baselines on temporal-reasoning benchmarks"
+			"Designed SEAR, an adaptive prompting framework that dynamically routes queries to optimal reasoning strategies (CoT, PoT, Decomposition) based on input complexity — outperforming 13 baselines including ToT and GoT across 8 datasets with a 92.5% HCS score",
+			"Engineered a retrieval-augmented generation pipeline over 160K+ tables (1.2TB) combining BM25 indexing, row-level chunking, and contrastive learning for ranking — optimizing context window utilization and grounding behavior of downstream LLMs, achieving 93% recall@10"
 		],
 		publications: [
 			{
