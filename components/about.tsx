@@ -662,8 +662,11 @@ const About = () => {
                   transition={{ duration: 0.5 }}
                   className="text-center"
                 >
+                  <p className="text-base font-medium text-foreground/90 mb-2">
+                    "युक्तः कर्मफल त्यक्त्वा।"
+                  </p>
                   <p className="text-lg italic text-foreground/80 mb-3">
-                    "The best way to predict the future is to create it."
+                    "Give your best without obsessing over results. Let go and trust."
                   </p>
                   <p className="text-sm text-muted-foreground">
                     — My guiding philosophy
