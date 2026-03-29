@@ -20,6 +20,20 @@ type Project = {
 
 const projects: Project[] = [
   {
+    title: 'SentinelEdge — On-Device Multimodal Scam Detection',
+    description: 'Real-time speech + text scam detection on edge hardware, no cloud dependency. Built a multimodal fusion pipeline combining Whisper Tiny (audio transcription) and XGBoost (text classification) with federated learning for on-device model updates.',
+    image: '/images/projects/ScamProof.png',
+    technologies: ['TinyML', 'Whisper', 'XGBoost', 'Federated Learning', 'PyTorch', 'FastAPI'],
+    achievements: [
+      'Built a multimodal fusion pipeline running at <50ms latency on constrained hardware with zero cloud calls',
+      'Integrated federated learning for on-device model updates — preserving user privacy by ensuring no raw audio ever leaves the device',
+      'Evaluated against adversarial and real-world audio distributions; measured false-positive rate across diverse scam speech patterns'
+    ],
+    period: 'Mar 2026',
+    githubUrl: 'https://github.com/Mayank-glitch-cpu/SentinelEdge',
+    category: 'AI & LLM'
+  },
+  {
     title: 'AXIS — Agentic eXpert Interview System',
     description: 'A 4-agent orchestration pipeline using LangChain + LangGraph that autonomously prepares candidates for interviews — parsing resumes, researching companies, generating tailored questions, and building personalized study plans.',
     image: '/images/projects/Axis.png',

@@ -8,7 +8,7 @@ import { SectionBackground } from './section-background'
 
 const experiences = [
 	{
-		title: "Software Engineer, Research",
+		title: "ML Research Engineer, Multimodal Systems",
 		company: "Coral Labs",
 		logo: "/images/logos/Arizona_State_University_seal.svg.png",
 		location: "Tempe, Arizona",
@@ -16,14 +16,20 @@ const experiences = [
 		endYear: "Present",
 		url: "https://coral-lab-asu.github.io/",
 		highlights: [
-			"Designed SEAR, an adaptive prompting framework that dynamically routes queries to optimal reasoning strategies (CoT, PoT, Decomposition) based on input complexity — outperforming 13 baselines including ToT and GoT across 8 datasets with a 92.5% HCS score",
-			"Engineered a retrieval-augmented generation pipeline over 160K+ tables (1.2TB) combining BM25 indexing, row-level chunking, and contrastive learning for ranking — optimizing context window utilization and grounding behavior of downstream LLMs, achieving 93% recall@10"
+			"Engineered a distributed data pipeline over 160K+ tables (1.2TB) using Apache Spark and BM25 indexing with row-level chunking — reduced retrieval latency 3× and improved recall from 84% → 93% through custom tokenization and contrastive reranking",
+			"Built SEAR, a 3-stage meta-reasoning engine that dynamically routes LLM queries (CoT, PoT, Decomposition) — outperforming 13 baselines across 8 datasets with a 92.5% HCS score on GPT-4o, Gemini, and LLaMA 70B. Accepted AACL-IJCNLP 2024",
+			"Designed TRIM-QA, a noise-aware row pruning system using adaptive confidence thresholding — improving downstream LLM grounding with 93% Recall@10. Submitted to ACL Rolling Review"
 		],
 		publications: [
 			{
 				title: "No Universal Prompt: Unifying Reasoning through Adaptive Prompting for Temporal Table Reasoning",
 				url: "https://aclanthology.org/2025.ijcnlp-long.150/",
 				venue: "AACL 2025"
+			},
+			{
+				title: "TRIM-QA: Noise-Aware Row Pruning for Table QA",
+				url: "",
+				venue: "Coming Soon — arXiv"
 			}
 		]
 	},
@@ -36,8 +42,16 @@ const experiences = [
 		endYear: "Present",
 		url: "https://job-hunt-frontend-etejhvrjsq-ue.a.run.app/",
 		highlights: [
-			"Architected an end-to-end AI automation pipeline using Elasticsearch for high-speed semantic search and a knowledge graph to map complex relationships between job requirements and user skills",
-			"Developed an LLM-based agentic workflow that autonomously parses job descriptions and aligns them with candidate resumes, improving job match relevance by 92% and reducing manual search time by 98%"
+			"Architected a hybrid search platform combining Elasticsearch (BM25), FAISS (ANN semantic search), and Neo4j (knowledge graph traversal) — serving <82ms median latency via GCP Cloud Run with 30+ FastAPI endpoints and a live waitlist across 2 countries",
+			"Built end-to-end: resume parsing, LLM-based job description alignment, explainable match scoring, and an invite system with custom email templates — deployed full-stack with React frontend and Dockerized backend",
+			"Achieved NDCG@10 = 0.81 across 1,283 job postings using LambdaMART reranking over hybrid BM25+SBERT retrieval. Submitted as first author to ACL 2026 and COLM 2026"
+		],
+		publications: [
+			{
+				title: "JobMatch-AI: Hybrid Search Engine using KG, Semantic Search and Explainable AI",
+				url: "https://job-hunt-frontend-etejhvrjsq-ue.a.run.app/",
+				venue: "arXiv — March 2026 · ACL 2026 submitted"
+			}
 		],
 		website: "https://job-hunt-frontend-etejhvrjsq-ue.a.run.app/"
 	},
@@ -50,9 +64,9 @@ const experiences = [
 		endYear: "2024",
 		url: "https://www.iiitdm.ac.in",
 		highlights: [
-			"Architected and deployed a resilient end-to-end IoT system on resource-constrained hardware (Raspberry Pi), automating deployment and monitoring processes",
-			"Optimized C++ inference kernels to achieve 35% lower latency, enabling real-time anomaly detection and data streaming to AWS",
-			"Designed an on-device predictive filtering algorithm that reduced sensor data transmission by 95%, significantly lowering operational costs and network load"
+			"Optimized C++ inference kernels for TinyML on Raspberry Pi — achieved 35% latency reduction (0.15ms), enabling real-time anomaly detection at 99.97% accuracy with live streaming to AWS",
+			"Designed predictive edge filtering that reduced fog-node data transmissions by 95% and energy consumption by 40% — deployed on LoRa hardware across smart agriculture field sites",
+			"Published 3 papers at IEEE/Springer (17+ citations) on scalable distributed IoT-ML inference — covering data aggregation, fog computing, and edge filtering algorithms"
 		],
 		publications: [
 			{
@@ -222,12 +236,13 @@ const Experience = () => {
 										<div className="mt-4 space-y-2">
 											<span className="text-xs text-muted-foreground font-medium">Publications</span>
 											<div className="space-y-2">
-												{exp.publications.map((pub, i) => (
-													<a
+												{exp.publications.map((pub, i) => {
+													const Wrapper = pub.url ? 'a' : 'div';
+													const linkProps = pub.url ? { href: pub.url, target: "_blank" as const, rel: "noopener noreferrer" } : {};
+													return (
+													<Wrapper
 														key={i}
-														href={pub.url}
-														target="_blank"
-														rel="noopener noreferrer"
+														{...linkProps}
 														className="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary/5 border border-primary/10 hover:bg-primary/10 hover:border-primary/20 transition-all group/pub"
 													>
 														<div className="w-8 h-8 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -241,9 +256,10 @@ const Experience = () => {
 															<p className="text-xs text-muted-foreground mt-0.5">{pub.venue}</p>
 														)}
 													</div>
-														<ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover/pub:text-primary group-hover/pub:-translate-y-0.5 group-hover/pub:translate-x-0.5 transition-all flex-shrink-0" />
-													</a>
-												))}
+														{pub.url && <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover/pub:text-primary group-hover/pub:-translate-y-0.5 group-hover/pub:translate-x-0.5 transition-all flex-shrink-0" />}
+													</Wrapper>
+													);
+												})}
 											</div>
 										</div>
 									)}

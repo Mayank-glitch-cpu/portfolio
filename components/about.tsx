@@ -24,10 +24,18 @@ import {
   SiGit,
   SiLinux,
   SiNextdotjs,
+  SiFastapi,
+  SiGraphql,
+  SiRedis,
+  SiGooglebigquery,
+  SiGithubactions,
+  SiJenkins,
+  SiMicrosoftazure,
+  SiNvidia,
 } from "react-icons/si";
 import { DiJava } from 'react-icons/di'
 import { HeroBackground } from './hero-background';
-import { MapPin, GraduationCap, Briefcase, Heart, Camera, Mountain, Gamepad2, Trophy, Github, ExternalLink } from 'lucide-react'
+import { MapPin, GraduationCap, Briefcase, Heart, Camera, Mountain, Gamepad2, Trophy, Github, ExternalLink, CalendarDays } from 'lucide-react'
 
 // Skills data organized by category
 type Skill = {
@@ -46,25 +54,36 @@ const programmingSkills: Skill[] = [
 const aiMlSkills: Skill[] = [
   { icon: SiPytorch, name: "PyTorch" },
   { icon: SiTensorflow, name: "TensorFlow" },
+  { icon: SiPytorch, name: "LangGraph" },
+  { icon: SiPytorch, name: "FAISS" },
+  { icon: SiPytorch, name: "LoRA/PEFT" },
+  { icon: SiNvidia, name: "CUDA" },
 ];
 
 const webFrameworkSkills: Skill[] = [
   { icon: SiReact, name: "React" },
   { icon: SiNextdotjs, name: "Next.js" },
   { icon: SiDjango, name: "Django" },
+  { icon: SiFastapi, name: "FastAPI" },
+  { icon: SiGraphql, name: "GraphQL" },
 ];
 
 const infraSkills: Skill[] = [
   { icon: SiDocker, name: "Docker" },
   { icon: SiKubernetes, name: "Kubernetes" },
   { icon: SiAmazon, name: "AWS" },
+  { icon: SiMicrosoftazure, name: "Azure" },
   { icon: SiApachekafka, name: "Kafka" },
   { icon: SiGrafana, name: "Grafana" },
+  { icon: SiJenkins, name: "Jenkins" },
+  { icon: SiGithubactions, name: "GitHub Actions" },
 ];
 
 const databaseSkills: Skill[] = [
   { icon: SiMongodb, name: "MongoDB" },
   { icon: SiPostgresql, name: "PostgreSQL" },
+  { icon: SiRedis, name: "Redis" },
+  { icon: SiGooglebigquery, name: "BigQuery" },
 ];
 
 const toolsSkills: Skill[] = [
@@ -135,6 +154,14 @@ const hobbyPhotos = [
 
 // Hackathon highlights data
 const hackathonHighlights = [
+  {
+    title: "SentinelEdge",
+    event: "HackASU 2025 - On-Device AI",
+    image: "/images/hackathons/hackASU2.JPG",
+    description: "Built a multimodal scam detection system combining Whisper Tiny and XGBoost for real-time speech + text classification at <50ms on edge hardware — zero cloud dependency with federated learning for private on-device updates.",
+    award: "1st Place Winner",
+    githubLink: "https://github.com/Mayank-glitch-cpu/SentinelEdge",
+  },
   {
     title: "GamED-AI",
     event: "HackASU 2025 - Anthropic Claude AI",
@@ -331,7 +358,7 @@ const About = () => {
 
                 <div className="text-center mt-4">
                   <Badge variant="outline" className="bg-primary/10 border-primary/30 text-primary text-xs">
-                    18+ Technologies & Growing
+                    30+ Technologies & Growing
                   </Badge>
                 </div>
               </CardContent>
@@ -352,7 +379,7 @@ const About = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.1 }}
                   >
-                    As a Data Science student at ASU, I architect <span className="text-primary font-semibold">intelligent systems</span> by specializing in <span className="text-primary font-semibold">RAG (Retrieval-Augmented Generation)</span> pipelines for LLMs and developing sophisticated <span className="text-primary font-semibold">AI Agents</span>. My core expertise lies in <span className="text-primary font-semibold">Natural Language Processing</span>, where I design high-performance retrieval algorithms to power next-generation AI applications.
+                    I build production ML systems — and then write papers about what I learned building them.
                   </motion.p>
 
                   <motion.p
@@ -360,7 +387,7 @@ const About = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
                   >
-                    I translate complex theory into real-world impact. My projects include analyzing <span className="text-primary font-semibold">Time Series data</span> for robust <span className="text-primary font-semibold">IoT Pipelines</span> in smart agriculture, and engineering a production-ready, dockerized pipeline for <a href="https://github.com/Mayank-glitch-cpu/automated-self-checkout" target="_blank" rel="noopener noreferrer" className="text-primary underline hover:text-primary/80 transition-colors">Intel's automated self-checkout system</a> with Grafana visualization.
+                    On the engineering side: a hybrid job-matching platform live on GCP (<span className="text-primary font-semibold">30+ endpoints, &lt;82ms latency</span>), a <span className="text-primary font-semibold">1.2TB table retrieval pipeline</span> achieving 93% Recall@10, and an on-device scam detection system running under <span className="text-primary font-semibold">50ms on edge hardware</span> without cloud dependency.
                   </motion.p>
 
                   <motion.p
@@ -368,7 +395,15 @@ const About = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
                   >
-                    I also engineered a <span className="text-primary font-semibold">Masked R-CNN</span> pipeline to detect the <span className="text-primary font-semibold">primary root length</span> of plant species like wheat, brassica napus, and arabidopsis thaliana—helping biologists study the <span className="text-primary font-semibold">root phenome</span> more effectively.
+                    On the research side: <span className="text-primary font-semibold">5 publications</span> across IEEE, Springer, AACL, and ACL venues. <span className="text-primary font-semibold">17+ citations.</span> Thesis defense May 2026.
+                  </motion.p>
+
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.4 }}
+                  >
+                    My stack: Python, C++, TypeScript — FastAPI backends, React frontends, Dockerized deployments on GCP and AWS. On the ML side: PyTorch, HuggingFace, LangChain, FAISS, Neo4j, Elasticsearch.
                   </motion.p>
                 </div>
               </CardContent>
@@ -389,7 +424,7 @@ const About = () => {
                 <div className="space-y-5">
                   {hackathonHighlights.map((hackathon, index) => {
                     // Check if this hackathon should have horizontal layout (image left, content right)
-                    const isHorizontalLayout = hackathon.title === "GamED-AI" || hackathon.title === "Hire Smart" || hackathon.title === "Interview Unlocked";
+                    const isHorizontalLayout = hackathon.title === "GamED-AI" || hackathon.title === "SentinelEdge" || hackathon.title === "Hire Smart" || hackathon.title === "Interview Unlocked";
                     
                     return (
                       <motion.div
@@ -719,6 +754,56 @@ const About = () => {
                   When I'm not coding, I'm exploring the beautiful landscapes of the American Southwest. From the majestic Grand Canyon to the iconic Golden Gate Bridge, every destination teaches me something new.
                 </p>
                 <PhotoGallery photos={travelPhotos} />
+              </CardContent>
+            </Card>
+
+            {/* What's Happening Currently */}
+            <Card className="bg-card/70 backdrop-blur-md border-border/50 hover:shadow-xl hover:shadow-primary/10 transition-all duration-500">
+              <CardHeader className="pb-2">
+                <CardTitle className="text-lg font-semibold flex items-center gap-2">
+                  <CalendarDays className="w-5 h-5 text-primary" />
+                  <span className="gradient-text">What&#39;s Happening Currently</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="pt-2">
+                <div className="space-y-4">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                  >
+                    <a
+                      href="https://stripesessions.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block group/stripe"
+                    >
+                      <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+                        {/* Image Column — matches project section */}
+                        <div className="sm:w-44 flex-shrink-0">
+                          <div className="relative w-full h-24 sm:h-20 rounded-lg overflow-hidden bg-muted/30">
+                            <Image
+                              src="/images/logos/stripe-sessions-2025.webp"
+                              alt="Stripe Sessions 2026"
+                              fill
+                              className="object-cover scale-150 group-hover/stripe:scale-[1.6] transition-transform duration-300"
+                              sizes="(max-width: 640px) 100vw, 176px"
+                            />
+                          </div>
+                        </div>
+                        {/* Content Column */}
+                        <div className="flex-1">
+                          <h4 className="text-base font-medium text-foreground group-hover/stripe:text-primary transition-colors">
+                            Stripe Sessions 2026
+                          </h4>
+                          <p className="text-sm text-muted-foreground/80 mt-1.5 leading-relaxed">
+                            Attending Stripe Sessions 2026 — exploring the future of payments, fintech infrastructure, and developer tools.
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </motion.div>
+                </div>
               </CardContent>
             </Card>
           </motion.div>
