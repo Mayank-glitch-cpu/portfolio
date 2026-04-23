@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Github, ExternalLink } from 'lucide-react'
+import { Github, ExternalLink, Youtube } from 'lucide-react'
 import Image from 'next/image'
 import { SectionBackground } from './section-background'
 
@@ -15,10 +15,30 @@ type Project = {
   period: string;
   githubUrl: string;
   liveUrl?: string;
+  videoUrl?: string;
+  articleUrl?: string;
   category: string;
 };
 
 const projects: Project[] = [
+  {
+    title: 'JobSync — Agentic Job Search MCP Service',
+    description: 'An agentic job-search tool that integrates with MCP clients (Claude Desktop, Claude Code, Cursor) to discover, classify, and sync job postings into Airtable or markdown files. Profile-based filtering uses your resume and role preferences to match relevant positions.',
+    image: '/images/projects/yt-JobSync_thumbnail.png',
+    technologies: ['MCP', 'Node.js', 'Airtable', 'SQLite', 'Claude AI', 'TypeScript'],
+    achievements: [
+      '1,440+ weekly downloads on npm — published as jobsync-mcp',
+      'Built direct ATS fetchers for Greenhouse, Lever, and Ashby — model-agnostic architecture where users bring their own LLM',
+      'SQLite-based deduplication cache prevents duplicate entries across runs; dual output to Airtable bases or local markdown files',
+      'Profile onboarding pipeline parses resume to extract skills, experience, and projects for intelligent job matching'
+    ],
+    period: 'Apr 2026',
+    githubUrl: 'https://github.com/Mayank-glitch-cpu/JobSync-Service',
+    liveUrl: 'https://www.npmjs.com/package/jobsync-mcp',
+    videoUrl: 'https://www.youtube.com/watch?v=M1cRe2JjIhg',
+    articleUrl: 'https://lnkd.in/g8NbjUHR',
+    category: 'AI & LLM'
+  },
   {
     title: 'SentinelEdge — On-Device Multimodal Scam Detection',
     description: 'Real-time speech + text scam detection on edge hardware, no cloud dependency. Built a multimodal fusion pipeline combining Whisper Tiny (audio transcription) and XGBoost (text classification) with federated learning for on-device model updates.',
@@ -31,6 +51,7 @@ const projects: Project[] = [
     ],
     period: 'Mar 2026',
     githubUrl: 'https://github.com/Mayank-glitch-cpu/SentinelEdge',
+    videoUrl: 'https://youtu.be/TbUMw-mnLhI?si=2qZgQhyVKehEfEVy',
     category: 'AI & LLM'
   },
   {
@@ -326,12 +347,34 @@ const Projects = () => {
                             <ExternalLink className="w-4 h-4 text-muted-foreground hover:text-foreground transition-colors" />
                           </a>
                         )}
+                        {project.videoUrl && (
+                          <a
+                            href={project.videoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-1.5 rounded-md hover:bg-muted/50 transition-colors"
+                            aria-label="Watch demo video"
+                          >
+                            <Youtube className="w-4 h-4 text-muted-foreground hover:text-red-500 transition-colors" />
+                          </a>
+                        )}
                       </div>
                     </div>
 
                     <p className="text-sm text-muted-foreground/80 mt-1.5 leading-relaxed">
                       {project.description}
                     </p>
+
+                    {project.articleUrl && (
+                      <a
+                        href={project.articleUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 mt-2 text-xs text-primary hover:text-primary/80 transition-colors"
+                      >
+                        Read more →
+                      </a>
+                    )}
 
                     {/* Technologies */}
                     <div className="flex flex-wrap gap-1.5 mt-3">
@@ -347,14 +390,22 @@ const Projects = () => {
 
                     {/* Achievements */}
                     <ul className="mt-3 space-y-1">
-                      {project.achievements.map((achievement, i) => (
+                      {project.achievements.map((achievement, i) => {
+                        const isMetric = /^\d[\d,+]/.test(achievement);
+                        return (
                         <li
                           key={i}
-                          className="text-xs text-muted-foreground/70 leading-relaxed pl-3 relative before:content-['·'] before:absolute before:left-0 before:text-muted-foreground/50"
+                          className={`text-xs leading-relaxed pl-3 relative before:absolute before:left-0 ${
+                            isMetric
+                              ? 'text-purple-300 font-medium before:content-["★"] before:text-purple-400'
+                              : 'text-muted-foreground/70 before:content-["·"] before:text-muted-foreground/50'
+                          }`}
+                          style={isMetric ? { textShadow: '0 0 12px rgba(168,85,247,0.7)' } : undefined}
                         >
                           {achievement}
                         </li>
-                      ))}
+                        );
+                      })}
                     </ul>
                   </div>
                 </div>

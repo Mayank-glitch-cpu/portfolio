@@ -49,7 +49,7 @@ const experiences = [
 		publications: [
 			{
 				title: "JobMatch-AI: Hybrid Search Engine using KG, Semantic Search and Explainable AI",
-				url: "https://job-hunt-frontend-etejhvrjsq-ue.a.run.app/",
+				url: "https://arxiv.org/abs/2603.14558",
 				venue: "arXiv — March 2026 · ACL 2026 submitted"
 			}
 		],
