@@ -245,7 +245,7 @@ const Hero: React.FC = () => {
 							<Button
 								variant="link"
 								className="p-0 h-auto text-base flex items-center gap-2"
-								onClick={() => window.open('https://mayank-glitch-cpu.github.io/mayank-resume/', '_blank')}
+								onClick={() => window.open('https://drive.google.com/file/d/1lZAvZRcaVp4CGlUEMGavoiRyPyvnqYdh/view?usp=sharing', '_blank')}
 							>
 								<FileText className="h-4 w-4" />
 								View Resume
