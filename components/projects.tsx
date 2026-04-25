@@ -34,9 +34,9 @@ const projects: Project[] = [
     ],
     period: 'Apr 2026',
     githubUrl: 'https://github.com/Mayank-glitch-cpu/JobSync-Service',
-    liveUrl: 'https://www.npmjs.com/package/jobsync-mcp',
+    liveUrl: 'https://mayank-glitch-cpu.github.io/JobSync-Service/',
     videoUrl: 'https://www.youtube.com/watch?v=M1cRe2JjIhg',
-    articleUrl: 'https://lnkd.in/g8NbjUHR',
+    articleUrl: 'https://mayank-glitch-cpu.github.io/JobSync-Service/',
     category: 'AI & LLM'
   },
   {
