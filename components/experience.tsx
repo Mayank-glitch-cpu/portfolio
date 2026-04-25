@@ -266,17 +266,32 @@ const Experience = () => {
 										</div>
 									)}
 
-									{/* Website Link */}
-									{'website' in exp && exp.website && (
-										<a
-											href={exp.website}
-											target="_blank"
-											rel="noopener noreferrer"
-											className="inline-flex items-center gap-2 mt-4 px-4 py-2 rounded-lg bg-primary/10 border border-primary/20 hover:bg-primary/20 hover:border-primary/30 transition-all group/web"
-										>
-											<ArrowUpRight className="w-4 h-4 text-primary" />
-											<span className="text-sm font-medium text-foreground group-hover/web:text-primary transition-colors">JobMatch-AI</span>
-										</a>
+									{/* Website / MCP Links */}
+									{(('website' in exp && exp.website) || ('mcpPackage' in exp && exp.mcpPackage)) && (
+										<div className="mt-4 flex flex-wrap gap-3">
+											{'website' in exp && exp.website && (
+												<a
+													href={exp.website}
+													target="_blank"
+													rel="noopener noreferrer"
+													className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 border border-primary/20 hover:bg-primary/20 hover:border-primary/30 transition-all group/web"
+												>
+													<ArrowUpRight className="w-4 h-4 text-primary" />
+													<span className="text-sm font-medium text-foreground group-hover/web:text-primary transition-colors">JobMatch-AI</span>
+												</a>
+											)}
+											{'mcpPackage' in exp && exp.mcpPackage && (
+												<a
+													href={exp.mcpPackage}
+													target="_blank"
+													rel="noopener noreferrer"
+													className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 border border-primary/20 hover:bg-primary/20 hover:border-primary/30 transition-all group/mcp"
+												>
+													<ArrowUpRight className="w-4 h-4 text-primary" />
+													<span className="text-sm font-medium text-foreground group-hover/mcp:text-primary transition-colors">MCP Package</span>
+												</a>
+											)}
+										</div>
 									)}
 
 									{/* PPT Presentation
