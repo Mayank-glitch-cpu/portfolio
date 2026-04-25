@@ -44,16 +44,18 @@ const experiences = [
 		highlights: [
 			"Architected a hybrid search platform combining Elasticsearch (BM25), FAISS (ANN semantic search), and Neo4j (knowledge graph traversal) — serving <82ms median latency via GCP Cloud Run with 30+ FastAPI endpoints and a live waitlist across 2 countries",
 			"Built end-to-end: resume parsing, LLM-based job description alignment, explainable match scoring, and an invite system with custom email templates — deployed full-stack with React frontend and Dockerized backend",
-			"Achieved NDCG@10 = 0.81 across 1,283 job postings using LambdaMART reranking over hybrid BM25+SBERT retrieval. Submitted as first author to ACL 2026 and COLM 2026"
+			"Achieved NDCG@10 = 0.81 across 1,283 job postings using LambdaMART reranking over hybrid BM25+SBERT retrieval. Submitted as first author to ACL 2026 and COLM 2026",
+			"Built JobSync-MCP Server, a real time Agentic Infrastructure that finds user profile aligned jobs and proactively applies on their behalf — achieving a 12% application success rate in early testing."
 		],
-		publications: [
-			{
-				title: "JobMatch-AI: Hybrid Search Engine using KG, Semantic Search and Explainable AI",
-				url: "https://arxiv.org/abs/2603.14558",
-				venue: "arXiv — March 2026 · ACL 2026 submitted"
-			}
-		],
-		website: "https://job-hunt-frontend-etejhvrjsq-ue.a.run.app/"
+			publications: [
+				{
+					title: "JobMatch-AI: Hybrid Search Engine using KG, Semantic Search and Explainable AI",
+					url: "https://arxiv.org/abs/2603.14558",
+					venue: "arXiv — March 2026 · Selected at ACL Demo 2026 (San Diego)"
+				}
+			],
+			website: "https://job-hunt-frontend-etejhvrjsq-ue.a.run.app/",
+			mcpPackage: "https://mayank-glitch-cpu.github.io/JobSync-Service/"
 	},
 	{
 		title: "Software Engineer, Machine Learning Architecture",
