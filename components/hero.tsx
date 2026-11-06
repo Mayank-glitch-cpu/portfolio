@@ -236,30 +236,6 @@ const Hero: React.FC = () => {
 								Know more about me <ArrowRight className="ml-2 h-4 w-4" />
 							</Button>
 						</motion.div>
-						<motion.div
-							initial={{ opacity: 0, y: 20 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.5, delay: 0.7 }}
-							className="flex flex-wrap gap-4"
-						>
-							<Button
-								variant="link"
-								className="p-0 h-auto text-base flex items-center gap-2"
-								onClick={() => window.open('https://drive.google.com/file/d/1lZAvZRcaVp4CGlUEMGavoiRyPyvnqYdh/view?usp=sharing', '_blank')}
-							>
-								<FileText className="h-4 w-4" />
-								View Resume
-							</Button>
-
-							<Button
-								size="lg"
-								className="rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700"
-								onClick={() => window.open('https://calendly.com/vyasmayank963/30min', '_blank')}
-							>
-								<Calendar className="mr-2 h-4 w-4" />
-								Let's Talk
-							</Button>
-						</motion.div>
 					</motion.div>
 
 					{/* Blob Image Container */}

@@ -8,12 +8,25 @@ import { SectionBackground } from './section-background'
 
 const experiences = [
 	{
+		title: "AI Software Engineer, Google AI Search Mode",
+		company: "Google",
+		logo: "/images/logos/google.svg",
+		location: "",
+		startYear: "Aug 2026",
+		endYear: "Present",
+		url: "https://www.google.com/search?sca_esv=b3f9128d827c892f&rlz=1C1ONGR_enUS1233US1233&sxsrf=AKL5yDiQ0nlsOEcvogauPQRQmb4jb4NT2g%3A1793950832786&udm=50&fbs=ACAhTvwdifjn2dKXmjtOfBxVFl_koHVe5RLSnJlTH2QYaq_YVdLmrLcUHX_SwxOCJnubtIIfkFBtNyvuNluxGIMJwZYVG2ni70hZbMsg8IUcwg0hoDyj5p3-JvG8WvBMU8yPgGOXoEqFxUMj9W9A3xEVZ0Ni2yyWVFOKRTDLaG0kG-4St0aRwVxAfGSpF-IVewmmcZTLnblQFJCXgjo8aPMMpWJlTQUk3A&vsint=&ntc=1&cs=0&sa=X&sqi=2&ved=2ahUKEwiKyYfR6_KXAxX5fjIDHcwkMZ4Q2J8OegQIFRAD&biw=1258&bih=772&dpr=2.2&zs=1",
+		highlights: [
+			"Working on making the AI Mode more personalized and factual"
+		],
+		publications: []
+	},
+	{
 		title: "ML Research Engineer, Multimodal Systems",
 		company: "Coral Labs",
 		logo: "/images/logos/Arizona_State_University_seal.svg.png",
 		location: "Tempe, Arizona",
 		startYear: "2025",
-		endYear: "Present",
+		endYear: "May 2026",
 		url: "https://coral-lab-asu.github.io/",
 		highlights: [
 			"Engineered a distributed data pipeline over 160K+ tables (1.2TB) using Apache Spark and BM25 indexing with row-level chunking — reduced retrieval latency 3× and improved recall from 84% → 93% through custom tokenization and contrastive reranking",
@@ -35,12 +48,12 @@ const experiences = [
 	},
 	{
 		title: "Founding Software Engineer",
-		company: "JobMatch-AI",
+		company: "Mutu-AI",
 		logo: "/images/logos/Arizona_State_University_seal.svg.png",
 		location: "Tempe, Arizona (Self-Employed)",
 		startYear: "2025",
-		endYear: "Present",
-		url: "https://job-hunt-frontend-etejhvrjsq-ue.a.run.app/",
+		endYear: "May 2026",
+		url: "https://mutu.dev",
 		highlights: [
 			"Architected a hybrid search platform combining Elasticsearch (BM25), FAISS (ANN semantic search), and Neo4j (knowledge graph traversal) — serving <82ms median latency via GCP Cloud Run with 30+ FastAPI endpoints and a live waitlist across 2 countries",
 			"Built end-to-end: resume parsing, LLM-based job description alignment, explainable match scoring, and an invite system with custom email templates — deployed full-stack with React frontend and Dockerized backend",
@@ -54,7 +67,7 @@ const experiences = [
 					venue: "arXiv — March 2026 · Selected at ACL Demo 2026 (San Diego)"
 				}
 			],
-			website: "https://job-hunt-frontend-etejhvrjsq-ue.a.run.app/",
+			website: "https://mutu.dev",
 			mcpPackage: "https://mayank-glitch-cpu.github.io/JobSync-Service/"
 	},
 	{
@@ -220,9 +233,11 @@ const Experience = () => {
 										</h3>
 										<ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover/link:text-primary group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5 transition-all" />
 									</a>
-									<p className="text-sm text-muted-foreground mt-1">
-										{exp.location}
-									</p>
+									{exp.location && (
+										<p className="text-sm text-muted-foreground mt-1">
+											{exp.location}
+										</p>
+									)}
 
 									{/* Highlights */}
 									<ul className="mt-3 space-y-1.5">
