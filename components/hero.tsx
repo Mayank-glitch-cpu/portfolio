@@ -4,7 +4,7 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Mail, Linkedin, Github, Twitter, Calendar, FileText } from 'lucide-react';
+import { ArrowRight, Linkedin, Github } from 'lucide-react';
 import { HeroBackground } from './hero-background';
 
 // Instagram icon component
